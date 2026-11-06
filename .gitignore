@@ -1,0 +1,9 @@
+artifacts/
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.babel-reports/
+build/
+dist/
