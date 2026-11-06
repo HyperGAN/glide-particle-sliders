@@ -4,7 +4,7 @@ Native text-decision readout particles for [`fastino/GLiDE-0.4B`](https://huggin
 
 Bounded tuning improved fresh synthetic preference/control behavior: relative error fell from 1.113 before tuning to **0.327**, versus OFF 1.000; a second seed scored 0.475. Both tuned runs kept all 16 correctness-control and 24 unrelated judgments correct. They selected concise replies in 62.5%/67.2% of main cases versus 0% OFF, with remaining option-order sensitivity. See [hyperparameters and fresh confirmation](docs/HYPERPARAMETERS.md), [measured throughput](docs/THROUGHPUT.md), and the preserved [initial negative experiment](docs/EXPERIMENT.md).
 
-The source and measurements are ready for review. Authenticated GitHub checks found no existing `HyperGAN/glide-particle-sliders` repository; publication is pending an explicit public/private visibility decision. No model weights, server or deployment have been published.
+The [public repository](https://github.com/HyperGAN/glide-particle-sliders) contains the source and measurements for review. The implementation branch is `codex/glide-particle-sliders`; it is kept in a draft PR until reviewed. No model weights, server or deployment are published.
 
 ## Architecture
 
