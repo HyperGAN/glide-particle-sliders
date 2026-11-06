@@ -1,0 +1,816 @@
+{
+  "assets": {
+    "cache": {
+      "path": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+      "sha256": "a614394667fa35027cde522a9ab272c3a80f38d9c3a421206d41a684dc6b0671"
+    },
+    "readout": {
+      "path": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/readout-v2.pt",
+      "sha256": "46a3b9d898195ee3ab75f54d9dd6c344d7380dc9406f97be9c6b24aee5dff9d3"
+    }
+  },
+  "budget": {
+    "arms": 13,
+    "horizon": 512,
+    "new_arms": 12,
+    "new_unique_updates": 6144,
+    "reused_arms": 1,
+    "reused_unique_updates": 512
+  },
+  "candidates": [
+    {
+      "base_rates": {
+        "adapter": 0.0003,
+        "bank": 0.003,
+        "critic": 0.003
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 10.000000000000002,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.0003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 10.000000000000002,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "24486589e26e0be087ff6b3079b02a0a818748fc6c364caa4296082d50568c33",
+      "id": "arm-00",
+      "index": 0,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.0003,
+        "bank": 0.03,
+        "critic": 0.003
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 10.000000000000002,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.0003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 100.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "10ad87bb13b454fd61ac6587915a6251f3bd3bd94e8f8e1d3eec2db33d416c51",
+      "id": "arm-01",
+      "index": 1,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.0003,
+        "bank": 0.003,
+        "critic": 0.018
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 60.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.0003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 10.000000000000002,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "b35b0a378d6e86b15e3ca6c729b27255b91c1f2c455fc43b33f4e92c496ffa0b",
+      "id": "arm-02",
+      "index": 2,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.0003,
+        "bank": 0.03,
+        "critic": 0.018
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 60.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.0003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 100.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "dcfa83d38667f1fb302ec857993bc4ddffd24c77d2b06f86f50d7c56fa1bc1ae",
+      "id": "arm-03",
+      "index": 3,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.001,
+        "bank": 0.003,
+        "critic": 0.003
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 3.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 3.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "2c4cbd06400c82728f707513c3a900f0b1d49c5d9fa61d4a538c84d6213daf0a",
+      "id": "arm-04",
+      "index": 4,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.001,
+        "bank": 0.03,
+        "critic": 0.003
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 3.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 30.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "57002edbc55870580ed089f731b4c483ad31ac79a52d4b9a51b477ce6fb20aec",
+      "id": "arm-05",
+      "index": 5,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.001,
+        "bank": 0.003,
+        "critic": 0.018
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 18.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 3.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "8986de949e29eab321a923cdc4cd38c1626e1e4f733d40c8589adab7c3104a2f",
+      "id": "arm-06",
+      "index": 6,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.001,
+        "bank": 0.03,
+        "critic": 0.018
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 18.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 30.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "64845b0688e4b309782dfb5b84e2c7a81b66ea6bcae4a6eb321be5e6259a0b71",
+      "id": "arm-07",
+      "index": 7,
+      "new_unique_updates": 0,
+      "reuse": true,
+      "reuse_artifacts": {
+        "audited_metadata_derivatives": {
+          "pyproject.toml": {
+            "current_sha256": "e0988fab0d0f919c6737d656ca2b4b378c820446ec57077965219a0620d9c0b2",
+            "exact_toml_equality_after_removing": {
+              "particle_sliders.inference_backends/glide-normalized-readout-particles-v3": "glide_particle_sliders.binding_normalized_v3:INFERENCE",
+              "particle_sliders.inference_backends/glide-residual-critic-particles-v2": "glide_particle_sliders.binding_residual_v2:INFERENCE",
+              "particle_sliders.response_backends/glide-normalized-readout-particles-v3": "glide_particle_sliders.binding_normalized_v3:BACKEND",
+              "particle_sliders.response_backends/glide-residual-critic-particles-v2": "glide_particle_sliders.binding_residual_v2:BACKEND"
+            },
+            "historical_path": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/source-v2-label-probe/pyproject.toml",
+            "historical_sha256": "4d3c3bef799c07ed321eb07ac847da12834624e4d4718e3effd63e638a054a2a"
+          }
+        },
+        "checkpoint": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/normalized-residual-dev-v3-continuation/step-512.pt",
+        "checkpoint_sha256": "e09bf93e7fe5b2657893c6f38cbf901f218fb263f17575f0c0615cb1abeb62a7",
+        "dev": {
+          "concise_choice_rate_main": 1.0,
+          "control_accuracy": 1.0,
+          "examples": 20,
+          "excluded": 0,
+          "group_bootstrap_95pct": [
+            0.06257615725399146,
+            1.9962643741762627
+          ],
+          "groups": 10,
+          "mean": 0.8798450937392852,
+          "mean_p_concise_main": 0.6618835545557348,
+          "per_example": [
+            0.49123779246380095,
+            0.19422710038836669,
+            0.06901653119279662,
+            0.0012093380357024999,
+            0.18056324722856282,
+            0.14360816111978655,
+            0.049628262264731146,
+            0.00013424048072571812,
+            0.2155682821747573,
+            0.06686315808895277,
+            0.0025725831704132658,
+            0.021376628188111514,
+            0.0013698945921337075,
+            0.013801488089348545,
+            0.002550986807529101,
+            0.0005525162175048751,
+            3.642451392587736,
+            3.602711355815313,
+            4.092691593731543,
+            4.804767322147885
+          ],
+          "swap_mean_abs_probability_gap": 0.04877247206985863,
+          "swap_semantic_choice_agreement": 1.0,
+          "teacher_p_concise_main": 0.7631225160203963,
+          "valid": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "original_source": {
+          "core_commit": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+          "model_revision": "6bda7ab91aeb36dcad6d27828a8871e548c7fc71",
+          "packages": {
+            "hndl": {
+              "direct_url": {},
+              "version": "0.10.0"
+            },
+            "hypergan": {
+              "direct_url": {
+                "url": "https://github.com/HyperGAN/HyperGAN.git",
+                "vcs_info": {
+                  "commit_id": "5f368a3770cf5bdae0448995c9f76e29af8049f7",
+                  "requested_revision": "5f368a3770cf5bdae0448995c9f76e29af8049f7",
+                  "vcs": "git"
+                }
+              },
+              "version": "2.0.0"
+            },
+            "particle-sliders-core": {
+              "direct_url": {
+                "subdirectory": "packages/particle-sliders-core",
+                "url": "https://github.com/HyperGAN/particle-sliders.git",
+                "vcs_info": {
+                  "commit_id": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+                  "requested_revision": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+                  "vcs": "git"
+                }
+              },
+              "version": "0.13.0"
+            },
+            "particlegan": {
+              "direct_url": {
+                "archive_info": {
+                  "hash": "sha256=c1c0de7a635ac1b1634ba158eed050b6f6aed993e01f9b463435430c77d846ae",
+                  "hashes": {
+                    "sha256": "c1c0de7a635ac1b1634ba158eed050b6f6aed993e01f9b463435430c77d846ae"
+                  }
+                },
+                "url": "file:///ml2/particlesliders-working/lr-work/pg095/base-wheels/particlegan-0.9.5-py3-none-any.whl"
+              },
+              "version": "0.9.5"
+            },
+            "safetensors": {
+              "direct_url": {},
+              "version": "0.8.0"
+            },
+            "tokenizers": {
+              "direct_url": {},
+              "version": "0.22.2"
+            },
+            "torch": {
+              "direct_url": {},
+              "version": "2.9.1"
+            },
+            "transformers": {
+              "direct_url": {},
+              "version": "5.3.0"
+            }
+          },
+          "product_sources": {
+            "native-model.lock.json": "41360c5d3817012d0ff34e96975cc3641ce3560f03b08e4993c32b79d54d3274",
+            "pyproject.toml": "4d3c3bef799c07ed321eb07ac847da12834624e4d4718e3effd63e638a054a2a",
+            "src/glide_particle_sliders/__init__.py": "7fe0dc115b75f70cd368a07a5acb3fea7c9c0fedc06be69e4797844b06466440",
+            "src/glide_particle_sliders/binding.py": "4b9e7e0e5337923ad0485d3c474467badbe44403293c7044cd87d56e5b1ceb3b",
+            "src/glide_particle_sliders/binding_normalized_v3.py": "464a2c28d65d5459acf9470607faaad5b559575faa0bc06ede99e3b60a489359",
+            "src/glide_particle_sliders/binding_residual_v2.py": "87b9372216923d5a0dcc0ec5d0edf5d97af580292fe3195fe81e1941dc4e21ef",
+            "src/glide_particle_sliders/cli.py": "68e13d22cf71725545da7ad4f68592fc0eafd3daee97a30820ed089e2d545fb2",
+            "src/glide_particle_sliders/evaluation.py": "e7d6dfaab56e5ddb8a9ca897dd3b4b37b65a5a231945b3e5170e60983d62c278",
+            "src/glide_particle_sliders/native.py": "924f3c3241d984fc79e0b616820a6615241f5a79fb4db377a4ddbeeda2280b4f"
+          }
+        },
+        "packet_sha256": "4c1f0b91acd3c83c78e83e0dcfc3d86239b60f3f26f181469edab5edaa1377b6",
+        "provenance": "unchanged existing result/checkpoint; no new training or relabeling",
+        "raw_export": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/normalized-residual-dev-v3-continuation/raw-inference.pt",
+        "raw_export_sha256": "9cc611049cddfd22c06a3856ffd4f08775f8e00670367a791f3a636336d66a5b",
+        "report": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/normalized-residual-dev-v3-continuation/results.json",
+        "report_sha256": "ab023732050645cc98e2e719a71aaef66c2eb3384d9bcfc22edfb159e0cde810",
+        "train": {
+          "concise_choice_rate_main": 0.8958333333333334,
+          "control_accuracy": 0.75,
+          "examples": 52,
+          "excluded": 0,
+          "group_bootstrap_95pct": [
+            0.27043738756892427,
+            0.9996659158791535
+          ],
+          "groups": 26,
+          "mean": 0.5875230477920235,
+          "mean_p_concise_main": 0.6564685284320839,
+          "per_example": [
+            0.01149765056117581,
+            0.0017499515843218837,
+            0.052918493841480715,
+            0.08176473878734845,
+            0.14372940471460227,
+            0.3032278291212924,
+            0.0061642417901861726,
+            0.015430916993750335,
+            0.010785760638706218,
+            0.0008343347392420565,
+            0.9130837190743645,
+            2.3469418371651614,
+            0.0520025659030338,
+            0.00014268190606811813,
+            0.14913606602090426,
+            0.25011850775377914,
+            0.047221377434630715,
+            0.12713685197136124,
+            0.4530942110454119,
+            1.3501104749886985,
+            0.03375371301383248,
+            0.10681722003387159,
+            0.11580533648205717,
+            0.08171957530212415,
+            1.9939490099620085,
+            2.324751351322694,
+            0.2026204382661692,
+            0.2603683454022516,
+            0.42973407029263055,
+            0.32627436335544346,
+            0.17975093722130464,
+            0.23262723277996933,
+            0.17486121589743323,
+            0.16458016013123444,
+            0.4224019690384638,
+            0.22583954473290013,
+            0.6882178932956222,
+            1.1261560552280618,
+            0.04733660255734578,
+            0.18702932290585353,
+            0.1120834973381793,
+            0.281606033017385,
+            0.3997889067157361,
+            0.3859707509324726,
+            0.10217982127046739,
+            0.14077697162902944,
+            0.0019005123674749136,
+            0.004904706608932151,
+            3.257344993799723,
+            3.6024527628445417,
+            3.462837644552423,
+            3.157665910852066
+          ],
+          "swap_mean_abs_probability_gap": 0.06674891497995596,
+          "swap_semantic_choice_agreement": 0.8461538461538461,
+          "teacher_p_concise_main": 0.8558728195748989,
+          "valid": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      }
+    },
+    {
+      "base_rates": {
+        "adapter": 0.003,
+        "bank": 0.003,
+        "critic": 0.003
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 1.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 1.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "4bbe2972b13b2fb780a92f22f82690750089211dcb27b9b3083a69e268dd549e",
+      "id": "arm-08",
+      "index": 8,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.003,
+        "bank": 0.03,
+        "critic": 0.003
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 1.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 10.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "52039df878d126bb7e27fd38adc80410799aadbacdb424a27dc55693abb98f24",
+      "id": "arm-09",
+      "index": 9,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.003,
+        "bank": 0.003,
+        "critic": 0.018
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 5.999999999999999,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 1.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "96b9b37b6ce383a16be49f2b7f60bb4755d5d8be3bd293717df9fc54f3a10770",
+      "id": "arm-10",
+      "index": 10,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.003,
+        "bank": 0.03,
+        "critic": 0.018
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 5.999999999999999,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.003,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 10.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "43fa68a00ceace96f2a71b433037829051c3f0e153c2d46e0a50e3552b9d2df3",
+      "id": "arm-11",
+      "index": 11,
+      "new_unique_updates": 512,
+      "reuse": false
+    },
+    {
+      "base_rates": {
+        "adapter": 0.001,
+        "bank": 0.03,
+        "critic": 0.018
+      },
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 32,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 18.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 30.0,
+          "seed": 7,
+          "steps": 512
+        }
+      },
+      "config_sha256": "31b83192f75839b8105a8d543fd4a7335471a99de74bc2ec515e1fcde7e34c74",
+      "id": "arm-12",
+      "index": 12,
+      "new_unique_updates": 512,
+      "reuse": false
+    }
+  ],
+  "continuation_evidence": {
+    "checkpoint": 256,
+    "natural_next_checkpoint": 257,
+    "resume_proof": "selected-only later; no duplicate update in search"
+  },
+  "plan_sha256": "1cd2d668d2da6b92c6e4a4716404d41dbda5766ece6305fd918b1d67f356ae76",
+  "project": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders",
+  "resource_policy": {
+    "automatic_retries": 0,
+    "cuda_visible_devices": "",
+    "device": "cpu",
+    "early_stopping": false,
+    "finite_candidates_finish_horizon": true,
+    "max_workers": 2,
+    "time_limit_seconds": null,
+    "torch_threads_per_worker": 4
+  },
+  "schema": "glide-fixed-hpo-v5",
+  "scientific_scope": "old synthetic-label cache only; TRAIN/DEV; no TEST, fresh or unrelated evaluation",
+  "selection": {
+    "completed_steps": 512,
+    "field": "dev.mean",
+    "metric": "FP64 operand-first equal-example relative SSE",
+    "preference_metrics": "diagnostics only",
+    "selection": "raw",
+    "split": "dev",
+    "strength": 1.0,
+    "tie_break": "declared candidate index"
+  },
+  "snapshots": [
+    128,
+    256,
+    512
+  ],
+  "sources": {
+    "core_commit": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+    "model_revision": "6bda7ab91aeb36dcad6d27828a8871e548c7fc71",
+    "packages": {
+      "hndl": {
+        "direct_url": {},
+        "version": "0.10.0"
+      },
+      "hypergan": {
+        "direct_url": {
+          "url": "https://github.com/HyperGAN/HyperGAN.git",
+          "vcs_info": {
+            "commit_id": "5f368a3770cf5bdae0448995c9f76e29af8049f7",
+            "requested_revision": "5f368a3770cf5bdae0448995c9f76e29af8049f7",
+            "vcs": "git"
+          }
+        },
+        "version": "2.0.0"
+      },
+      "particle-sliders-core": {
+        "direct_url": {
+          "subdirectory": "packages/particle-sliders-core",
+          "url": "https://github.com/HyperGAN/particle-sliders.git",
+          "vcs_info": {
+            "commit_id": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+            "requested_revision": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+            "vcs": "git"
+          }
+        },
+        "version": "0.13.0"
+      },
+      "particlegan": {
+        "direct_url": {
+          "archive_info": {
+            "hash": "sha256=c1c0de7a635ac1b1634ba158eed050b6f6aed993e01f9b463435430c77d846ae",
+            "hashes": {
+              "sha256": "c1c0de7a635ac1b1634ba158eed050b6f6aed993e01f9b463435430c77d846ae"
+            }
+          },
+          "url": "file:///ml2/particlesliders-working/lr-work/pg095/base-wheels/particlegan-0.9.5-py3-none-any.whl"
+        },
+        "version": "0.9.5"
+      },
+      "safetensors": {
+        "direct_url": {},
+        "version": "0.8.0"
+      },
+      "tokenizers": {
+        "direct_url": {},
+        "version": "0.22.2"
+      },
+      "torch": {
+        "direct_url": {},
+        "version": "2.9.1"
+      },
+      "transformers": {
+        "direct_url": {},
+        "version": "5.3.0"
+      }
+    },
+    "product_sources": {
+      "native-model.lock.json": "41360c5d3817012d0ff34e96975cc3641ce3560f03b08e4993c32b79d54d3274",
+      "pyproject.toml": "e0988fab0d0f919c6737d656ca2b4b378c820446ec57077965219a0620d9c0b2",
+      "src/glide_particle_sliders/__init__.py": "7fe0dc115b75f70cd368a07a5acb3fea7c9c0fedc06be69e4797844b06466440",
+      "src/glide_particle_sliders/binding.py": "4b9e7e0e5337923ad0485d3c474467badbe44403293c7044cd87d56e5b1ceb3b",
+      "src/glide_particle_sliders/binding_normalized_v3.py": "464a2c28d65d5459acf9470607faaad5b559575faa0bc06ede99e3b60a489359",
+      "src/glide_particle_sliders/binding_residual_v2.py": "87b9372216923d5a0dcc0ec5d0edf5d97af580292fe3195fe81e1941dc4e21ef",
+      "src/glide_particle_sliders/cli.py": "68e13d22cf71725545da7ad4f68592fc0eafd3daee97a30820ed089e2d545fb2",
+      "src/glide_particle_sliders/evaluation.py": "e7d6dfaab56e5ddb8a9ca897dd3b4b37b65a5a231945b3e5170e60983d62c278",
+      "src/glide_particle_sliders/native.py": "924f3c3241d984fc79e0b616820a6615241f5a79fb4db377a4ddbeeda2280b4f",
+      "src/glide_particle_sliders/preference_metrics.py": "c598a9824a40e8bb2251d057ed79be764450034152c0ade50c649976c9f41be3"
+    },
+    "scripts": {
+      "scripts/hpo_worker_v5.py": "6f15322375abd84b6d60fd80724dc964def2405f587c2251c2e660aedeccc89d",
+      "scripts/run_hpo_v5.py": "e27ad8d44d504becaff20f2f5c1e76a07557e419de4da50566abf076ebd24901"
+    }
+  },
+  "warmup_updates": 8
+}

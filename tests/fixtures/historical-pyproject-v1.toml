@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glide-particle-sliders"
+version = "0.1.0"
+description = "Native GLiDE decision-readout particles using the shared particle-sliders lifecycle"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "particle-sliders-core[hypergan-hndl] @ git+https://github.com/HyperGAN/particle-sliders.git@3dd672a7f9b8c169daef90fd63e4bb42b9ddc423#subdirectory=packages/particle-sliders-core",
+  "transformers==5.3.0", "tokenizers==0.22.2", "safetensors==0.8.0", "pillow>=11",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+glide-particle-sliders = "glide_particle_sliders.cli:main"
+
+[project.entry-points."particle_sliders.response_backends"]
+glide-readout-particles = "glide_particle_sliders.binding:BACKEND"
+
+[project.entry-points."particle_sliders.inference_backends"]
+glide-readout-particles = "glide_particle_sliders.binding:INFERENCE"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

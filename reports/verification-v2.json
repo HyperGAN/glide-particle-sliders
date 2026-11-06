@@ -1,0 +1,104 @@
+{
+  "all_python_sources_parse": true,
+  "completed_finite_arms": 13,
+  "foreign_workloads_changed": false,
+  "gpu_launches": 0,
+  "hpo_arms": 13,
+  "hpo_log_checks": [
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-00",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-01",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-03",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-02",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-04",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-05",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-06",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-08",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-09",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-10",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-11",
+      "logs_contiguous": true
+    },
+    {
+      "actual_optimizer_groups_observed": true,
+      "actual_unique_updates": 512,
+      "arm": "arm-12",
+      "logs_contiguous": true
+    }
+  ],
+  "hpo_new_unique_updates": 6144,
+  "native_public_api_max_probability_error": 1.3633940080248763e-06,
+  "portable_label_builder_tensor_equality": true,
+  "reused_anchor_arms": 1,
+  "seed11_physical_updates": 513,
+  "seed11_unique_updates": 512,
+  "selected_seed7_proof_physical_updates": 1,
+  "source_capsule": "artifacts/source-hpo-v5-confirmation",
+  "tests": {
+    "exit_code": 0,
+    "observed_seconds": 11.8,
+    "passed": 57,
+    "subtests_passed": 784
+  },
+  "weights_published": false,
+  "wheel": {
+    "file": "artifacts/wheel-v2/glide_particle_sliders-0.1.0-py3-none-any.whl",
+    "model_weights_included": false,
+    "sha256": "863901d8db83e4790f4114febfd0073be8d7ba755d08364f7ccd5d5c345a9f9e",
+    "source_bytes_exact": true
+  },
+  "whole_investigation_genuine_physical_updates": 10311,
+  "whole_investigation_genuine_unique_updates": 10304
+}

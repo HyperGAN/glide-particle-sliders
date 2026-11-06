@@ -1,0 +1,26 @@
+GLiDE particle sliders
+Copyright (c) 2026 HyperGAN contributors
+
+The top-level MIT LICENSE covers this repository's independently authored
+integration source, tests, experiment scripts, synthetic datasets and reports.
+The Rohit Gandikota copyright notice from the shared particle-sliders source is
+retained for integration patterns derived from that project. External
+dependencies retain their own licenses.
+
+Built with Fastino GLiDE.
+GLiDE is developed by Fastino Inc.:
+https://huggingface.co/fastino/GLiDE-0.4B
+
+The pretrained model and its native runtime are downloaded separately; no model
+weights are included in this repository. Fastino contributions and derivative
+model artifacts remain subject to the Fastino Community License, including its
+commercial attribution, production revenue threshold and derivative-work terms.
+The top-level MIT LICENSE does not relicense those assets or derivative model
+artifacts. Preserve and consult:
+  licenses/GLiDE-LICENSE
+  licenses/GLiDE-NOTICE
+  licenses/Ettin-encoder-400m-LICENSE
+
+GLiDE is based on Ettin-encoder-400m, copyright (c) 2025 the Ettin authors
+(Johns Hopkins University CLSP), under the MIT License. The original upstream
+license is preserved at the path above.

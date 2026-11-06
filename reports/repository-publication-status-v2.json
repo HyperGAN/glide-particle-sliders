@@ -1,0 +1,37 @@
+{
+  "authenticated_org_create_permission_verified": false,
+  "connected_github_tool_available": false,
+  "credentials_or_permissions_changed": false,
+  "deployed": false,
+  "gh_cli_available": false,
+  "last_public_recheck": {
+    "authenticated": false,
+    "connected_github_tool_found": false,
+    "recorded_at": "2026-11-06T18:19:03.164080+00:00",
+    "remote_mutations_attempted": false,
+    "status": 404
+  },
+  "local_duplicate_search_roots": [
+    "/ml2/hypergan",
+    "/ml2/particlesliders-working",
+    "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan"
+  ],
+  "local_project": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders",
+  "matching_local_projects": [
+    "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders"
+  ],
+  "merged": false,
+  "private_repository_existence_verified": false,
+  "public_readonly_probe": {
+    "authenticated": false,
+    "returned_message": "Not Found",
+    "status": 404,
+    "url": "https://api.github.com/repos/HyperGAN/glide-particle-sliders"
+  },
+  "recorded_at": "2026-11-06T17:50:46.614077+00:00",
+  "remaining_requirement": "An authorized authenticated GitHub capability must check private/existing repositories and organization creation/publication permissions before creating or pushing. Public404 alone does not establish that the name is available.",
+  "remote_mutations_attempted": false,
+  "requested_repository": "HyperGAN/glide-particle-sliders",
+  "source_ready_locally": true,
+  "weights_published": false
+}

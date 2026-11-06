@@ -1,0 +1,488 @@
+{
+  "active_adapter_sha256": "9cc611049cddfd22c06a3856ffd4f08775f8e00670367a791f3a636336d66a5b",
+  "active_readout_sha256": "46a3b9d898195ee3ab75f54d9dd6c344d7380dc9406f97be9c6b24aee5dff9d3",
+  "cache_sha256": "a614394667fa35027cde522a9ab272c3a80f38d9c3a421206d41a684dc6b0671",
+  "cached_active_adapter": [
+    {
+      "batch_size": 1,
+      "excludes": "encoder, tokenization, probability postprocessing",
+      "includes": "shared native-only inference API, normalized HNDL routed adapter, native readout, observation and detach",
+      "latency": {
+        "mean_ms": 1.0338160504761618,
+        "observations": 200,
+        "p50_ms": 1.0081479995278642,
+        "p95_ms": 1.1520740226842463
+      },
+      "rows_per_second": 967.2900701623015,
+      "strength": 1.0,
+      "timed_forwards": 200,
+      "warmup_forwards_excluded": 20
+    },
+    {
+      "batch_size": 8,
+      "excludes": "encoder, tokenization, probability postprocessing",
+      "includes": "shared native-only inference API, normalized HNDL routed adapter, native readout, observation and detach",
+      "latency": {
+        "mean_ms": 1.173831813794095,
+        "observations": 200,
+        "p50_ms": 1.1420089867897332,
+        "p95_ms": 1.347323996014893
+      },
+      "rows_per_second": 6815.286403034312,
+      "strength": 1.0,
+      "timed_forwards": 200,
+      "warmup_forwards_excluded": 20
+    },
+    {
+      "batch_size": 32,
+      "excludes": "encoder, tokenization, probability postprocessing",
+      "includes": "shared native-only inference API, normalized HNDL routed adapter, native readout, observation and detach",
+      "latency": {
+        "mean_ms": 1.3978982585831545,
+        "observations": 200,
+        "p50_ms": 1.355369997327216,
+        "p95_ms": 1.7504059942439198
+      },
+      "rows_per_second": 22891.508594075887,
+      "strength": 1.0,
+      "timed_forwards": 200,
+      "warmup_forwards_excluded": 20
+    }
+  ],
+  "cached_off_head": [
+    {
+      "batch_size": 1,
+      "excludes": "encoder, tokenization, adapter, probability postprocessing",
+      "includes": "native frozen Linear1024-to-255 readout and first2 output view",
+      "latency": {
+        "mean_ms": 0.02442668002913706,
+        "observations": 200,
+        "p50_ms": 0.025120010832324624,
+        "p95_ms": 0.028790003852918744
+      },
+      "rows_per_second": 40938.842233457945,
+      "timed_forwards": 200,
+      "warmup_forwards_excluded": 20
+    },
+    {
+      "batch_size": 8,
+      "excludes": "encoder, tokenization, adapter, probability postprocessing",
+      "includes": "native frozen Linear1024-to-255 readout and first2 output view",
+      "latency": {
+        "mean_ms": 0.06327306531602517,
+        "observations": 200,
+        "p50_ms": 0.05265000800136477,
+        "p95_ms": 0.08983100997284055
+      },
+      "rows_per_second": 126436.10610680877,
+      "timed_forwards": 200,
+      "warmup_forwards_excluded": 20
+    },
+    {
+      "batch_size": 32,
+      "excludes": "encoder, tokenization, adapter, probability postprocessing",
+      "includes": "native frozen Linear1024-to-255 readout and first2 output view",
+      "latency": {
+        "mean_ms": 0.10680940977181308,
+        "observations": 200,
+        "p50_ms": 0.0993710127659142,
+        "p95_ms": 0.1413509889971465
+      },
+      "rows_per_second": 299599.07154589274,
+      "timed_forwards": 200,
+      "warmup_forwards_excluded": 20
+    }
+  ],
+  "finished": "2026-11-06T18:00:06.269451+00:00",
+  "limitations": [
+    "One CPU timing pass per native batch, without repeated-trial confidence intervals",
+    "Native OFF head timing excludes the routed adapter; active cached API and PG step timing include it",
+    "All native batch arms use the same32 old TRAIN requests",
+    "PG benchmark is a new64-update throughput cohort, not a semantic-quality comparison"
+  ],
+  "native": [
+    {
+      "api_call_latency": {
+        "mean_ms": 604.7832098447543,
+        "observations": 32,
+        "p50_ms": 606.8442379910266,
+        "p95_ms": 632.1811580273788
+      },
+      "includes": "prompt rendering, tokenization, native encoder, frozen OFF readout, answer postprocessing",
+      "native_input_tokens": 6960,
+      "padded_tokens": 6960,
+      "padded_tokens_per_second": 359.6300992494493,
+      "request_batch_size": 1,
+      "requests_per_second": 1.6534717206871232,
+      "seconds": 19.353218806005316,
+      "timed_api_calls": 32,
+      "timed_requests": 32,
+      "warmup_requests_excluded": 1
+    },
+    {
+      "api_call_latency": {
+        "mean_ms": 1163.3744232458412,
+        "observations": 16,
+        "p50_ms": 1171.0678239905974,
+        "p95_ms": 1241.6880089731421
+      },
+      "includes": "prompt rendering, tokenization, native encoder, frozen OFF readout, answer postprocessing",
+      "native_input_tokens": 6960,
+      "padded_tokens": 6960,
+      "padded_tokens_per_second": 373.9105862836847,
+      "request_batch_size": 2,
+      "requests_per_second": 1.7191291323387803,
+      "seconds": 18.61407581201638,
+      "timed_api_calls": 16,
+      "timed_requests": 32,
+      "warmup_requests_excluded": 2
+    },
+    {
+      "api_call_latency": {
+        "mean_ms": 2415.9827240036975,
+        "observations": 8,
+        "p50_ms": 2341.2136695114896,
+        "p95_ms": 2949.6512429905124
+      },
+      "includes": "prompt rendering, tokenization, native encoder, frozen OFF readout, answer postprocessing",
+      "native_input_tokens": 6960,
+      "padded_tokens": 7028,
+      "padded_tokens_per_second": 363.6193142986376,
+      "request_batch_size": 4,
+      "requests_per_second": 1.6556371738128064,
+      "seconds": 19.32790620200103,
+      "timed_api_calls": 8,
+      "timed_requests": 32,
+      "warmup_requests_excluded": 4
+    },
+    {
+      "api_call_latency": {
+        "mean_ms": 4846.493586490396,
+        "observations": 4,
+        "p50_ms": 4856.992651490145,
+        "p95_ms": 4904.635350976605
+      },
+      "includes": "prompt rendering, tokenization, native encoder, frozen OFF readout, answer postprocessing",
+      "native_input_tokens": 6960,
+      "padded_tokens": 7128,
+      "padded_tokens_per_second": 367.68802217043645,
+      "request_batch_size": 8,
+      "requests_per_second": 1.6506757448728908,
+      "seconds": 19.386000005993992,
+      "timed_api_calls": 4,
+      "timed_requests": 32,
+      "warmup_requests_excluded": 8
+    }
+  ],
+  "native_adapter_strength": 0.0,
+  "native_input_tokens": {
+    "max": 227,
+    "min": 206,
+    "token_budget": 16384,
+    "total": 6960
+  },
+  "native_model_identity": {
+    "assets_index_sha256": "b1b2ec9d2ac0c13016c2fb5ec7e02c46361722951347a713c9fb4f1702302775",
+    "files": {
+      "LICENSE": "7381146597b418d6fa4c1345c43ca2450ccccd6c6322257356efabfece9ebb9a",
+      "NOTICE": "54576106686e7b0c3796ac7d81a5df94cf471b24d747feee22d257adf5edbbfd",
+      "README.md": "44acf7ca770fa9f2028dc43ccce20f377d44d2c7795842ae68cf8cfb0f316147",
+      "config.json": "778102ed6dca61fe4258ca87cd302927cc991c239d218e57f33ae272d7324b38",
+      "decision_config.json": "33e58b79cf4228abff85153ee630a80461dff5c97f7aed9d26abd1738be3b5b5",
+      "glide/__init__.py": "7e807d7d94895d436c43c2b2add0521608e208c5dde7e0016549c5b8ee5d7192",
+      "glide/encoder.py": "e2767770c3cc645c0a61eb4580e39e215406083ef5d9ba01bc91d0af33d3127d",
+      "glide/images.py": "4858f30b92819abe463d845886f3240145c532fd0dfc725f5a08586e7591c616",
+      "glide/model.py": "8efc9a72b26b3b05885ce1d34fccb94b1139d3c43511ec52f598fedd3f2a662c",
+      "glide/nvfp4.py": "d6b5633e24c8702055ec05a98e63d718948e43fa1cb14c6555bd0285fa2ea497",
+      "glide/prompt.py": "e47149ac980fe12c3cb24ea0ee63822d5bcde71f32d4a5cc9f37499853948338",
+      "licenses/Ettin-encoder-400m-LICENSE": "9cec9e5a835df0bdc65cc3405c1177763c87da63a99d650b75cc288e046ac9f3",
+      "model-00001-of-00001.safetensors": "4540aa6d168fd15b06f7d6a61c34dd45523b5a0a1a72f98f1b2a81cf60774f34",
+      "model.safetensors.index.json": "911f8dfccf8af55999c6cb14d08f72e86b3450a123be4add338d77b47eb4b613",
+      "readout.safetensors": "0cb6da049081b05dc60dcf0c9f95dc4309c8849ab921f61f67f4658172b57f2a",
+      "render_tokenizer/chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+      "render_tokenizer/tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "render_tokenizer/tokenizer_config.json": "66e427c470fe580fe8c7b5725d857af23d8417e37fae62667ec698306a19987b",
+      "requirements.txt": "16b3db96b1fc595622f259a3d41ab50962a940aa561396096d02bfec4745c064",
+      "special_tokens_map.json": "ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049",
+      "tokenizer.json": "9fd55248d51d33976b324fc11592e28071da7d41e0e9401dfb7082e30574b7b1",
+      "tokenizer_config.json": "3cd2017ff46d0a527e5d39cae39272eccfa1f19bb9f89b05d166aab2e38354e2"
+    },
+    "model_id": "fastino/GLiDE-0.4B",
+    "numerical": {
+      "attention": "sdpa",
+      "device": "cpu",
+      "dtype": "float32",
+      "source_weights": "bfloat16",
+      "threads": 4,
+      "tokenizers": "0.22.2",
+      "torch": "2.9.1+cu128",
+      "transformers": "5.3.0"
+    },
+    "pooling": "native last real token before SEP",
+    "response": "first two native decision logits",
+    "revision": "6bda7ab91aeb36dcad6d27828a8871e548c7fc71"
+  },
+  "native_model_load_seconds": 7.3044828310084995,
+  "native_model_loaded_once": true,
+  "native_peak_process_rss_kib": 3240776,
+  "native_readout_unchanged": true,
+  "peak_process_rss_kib": 3240776,
+  "pg_attempts": [
+    {
+      "batch_size": 2,
+      "checkpoint_sha256": "34bc92e29c8b4acbe1a311af85759522efa6681b07ba87d13678f26c7b997883",
+      "committed_updates": 64,
+      "common_schedule_horizon": 64,
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 2,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 18.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 30.0,
+          "seed": 7,
+          "steps": 64
+        }
+      },
+      "d_row_exposures": 128,
+      "example_exposures_per_second": 116.8678348002968,
+      "extra_training_warmup_updates": 0,
+      "g_row_exposures": 128,
+      "physical_updates": 64,
+      "prepare_seconds": 0.10314194299280643,
+      "raw_export_sha256": "be78aa529560570e9e988161fc33befbe05de6a1dcae4458825b26dc41c38e8d",
+      "replayed_prefix": 0,
+      "seconds": 1.0952543120074552,
+      "steady_steps9_to64_latency": {
+        "mean_ms": 17.0694731605181,
+        "observations": 56,
+        "p50_ms": 16.904885982512496,
+        "p95_ms": 19.10156398662366
+      },
+      "timed_updates": 64,
+      "update_latency": {
+        "mean_ms": 17.11305909384464,
+        "observations": 64,
+        "p50_ms": 16.88479598669801,
+        "p95_ms": 19.10156398662366
+      },
+      "updates_per_second": 58.4339174001484,
+      "weight_ema": false
+    },
+    {
+      "batch_size": 8,
+      "checkpoint_sha256": "598e1536adf9e664b7b93e6df25c4726fb767882bf3a3bfde68ec818b9273bdf",
+      "committed_updates": 64,
+      "common_schedule_horizon": 64,
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 8,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 18.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 30.0,
+          "seed": 7,
+          "steps": 64
+        }
+      },
+      "d_row_exposures": 512,
+      "example_exposures_per_second": 261.528661508039,
+      "extra_training_warmup_updates": 0,
+      "g_row_exposures": 512,
+      "physical_updates": 64,
+      "prepare_seconds": 0.10373316600453109,
+      "raw_export_sha256": "766fca6274d19870b903145edd1db483f35e9847d0640144d3911e9463ffc1f7",
+      "replayed_prefix": 0,
+      "seconds": 1.9577204159868415,
+      "steady_steps9_to64_latency": {
+        "mean_ms": 30.649370928585995,
+        "observations": 56,
+        "p50_ms": 29.87559451139532,
+        "p95_ms": 35.02361700520851
+      },
+      "timed_updates": 64,
+      "update_latency": {
+        "mean_ms": 30.589047437842964,
+        "observations": 64,
+        "p50_ms": 29.85271450597793,
+        "p95_ms": 35.02361700520851
+      },
+      "updates_per_second": 32.69108268850488,
+      "weight_ema": false
+    },
+    {
+      "batch_size": 32,
+      "checkpoint_sha256": "c17e648dc0942af290a25235de874b2f75673c1aba1f2c1b89a5ed2e7892fa1a",
+      "committed_updates": 64,
+      "common_schedule_horizon": 64,
+      "config": {
+        "backend": "glide-normalized-readout-particles-v3",
+        "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+        "options": {
+          "base_precision": "float32",
+          "batch": 32,
+          "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+          "critic": "residual64",
+          "d_lr_mult": 18.0,
+          "device": "cpu",
+          "ema_decay": null,
+          "lr": 0.001,
+          "penalty_input_domain": "continuous",
+          "pg_source_profile": "release-0.9.5",
+          "prior_lr_mult": 30.0,
+          "seed": 7,
+          "steps": 64
+        }
+      },
+      "d_row_exposures": 2048,
+      "example_exposures_per_second": 396.0621560359381,
+      "extra_training_warmup_updates": 0,
+      "g_row_exposures": 2048,
+      "physical_updates": 64,
+      "prepare_seconds": 0.09869322899612598,
+      "raw_export_sha256": "53130096ab297eb11d33895d2daa53220492d19d9ca06fe055e11a714a15bd49",
+      "replayed_prefix": 0,
+      "seconds": 5.170905548002338,
+      "steady_steps9_to64_latency": {
+        "mean_ms": 81.69106303570776,
+        "observations": 56,
+        "p50_ms": 80.39123800699599,
+        "p95_ms": 109.90046599181369
+      },
+      "timed_updates": 64,
+      "update_latency": {
+        "mean_ms": 80.79474168744127,
+        "observations": 64,
+        "p50_ms": 79.29305400466546,
+        "p95_ms": 103.33935500239022
+      },
+      "updates_per_second": 12.376942376123065,
+      "weight_ema": false
+    }
+  ],
+  "resource": {
+    "device": "cpu",
+    "gpu_launches": 0,
+    "torch_threads": 4
+  },
+  "schema": "glide-cpu-throughput-v1",
+  "selected_row_ids": [
+    "coding-active-filter--concise-0",
+    "coding-active-filter--concise-1",
+    "coding-cache-policy--concise-0",
+    "coding-cache-policy--concise-1",
+    "coding-import-button--concise-0",
+    "coding-import-button--concise-1",
+    "coding-retry-change--concise-0",
+    "coding-retry-change--concise-1",
+    "coding-upload-size-rule--concise-0",
+    "coding-upload-size-rule--concise-1",
+    "coding-log-severity--concise-0",
+    "coding-log-severity--concise-1",
+    "support-parcel-address--concise-0",
+    "support-parcel-address--concise-1",
+    "support-workshop-cancellation--concise-0",
+    "support-workshop-cancellation--concise-1",
+    "support-pending-charge--concise-0",
+    "support-pending-charge--concise-1",
+    "support-subscription-pause--concise-0",
+    "support-subscription-pause--concise-1",
+    "support-museum-timeslot--concise-0",
+    "support-museum-timeslot--concise-1",
+    "support-library-card--concise-0",
+    "support-library-card--concise-1",
+    "household-chore-roster--concise-0",
+    "household-chore-roster--concise-1",
+    "household-recipe-doubling--concise-0",
+    "household-recipe-doubling--concise-1",
+    "household-bookshelf-boxes--concise-0",
+    "household-bookshelf-boxes--concise-1",
+    "household-wrap-sorting--concise-0",
+    "household-wrap-sorting--concise-1"
+  ],
+  "selection": "first32 old TRAIN rows in immutable cache order; no quality-dependent selection",
+  "source": {
+    "files": {
+      "native-model.lock.json": "41360c5d3817012d0ff34e96975cc3641ce3560f03b08e4993c32b79d54d3274",
+      "pyproject.toml": "e0988fab0d0f919c6737d656ca2b4b378c820446ec57077965219a0620d9c0b2",
+      "scripts/benchmark_throughput.py": "caf0361d97c807de23e6a1864a1ec0c4b37e730380d1068790f026a686c08d99",
+      "src/glide_particle_sliders/__init__.py": "7fe0dc115b75f70cd368a07a5acb3fea7c9c0fedc06be69e4797844b06466440",
+      "src/glide_particle_sliders/binding.py": "4b9e7e0e5337923ad0485d3c474467badbe44403293c7044cd87d56e5b1ceb3b",
+      "src/glide_particle_sliders/binding_normalized_v3.py": "464a2c28d65d5459acf9470607faaad5b559575faa0bc06ede99e3b60a489359",
+      "src/glide_particle_sliders/binding_residual_v2.py": "87b9372216923d5a0dcc0ec5d0edf5d97af580292fe3195fe81e1941dc4e21ef",
+      "src/glide_particle_sliders/cli.py": "68e13d22cf71725545da7ad4f68592fc0eafd3daee97a30820ed089e2d545fb2",
+      "src/glide_particle_sliders/evaluation.py": "e7d6dfaab56e5ddb8a9ca897dd3b4b37b65a5a231945b3e5170e60983d62c278",
+      "src/glide_particle_sliders/native.py": "924f3c3241d984fc79e0b616820a6615241f5a79fb4db377a4ddbeeda2280b4f",
+      "src/glide_particle_sliders/preference_metrics.py": "c598a9824a40e8bb2251d057ed79be764450034152c0ade50c649976c9f41be3"
+    },
+    "packages": {
+      "hndl": {
+        "direct_url": {},
+        "version": "0.10.0"
+      },
+      "hypergan": {
+        "direct_url": {
+          "url": "https://github.com/HyperGAN/HyperGAN.git",
+          "vcs_info": {
+            "commit_id": "5f368a3770cf5bdae0448995c9f76e29af8049f7",
+            "requested_revision": "5f368a3770cf5bdae0448995c9f76e29af8049f7",
+            "vcs": "git"
+          }
+        },
+        "version": "2.0.0"
+      },
+      "particle-sliders-core": {
+        "direct_url": {
+          "subdirectory": "packages/particle-sliders-core",
+          "url": "https://github.com/HyperGAN/particle-sliders.git",
+          "vcs_info": {
+            "commit_id": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+            "requested_revision": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+            "vcs": "git"
+          }
+        },
+        "version": "0.13.0"
+      },
+      "particlegan": {
+        "direct_url": {
+          "archive_info": {
+            "hash": "sha256=c1c0de7a635ac1b1634ba158eed050b6f6aed993e01f9b463435430c77d846ae",
+            "hashes": {
+              "sha256": "c1c0de7a635ac1b1634ba158eed050b6f6aed993e01f9b463435430c77d846ae"
+            }
+          },
+          "url": "file:///ml2/particlesliders-working/lr-work/pg095/base-wheels/particlegan-0.9.5-py3-none-any.whl"
+        },
+        "version": "0.9.5"
+      },
+      "torch": {
+        "direct_url": {},
+        "version": "2.9.1"
+      },
+      "transformers": {
+        "direct_url": {},
+        "version": "5.3.0"
+      }
+    }
+  },
+  "started": "2026-11-06T17:58:23.861944+00:00",
+  "status": "completed",
+  "total_new_pg_physical_updates": 192,
+  "total_new_pg_unique_updates": 192
+}

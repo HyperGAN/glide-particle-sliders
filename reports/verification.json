@@ -1,0 +1,80 @@
+{
+  "experiment-v1": {
+    "actual_update_logs": [
+      {
+        "actual_log_updates": 128,
+        "lr": 0.0001,
+        "steps_unique_contiguous": true
+      },
+      {
+        "actual_log_updates": 128,
+        "lr": 0.001,
+        "steps_unique_contiguous": true
+      },
+      {
+        "actual_log_updates": 128,
+        "lr": 0.01,
+        "steps_unique_contiguous": true
+      }
+    ],
+    "results_sha256": "92311a6d5dc0ee98eb4266eeda271360d5f73629993d3b047c12cf2b118e5861",
+    "source_snapshot_matches": {
+      "native-model.lock.json": true,
+      "pyproject.toml": true,
+      "src/glide_particle_sliders/__init__.py": true,
+      "src/glide_particle_sliders/binding.py": true,
+      "src/glide_particle_sliders/cli.py": true,
+      "src/glide_particle_sliders/evaluation.py": true,
+      "src/glide_particle_sliders/native.py": true
+    }
+  },
+  "label-probe-v1": {
+    "actual_update_logs": [
+      {
+        "actual_log_updates": 512,
+        "lr": 0.0001,
+        "steps_unique_contiguous": true
+      },
+      {
+        "actual_log_updates": 512,
+        "lr": 0.001,
+        "steps_unique_contiguous": true
+      },
+      {
+        "actual_log_updates": 512,
+        "lr": 0.01,
+        "steps_unique_contiguous": true
+      }
+    ],
+    "results_sha256": "80f029d2823b050d0feabe6815751615af76a13b35c5e8ebc42ba1744f4f7f89",
+    "source_snapshot_matches": {
+      "native-model.lock.json": true,
+      "pyproject.toml": true,
+      "src/glide_particle_sliders/__init__.py": true,
+      "src/glide_particle_sliders/binding.py": true,
+      "src/glide_particle_sliders/cli.py": true,
+      "src/glide_particle_sliders/evaluation.py": true,
+      "src/glide_particle_sliders/native.py": true
+    }
+  },
+  "publication": {
+    "deployed": false,
+    "pull_request_created": false,
+    "remote_repository_created": false,
+    "weights_published": false
+  },
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 CUDA_VISIBLE_DEVICES='' .venv/bin/python -m pytest -q",
+    "exit_code": 0,
+    "observed_seconds": 5.15,
+    "passed": 21,
+    "subtests_passed": 324
+  },
+  "wheel": {
+    "files": 10,
+    "model_weight_files": [],
+    "package_sources_exact": true,
+    "path": "artifacts/wheel/glide_particle_sliders-0.1.0-py3-none-any.whl",
+    "sha256": "6e4bb0a95647c90dd94fafdcc68283bb1ae01587471528f49393721db58da1e5"
+  }
+}
