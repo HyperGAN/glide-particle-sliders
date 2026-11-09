@@ -20,5 +20,8 @@ original separate scopes. The original experiment/HPO scripts still implement
 historical SSE/index selection; they are not current ranking instructions.
 The existing normalized configuration factory accepts the exact scalar tuples;
 the convenience training script hardcodes one multiplier pair and does not
-expose every tied recipe. Native bundle adoption/product publication is separate
-from this accepted arithmetic decision.
+expose every tied recipe. The existing frozen core0.13.0/PG0.9.5 native bundle
+is now Root-adopted, and twelve saved fresh-anchor decision previews are
+published, separately from this accepted arithmetic decision. Ordinary Generate
+remains unavailable and published weights remain zero. See the portable status
+evidence; no proof, search, output or score was repeated.
