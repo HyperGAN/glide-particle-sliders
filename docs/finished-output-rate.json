@@ -640,8 +640,8 @@
   "per_case_HPO_choice_transcripts_available": false,
   "per_case_limitation": "Saved binary counts and denominators determine the exact linear mean; do not fabricate which12 individual choices occurred for a0.75 arm.",
   "measurement_kind": "REUSED_ORIGINAL_NATIVE_BINARY_CHOICES_ARITHMETIC_ONLY",
-  "native_bundle_Root_adopted": false,
-  "current_previews_published": false,
+  "native_bundle_Root_adopted": true,
+  "current_previews_published": true,
   "ordinary_Generate_available": false,
   "portability": "This summary is exact recipe/first-count metadata, not a model runner, changed default or download manifest. Original native model, conditioning cache, source-bound RAW/FULL artifacts and runtime dependencies are not bundled.",
   "source_records": [
@@ -656,6 +656,29 @@
       "bytes": 2697,
       "sha256": "7780fe712668c5b600d7aa6ff7350e7807adf4b50fb6c7b20d1a13d65e6a35d2",
       "availability": "Retained campaign evidence, not a public artifact download bundled here."
+    },
+    {
+      "artifact_id": "Root-existing-frozen-native-bundle-material-acceptance-v1.json",
+      "bytes": 7807,
+      "sha256": "cf06417d3e3a4abd72c7390012f94bbeb90e9953b7a44b7a254d52661b99aeb3",
+      "scope": "Existing frozen core0.13.0/PG0.9.5 native bundle material acceptance",
+      "availability": "Retained campaign evidence, not a public artifact download bundled here."
+    },
+    {
+      "artifact_id": "Root-applied-adoption-receipt-v1.json",
+      "bytes": 6029,
+      "sha256": "4fc1950f36937fd637926d978cc3b6454813c4edb6fd028badbbfd8e61c1a1eb",
+      "scope": "Actual canonical native-bundle adoption, 2026-11-09T04:05:59.492324+00:00",
+      "availability": "Retained campaign evidence, not a public artifact download bundled here."
+    },
+    {
+      "artifact_id": "Root-actual-publication-receipt-v1.json",
+      "bytes": 7452,
+      "sha256": "1620f764293e5ec5c0362a1526b6e42d804864e4303b06fabea32eef0335a2ea",
+      "scope": "Twelve saved fresh-anchor decision previews published, 2026-11-09T04:00:52.923600+00:00; separate fresh104 scope",
+      "availability": "Retained campaign evidence, not a public artifact download bundled here."
     }
-  ]
+  ],
+  "current_campaign_status_scope": "Existing native evidence only: original Source29075/core0.13.0/PG0.9.5 CPU FP32 normalized/residual64; no current-core0.14 claim. Published previews are twelve saved fresh-anchor decisions, separate from main16 LR selection. Ordinary Generate remains unavailable; published weights remain zero. No new model/proof/rating/experiment.",
+  "published_control_weights": 0
 }

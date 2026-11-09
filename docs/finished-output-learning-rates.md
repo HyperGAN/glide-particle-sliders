@@ -109,8 +109,17 @@ confirmation is required. See [the historical study](HYPERPARAMETERS.md).
 
 The retained model/cache/RAW/FULL artifacts are not public downloads bundled
 here. The summary provides first counts, exact options, original observation
-pointers and source hashes for scalar arithmetic review. This decision does
-not establish a newly Root-adopted native bundle, current-core qualification,
-sampler publication or ordinary Generate availability. Implementation merge
-and product integration remain separate work; this documentation authorizes
-no new execution or repeated completed search.
+pointers and source hashes for scalar arithmetic review. Separately, Root
+adopted the existing frozen core0.13.0/PG0.9.5 native bundle on 2026-11-09:
+512 original unique updates, exact full256→257 continuation, RAW native-response
+reload and actual `Glide.decide_batch` replay. This reuses its original Source
+identity; it does not claim current-core0.14 qualification.
+
+The campaign sampler also publishes twelve saved fresh-anchor OFF/ON decision
+previews (first three original groups in both option orders). They retain their
+separate fresh104 scope and do not replace or rerate the main16 LR comparison.
+The [portable metadata](finished-output-rate.json) records the actual acceptance,
+canonical adoption and preview-publication artifact names, bytes and SHA256.
+These identify retained evidence, not public artifact download links. Ordinary
+Generate remains unavailable and published weights remain zero. This status
+update adds no model call, proof, experiment, confirmation or repeated score.

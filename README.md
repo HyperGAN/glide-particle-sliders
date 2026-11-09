@@ -8,6 +8,14 @@ The historical SSE-selected batch32 run and fresh104 results remain [separate di
 
 The reviewed implementation from [PR1](https://github.com/HyperGAN/glide-particle-sliders/pull/1) merged on 2026-11-09 at [`e058591d`](https://github.com/HyperGAN/glide-particle-sliders/commit/e058591d1ac12042609dfe58504cebc8d9235ae0); its reviewed Source head `29075f79269d1976071575e9d0ce8d569458fc3b` is retained as an ancestor. The [public repository](https://github.com/HyperGAN/glide-particle-sliders) publishes source and weight-free measurements. This source merge publishes no model weights, server or deployment and does not change captured native identities.
 
+**Campaign status, 2026-11-09:** the existing frozen core0.13.0/PG0.9.5 native
+bundle is Root-adopted, and twelve saved fresh-anchor OFF/ON decision previews
+are published in the campaign sampler. These are separate from the original
+main16 LR comparison. [Portable status evidence](docs/finished-output-rate.json)
+records the actual adoption/publication artifact identities. Ordinary Generate
+remains unavailable and published weights remain zero; no new native proof,
+training, inference or rating was required for this status update.
+
 ## Architecture
 
 GLiDE is a bidirectional Ettin/ModernBERT encoder with 28 layers, width 1024 and a native bias-free `Linear(1024,255)` decision readout. It has no image encoder and does not generate text. Its 255 outputs are option positions, not semantic classes.
