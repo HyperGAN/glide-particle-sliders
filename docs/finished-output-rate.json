@@ -1,0 +1,661 @@
+{
+  "schema": "particle-slider-scoped-finished-output-rate-guidance-v1",
+  "as_of": "2026-11-09",
+  "product_id": "glide-particle-sliders",
+  "concept": "Concision preference",
+  "status": "completed_intended_effect_comparison_four_full_recipes_tied",
+  "original_source_commit": "29075f79269d1976071575e9d0ce8d569458fc3b",
+  "scientific_core_version": "0.13.0",
+  "ParticleGAN": "0.9.5",
+  "selection_metric": "Equal eight-scenario mean of the two original opposite option orders: native concise-choice ON1 minus matched OFF0, exactly the equal16-main-row mean. Authored synthetic-label dev choices only; control/unrelated rows, probability, SSE and preservation excluded. Per-case HPO transcripts are absent; saved counts determine the linear mean without fabricated individual judgments.",
+  "binary_intensity": "1 iff native chosen option equals original concise_slot, else0",
+  "arithmetic": "(ON_concise_count - OFF_concise_count) / 16; equal8 scenario means of two opposite orders",
+  "excluded_from_selection": [
+    "correctness-control rows",
+    "unrelated rows",
+    "all.choice_accuracy pooling",
+    "probability/confidence gain",
+    "relative SSE",
+    "preservation/beauty gates",
+    "declared candidate index or batch tiebreak"
+  ],
+  "rate_overrides": null,
+  "actual_rates": null,
+  "selected_unique_G": null,
+  "unique_full_recipe_selected": false,
+  "tied_best_G": [
+    0.001
+  ],
+  "tied_best_arms": [
+    "arm-04",
+    "arm-05",
+    "arm-06",
+    "arm-07"
+  ],
+  "tied_rate_overrides": [
+    {
+      "lr": 0.001,
+      "d_lr_mult": 3.0,
+      "prior_lr_mult": 3.0,
+      "ema_decay": null
+    },
+    {
+      "lr": 0.001,
+      "d_lr_mult": 3.0,
+      "prior_lr_mult": 30.0,
+      "ema_decay": null
+    },
+    {
+      "lr": 0.001,
+      "d_lr_mult": 18.0,
+      "prior_lr_mult": 3.0,
+      "ema_decay": null
+    },
+    {
+      "lr": 0.001,
+      "d_lr_mult": 18.0,
+      "prior_lr_mult": 30.0,
+      "ema_decay": null
+    }
+  ],
+  "tied_actual_rates": [
+    {
+      "generator": 0.001,
+      "critic": 0.003,
+      "bank": 0.003
+    },
+    {
+      "generator": 0.001,
+      "critic": 0.003,
+      "bank": 0.03
+    },
+    {
+      "generator": 0.001,
+      "critic": 0.018000000000000002,
+      "bank": 0.003
+    },
+    {
+      "generator": 0.001,
+      "critic": 0.018000000000000002,
+      "bank": 0.03
+    }
+  ],
+  "tied_configs_without_local_cache_path": [
+    {
+      "backend": "glide-normalized-readout-particles-v3",
+      "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+      "options": {
+        "base_precision": "float32",
+        "batch": 8,
+        "critic": "residual64",
+        "d_lr_mult": 3.0,
+        "device": "cpu",
+        "ema_decay": null,
+        "lr": 0.001,
+        "penalty_input_domain": "continuous",
+        "pg_source_profile": "release-0.9.5",
+        "prior_lr_mult": 3.0,
+        "seed": 7,
+        "steps": 512
+      }
+    },
+    {
+      "backend": "glide-normalized-readout-particles-v3",
+      "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+      "options": {
+        "base_precision": "float32",
+        "batch": 8,
+        "critic": "residual64",
+        "d_lr_mult": 3.0,
+        "device": "cpu",
+        "ema_decay": null,
+        "lr": 0.001,
+        "penalty_input_domain": "continuous",
+        "pg_source_profile": "release-0.9.5",
+        "prior_lr_mult": 30.0,
+        "seed": 7,
+        "steps": 512
+      }
+    },
+    {
+      "backend": "glide-normalized-readout-particles-v3",
+      "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+      "options": {
+        "base_precision": "float32",
+        "batch": 8,
+        "critic": "residual64",
+        "d_lr_mult": 18.0,
+        "device": "cpu",
+        "ema_decay": null,
+        "lr": 0.001,
+        "penalty_input_domain": "continuous",
+        "pg_source_profile": "release-0.9.5",
+        "prior_lr_mult": 3.0,
+        "seed": 7,
+        "steps": 512
+      }
+    },
+    {
+      "backend": "glide-normalized-readout-particles-v3",
+      "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+      "options": {
+        "base_precision": "float32",
+        "batch": 8,
+        "critic": "residual64",
+        "d_lr_mult": 18.0,
+        "device": "cpu",
+        "ema_decay": null,
+        "lr": 0.001,
+        "penalty_input_domain": "continuous",
+        "pg_source_profile": "release-0.9.5",
+        "prior_lr_mult": 30.0,
+        "seed": 7,
+        "steps": 512
+      }
+    }
+  ],
+  "required_original_local_option": "cache_file; its original absolute path is deliberately omitted, not substituted or retagged",
+  "profile": {
+    "RAW_updates": 512,
+    "horizon": 512,
+    "winning_batch": 8,
+    "seed": 7,
+    "device": "cpu",
+    "base_precision": "float32",
+    "critic": "residual64",
+    "adapter_normalization": "TRAIN-only centering/global RMS, adapter branch only",
+    "particle_bank_shape": [
+      128,
+      4
+    ],
+    "rank": 8,
+    "alpha": 8
+  },
+  "comparison_cases": 16,
+  "comparison_scenarios": 8,
+  "comparison_arms": 13,
+  "mean_effect_gain": 1.0,
+  "all_candidate_first_counts": [
+    {
+      "control_id": "arm-00",
+      "G": 0.0003,
+      "D": 0.003,
+      "bank": 0.003,
+      "batch": 8,
+      "mean_effect_gain": 0.0,
+      "ON_concise_count": 0,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-01",
+      "G": 0.0003,
+      "D": 0.003,
+      "bank": 0.03,
+      "batch": 8,
+      "mean_effect_gain": 0.0,
+      "ON_concise_count": 0,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-02",
+      "G": 0.0003,
+      "D": 0.018,
+      "bank": 0.003,
+      "batch": 8,
+      "mean_effect_gain": 0.0,
+      "ON_concise_count": 0,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-03",
+      "G": 0.0003,
+      "D": 0.018,
+      "bank": 0.03,
+      "batch": 8,
+      "mean_effect_gain": 0.0,
+      "ON_concise_count": 0,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-04",
+      "G": 0.001,
+      "D": 0.003,
+      "bank": 0.003,
+      "batch": 8,
+      "mean_effect_gain": 1.0,
+      "ON_concise_count": 16,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-05",
+      "G": 0.001,
+      "D": 0.003,
+      "bank": 0.03,
+      "batch": 8,
+      "mean_effect_gain": 1.0,
+      "ON_concise_count": 16,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-06",
+      "G": 0.001,
+      "D": 0.018000000000000002,
+      "bank": 0.003,
+      "batch": 8,
+      "mean_effect_gain": 1.0,
+      "ON_concise_count": 16,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-07",
+      "G": 0.001,
+      "D": 0.018000000000000002,
+      "bank": 0.03,
+      "batch": 8,
+      "mean_effect_gain": 1.0,
+      "ON_concise_count": 16,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-08",
+      "G": 0.003,
+      "D": 0.003,
+      "bank": 0.003,
+      "batch": 8,
+      "mean_effect_gain": 0.75,
+      "ON_concise_count": 12,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-09",
+      "G": 0.003,
+      "D": 0.003,
+      "bank": 0.03,
+      "batch": 8,
+      "mean_effect_gain": 0.75,
+      "ON_concise_count": 12,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-10",
+      "G": 0.003,
+      "D": 0.018,
+      "bank": 0.003,
+      "batch": 8,
+      "mean_effect_gain": 0.75,
+      "ON_concise_count": 12,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-11",
+      "G": 0.003,
+      "D": 0.018,
+      "bank": 0.03,
+      "batch": 8,
+      "mean_effect_gain": 0.75,
+      "ON_concise_count": 12,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    },
+    {
+      "control_id": "arm-12",
+      "G": 0.001,
+      "D": 0.018000000000000002,
+      "bank": 0.03,
+      "batch": 32,
+      "mean_effect_gain": 0.75,
+      "ON_concise_count": 12,
+      "OFF_concise_count": 0,
+      "matched_ordered_cases": 16
+    }
+  ],
+  "candidate_first_observations": [
+    {
+      "arm": "arm-00",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-00/results.json",
+          "bytes": 62380,
+          "sha256": "4cce01b61e8ed2d08c87957a7bd4d0512cb3a8e8ab0350c72993a2557c4ffe47",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-00/results.json",
+          "bytes": 62380,
+          "sha256": "4cce01b61e8ed2d08c87957a7bd4d0512cb3a8e8ab0350c72993a2557c4ffe47",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-01",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-01/results.json",
+          "bytes": 62338,
+          "sha256": "2fe3ee40068665265e1f180debae6dd91dbfd2c7c8b2ed3ebaec6048b995b5bd",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-01/results.json",
+          "bytes": 62338,
+          "sha256": "2fe3ee40068665265e1f180debae6dd91dbfd2c7c8b2ed3ebaec6048b995b5bd",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-02",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-02/results.json",
+          "bytes": 62345,
+          "sha256": "ab09911d41136e6d0d93c22cf45c9af09261f75d7110fa364a56c9d48f10b529",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-02/results.json",
+          "bytes": 62345,
+          "sha256": "ab09911d41136e6d0d93c22cf45c9af09261f75d7110fa364a56c9d48f10b529",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-03",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-03/results.json",
+          "bytes": 62343,
+          "sha256": "fe2835c2a7f5c8aeed462740b49ca16cd4d3a378acbe2f20bef6d2ded0f74566",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-03/results.json",
+          "bytes": 62343,
+          "sha256": "fe2835c2a7f5c8aeed462740b49ca16cd4d3a378acbe2f20bef6d2ded0f74566",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-04",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-04/results.json",
+          "bytes": 62242,
+          "sha256": "e25593410a2f3aa2086c2868c2e639efa8e07556674435088097583994ef67ec",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 1.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-04/results.json",
+          "bytes": 62242,
+          "sha256": "e25593410a2f3aa2086c2868c2e639efa8e07556674435088097583994ef67ec",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-05",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-05/results.json",
+          "bytes": 62277,
+          "sha256": "cb1b8b4874888d3404e137f8cbcd3214c6f1f155dd4b8c65e67249bfbe1e2127",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 1.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-05/results.json",
+          "bytes": 62277,
+          "sha256": "cb1b8b4874888d3404e137f8cbcd3214c6f1f155dd4b8c65e67249bfbe1e2127",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-06",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-06/results.json",
+          "bytes": 62337,
+          "sha256": "ab6d840f64009c85b0a7506db77e5df9d8859cec09d1bcc2a2e831f344fca92c",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 1.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-06/results.json",
+          "bytes": 62337,
+          "sha256": "ab6d840f64009c85b0a7506db77e5df9d8859cec09d1bcc2a2e831f344fca92c",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-07",
+      "ON": {
+        "record": {
+          "artifact_id": "normalized-residual-dev-v3-continuation/results.json",
+          "bytes": 19138,
+          "sha256": "ab023732050645cc98e2e719a71aaef66c2eb3384d9bcfc22edfb159e0cde810",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev/concise_choice_rate_main",
+        "saved_value": 1.0
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-00/results.json",
+          "bytes": 62380,
+          "sha256": "4cce01b61e8ed2d08c87957a7bd4d0512cb3a8e8ab0350c72993a2557c4ffe47",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-08",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-08/results.json",
+          "bytes": 62443,
+          "sha256": "7c3d3d3b01e25a66c53840a9ce220039b82509ddf11c66d1b7c48468b01d87d0",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.75
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-08/results.json",
+          "bytes": 62443,
+          "sha256": "7c3d3d3b01e25a66c53840a9ce220039b82509ddf11c66d1b7c48468b01d87d0",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-09",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-09/results.json",
+          "bytes": 62418,
+          "sha256": "ef7333dbfe5ce0492965e9ba8167d3263349a6ab4263a7cd9e2f783a2acafeba",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.75
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-09/results.json",
+          "bytes": 62418,
+          "sha256": "ef7333dbfe5ce0492965e9ba8167d3263349a6ab4263a7cd9e2f783a2acafeba",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-10",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-10/results.json",
+          "bytes": 62451,
+          "sha256": "827005d8e4d163dc095ea99bcf5fc7a2a6bf5fb46cce81122a313e09862c0f87",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.75
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-10/results.json",
+          "bytes": 62451,
+          "sha256": "827005d8e4d163dc095ea99bcf5fc7a2a6bf5fb46cce81122a313e09862c0f87",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-11",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-11/results.json",
+          "bytes": 62432,
+          "sha256": "5f005b88a97cbcf10a463fe9b013a015a655c38e00e636b6a559612347860b6d",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.75
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-11/results.json",
+          "bytes": 62432,
+          "sha256": "5f005b88a97cbcf10a463fe9b013a015a655c38e00e636b6a559612347860b6d",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    },
+    {
+      "arm": "arm-12",
+      "ON": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-12/results.json",
+          "bytes": 62380,
+          "sha256": "570b0bc036479a2834c6a9ee744b5c4f1e9974ffef77a0bed3126d00e95b7f2c",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/dev/concise_choice_rate_main",
+        "saved_value": 0.75
+      },
+      "OFF": {
+        "record": {
+          "artifact_id": "hpo-v5/arm-12/results.json",
+          "bytes": 62380,
+          "sha256": "570b0bc036479a2834c6a9ee744b5c4f1e9974ffef77a0bed3126d00e95b7f2c",
+          "availability": "Retained original first-observation record; not bundled as a public download."
+        },
+        "JSON_pointer": "/snapshots/2/dev_off/concise_choice_rate_main",
+        "saved_value": 0.0
+      }
+    }
+  ],
+  "weight_EMA": null,
+  "completed_search_reused": true,
+  "new_training_updates": 0,
+  "new_model_render_proof_or_judgment_calls": 0,
+  "additional_fresh_confirmation_required": false,
+  "product_default_changed": false,
+  "historical_SSE_recipe": {
+    "arm": "arm-12",
+    "batch": 32,
+    "G": 0.001,
+    "D": 0.018000000000000002,
+    "bank": 0.03,
+    "current_main_choice_gain": 0.75
+  },
+  "existing_fresh_results_separate": true,
+  "fresh_scope": "Original fresh104 results cover the historical anchor/selected seed7/seed11 only; not pooled with the13-arm original-dev ranking or claimed as confirmation of all four tied recipes.",
+  "per_case_HPO_choice_transcripts_available": false,
+  "per_case_limitation": "Saved binary counts and denominators determine the exact linear mean; do not fabricate which12 individual choices occurred for a0.75 arm.",
+  "measurement_kind": "REUSED_ORIGINAL_NATIVE_BINARY_CHOICES_ARITHMETIC_ONLY",
+  "native_bundle_Root_adopted": false,
+  "current_previews_published": false,
+  "ordinary_Generate_available": false,
+  "portability": "This summary is exact recipe/first-count metadata, not a model runner, changed default or download manifest. Original native model, conditioning cache, source-bound RAW/FULL artifacts and runtime dependencies are not bundled.",
+  "source_records": [
+    {
+      "artifact_id": "root-existing-13-arm-RAW512-effect-decision-v1.json",
+      "bytes": 47791,
+      "sha256": "cc6df644a422bbb3598545f781656e72f95fd80c48e2d1a4f04f8e9f31ba8525",
+      "availability": "Retained campaign evidence, not a public artifact download bundled here."
+    },
+    {
+      "artifact_id": "Root-adopted-protocol.json",
+      "bytes": 2697,
+      "sha256": "7780fe712668c5b600d7aa6ff7350e7807adf4b50fb6c7b20d1a13d65e6a35d2",
+      "availability": "Retained campaign evidence, not a public artifact download bundled here."
+    }
+  ]
+}
