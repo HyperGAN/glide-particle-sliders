@@ -1,0 +1,109 @@
+{
+  "dataset_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/data/concise-fresh-v3.json",
+  "dataset_sha256": "995871d69e3c1b7e0b8ee052d5e2fa68c9a472f8455408d39ba74cf2bf1b9059",
+  "evaluation_script_sha256": "f3fccb78abbfa6e08613131bd78ec93d33eed273dc8ee3f28f4d692cd07d3258",
+  "frozen_at": "2026-11-06T18:11:15.408236+00:00",
+  "further_training_or_selection_on_confirmation": false,
+  "gpu_launches": 0,
+  "hpo_plan_sha256": "bc83baf040717502397ccab67287bfd9fc25e3b09c81cce4d0fa3d0d8cf17f82",
+  "hpo_selection_sha256": "b5210a276b0f06313dc8e1bebad4e2cc737e712e837dd8afea5d5f87fd5e24a3",
+  "metrics": {
+    "preference": "ordered and both-orders scenario choices, mean/worst-order Ppreferred, grouped probability gains",
+    "primary": "strength1 RAW FP64 equal-example relative SSE on80 preference rows",
+    "unrelated": "all student values finite; teacher-only exact-zero24 exclusions, flips/accuracy/DeltaP/KL diagnostic"
+  },
+  "models": [
+    {
+      "aliases": [
+        "pre-tuning-anchor-seed7"
+      ],
+      "artifact": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/normalized-residual-dev-v3-continuation/raw-inference.pt",
+      "artifact_sha256": "9cc611049cddfd22c06a3856ffd4f08775f8e00670367a791f3a636336d66a5b",
+      "name": "pre-tuning-anchor-seed7",
+      "seed": 7
+    },
+    {
+      "aliases": [
+        "tuned-seed7"
+      ],
+      "artifact": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/hpo-v5/arm-12/raw-inference.pt",
+      "artifact_sha256": "ec24bbdc9d29b4bb6bf07bcc61356622e2326d54adeccba6f70bb5ba76800872",
+      "name": "tuned-seed7",
+      "seed": 7
+    },
+    {
+      "aliases": [
+        "tuned-seed11"
+      ],
+      "artifact": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/hpo-v5/seed11-confirmation/raw-inference.pt",
+      "artifact_sha256": "607b8389c0ddcec68b9c669fba7a84f06ce45f8634dacceabace2aec42389ddb",
+      "name": "tuned-seed11",
+      "seed": 11
+    }
+  ],
+  "output_directory": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/hpo-v5/fresh-confirmation",
+  "preference_groups": 40,
+  "preference_ordered_rows": 80,
+  "product_sources": {
+    "native-model.lock.json": "41360c5d3817012d0ff34e96975cc3641ce3560f03b08e4993c32b79d54d3274",
+    "pyproject.toml": "e0988fab0d0f919c6737d656ca2b4b378c820446ec57077965219a0620d9c0b2",
+    "src/glide_particle_sliders/__init__.py": "7fe0dc115b75f70cd368a07a5acb3fea7c9c0fedc06be69e4797844b06466440",
+    "src/glide_particle_sliders/binding.py": "4b9e7e0e5337923ad0485d3c474467badbe44403293c7044cd87d56e5b1ceb3b",
+    "src/glide_particle_sliders/binding_normalized_v3.py": "464a2c28d65d5459acf9470607faaad5b559575faa0bc06ede99e3b60a489359",
+    "src/glide_particle_sliders/binding_residual_v2.py": "87b9372216923d5a0dcc0ec5d0edf5d97af580292fe3195fe81e1941dc4e21ef",
+    "src/glide_particle_sliders/cli.py": "68e13d22cf71725545da7ad4f68592fc0eafd3daee97a30820ed089e2d545fb2",
+    "src/glide_particle_sliders/evaluation.py": "e7d6dfaab56e5ddb8a9ca897dd3b4b37b65a5a231945b3e5170e60983d62c278",
+    "src/glide_particle_sliders/native.py": "924f3c3241d984fc79e0b616820a6615241f5a79fb4db377a4ddbeeda2280b4f",
+    "src/glide_particle_sliders/preference_metrics.py": "c598a9824a40e8bb2251d057ed79be764450034152c0ade50c649976c9f41be3"
+  },
+  "readout_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/readout-v2.pt",
+  "schema": "glide-hpo-blind-confirmation-plan-v5",
+  "seed11_confirmation_sha256": "7311a193ed2dabe5a8f2faad945e8b609f1a3388ceee17ba5a56fb3cdcfdce00",
+  "seed11_not_used_for_reselection": true,
+  "selected_arm": "arm-12",
+  "selected_base_rates": {
+    "adapter": 0.001,
+    "bank": 0.03,
+    "critic": 0.018
+  },
+  "selected_config": {
+    "backend": "glide-normalized-readout-particles-v3",
+    "cohort": "glide-04b-normalized-adapter-pg095-raw-v3",
+    "options": {
+      "base_precision": "float32",
+      "batch": 32,
+      "cache_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/label-probe-inputs-v1/synthetic-label-cache.pt",
+      "critic": "residual64",
+      "d_lr_mult": 18.0,
+      "device": "cpu",
+      "ema_decay": null,
+      "lr": 0.001,
+      "penalty_input_domain": "continuous",
+      "pg_source_profile": "release-0.9.5",
+      "prior_lr_mult": 30.0,
+      "seed": 7,
+      "steps": 512
+    }
+  },
+  "selection_metric": {
+    "completed_steps": 512,
+    "field": "dev.mean",
+    "metric": "FP64 operand-first equal-example relative SSE",
+    "preference_metrics": "diagnostics only",
+    "selection": "raw",
+    "split": "dev",
+    "strength": 1.0,
+    "tie_break": "declared candidate index"
+  },
+  "strengths": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "target": "Preference:T=N+delta with preferred+1.5/other-1.5; unrelated:T=N exactly",
+  "unrelated_cases": 12,
+  "unrelated_ordered_rows": 24,
+  "weights": "raw; no EMA"
+}

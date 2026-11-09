@@ -1,0 +1,142 @@
+{
+  "schema": "glide-dataset-provenance-correction-v1",
+  "created_at_utc": "2026-11-06T17:27:04.993740+00:00",
+  "status": "additional_correction_record_original_artifacts_preserved",
+  "finding": {
+    "field": "metadata.dataset_sha256",
+    "affected_caches": [
+      "artifacts/concise-cache-v1.pt",
+      "artifacts/concise-cache-v2.pt"
+    ],
+    "stale_value": "48877d1285b26ced60a37a7ac878f211ba9709b2d6a2473f9cd0699e41744a42",
+    "meaning": "The stored hash identifies the later on-disk dataset, not the rows that were read and encoded for these caches.",
+    "cause": "prepare_cache parsed dataset rows before encoding, then hashed dataset_file after encoding. The development control changed between those operations.",
+    "embedded_dataset_rows_match_cache_row_ids": true,
+    "embedded_dataset_splits_match_cache_splits": true,
+    "both_cache_embedded_datasets_equal": true
+  },
+  "recovered_input_snapshot": {
+    "path": "artifacts/datasets/concise-cache-v1-input-snapshot.json",
+    "sha256": "055e9598e17a2c09eb12a02dfff158a13657de4e89df8de6b7e315f15771d0b5",
+    "schema": "glide-concise-pairs-v1",
+    "rows": 108,
+    "groups": 54,
+    "rows_by_split": {
+      "dev": 20,
+      "test": 36,
+      "train": 52
+    },
+    "recovery_source": "Exact row objects from metadata.dataset in both original caches.",
+    "serialization": "UTF-8 JSON, ensure_ascii=False, indent=2, one final newline.",
+    "original_input_file_byte_hash": "Not captured reliably; this SHA256 identifies the recovered snapshot serialization, not a separately observed original file."
+  },
+  "current_dataset": {
+    "path": "data/concise-preference-v1.json",
+    "sha256": "48877d1285b26ced60a37a7ac878f211ba9709b2d6a2473f9cd0699e41744a42",
+    "unchanged_row_objects": 106,
+    "changed_row_objects": 2,
+    "unchanged_train_rows": 52,
+    "unchanged_test_rows": 36
+  },
+  "changed_groups": [
+    {
+      "old_group": "control-support-return-window",
+      "new_group": "control-support-order-mismatch",
+      "split": "dev",
+      "domain": "customer_support",
+      "control": true,
+      "old_scenario": "Return eligibility: a 30-day-old purchase is outside a 21-day return window.",
+      "new_scenario": "Order mismatch: a blue medium shirt was ordered, while a red small shirt was received.",
+      "concise_slot_and_preferred_slot_labels_unchanged": true,
+      "preferred_reply_remains_longer": true
+    }
+  ],
+  "changed_rows": [
+    {
+      "row_index_zero_based": 100,
+      "old_id": "control-support-return-window--concise-0",
+      "new_id": "control-support-order-mismatch--concise-0",
+      "old_group": "control-support-return-window",
+      "new_group": "control-support-order-mismatch",
+      "split": "dev",
+      "domain": "customer_support",
+      "changed_top_level_fields": [
+        "group",
+        "id",
+        "neutral",
+        "positive"
+      ],
+      "unchanged_fields": [
+        "split",
+        "domain",
+        "control",
+        "concise_slot",
+        "preferred_slot"
+      ],
+      "request_changes": {
+        "both_arms": [
+          "state",
+          "questions.preference.criteria.first",
+          "questions.preference.criteria.second"
+        ],
+        "instructions_changed": false,
+        "option_key_order_changed": false
+      }
+    },
+    {
+      "row_index_zero_based": 101,
+      "old_id": "control-support-return-window--concise-1",
+      "new_id": "control-support-order-mismatch--concise-1",
+      "old_group": "control-support-return-window",
+      "new_group": "control-support-order-mismatch",
+      "split": "dev",
+      "domain": "customer_support",
+      "changed_top_level_fields": [
+        "group",
+        "id",
+        "neutral",
+        "positive"
+      ],
+      "unchanged_fields": [
+        "split",
+        "domain",
+        "control",
+        "concise_slot",
+        "preferred_slot"
+      ],
+      "request_changes": {
+        "both_arms": [
+          "state",
+          "questions.preference.criteria.first",
+          "questions.preference.criteria.second"
+        ],
+        "instructions_changed": false,
+        "option_key_order_changed": false
+      }
+    }
+  ],
+  "split_and_template_implication": {
+    "old_design_concern": "The old development return-window control uses a policy-deadline motif resembling the training workshop-cancellation scenario. The replacement introduces a distinct order-versus-delivery attribute task as a precaution against task-family overlap.",
+    "interpretation_limit": "This is a dataset-design concern, not evidence that a model exploited leakage.",
+    "affected_selection": "The experiment-v1 development measurements and checkpoint selection used the old return-window control.",
+    "test_scope": "No test or train row objects changed. The recorded test metrics still describe the original cached test rows, but the complete final dataset file is not the exact experiment-v1 input.",
+    "future_work": "Use a new cache derivative for the revised development control; retain experiment-v1 and its exact recovered input snapshot as historical evidence."
+  },
+  "preservation": {
+    "original_cache_result_and_lock_files_modified": false,
+    "native_encoder_execution_performed": false,
+    "training_performed": false,
+    "protected_file_sha256": {
+      "artifacts/concise-cache-v1.pt": "9739dec4bb242bdcf09d3a2ba4ea13c6e8db2b64c4f2a2094255fc6b3b45f91a",
+      "artifacts/concise-cache-v2.pt": "da03d88bb0b208c4ef61a3ad7a7329d92f633603572c7d1ed8a699eaf85f6bf4",
+      "artifacts/readout-v1.pt": "b0dfa345e4db8ab20a5f93b2dc299107db1ecdef61b0ffe65fe31e7a1d925b5c",
+      "artifacts/readout-v2.pt": "46a3b9d898195ee3ab75f54d9dd6c344d7380dc9406f97be9c6b24aee5dff9d3",
+      "artifacts/experiment-v1/results.json": "92311a6d5dc0ee98eb4266eeda271360d5f73629993d3b047c12cf2b118e5861",
+      "artifacts/experiment-v1/selection.json": "0a7f80d7a56c3213fd8e0fd74022be628e9fd538c42a02c68da88a289022bd2c",
+      "native-model.lock.json": "41360c5d3817012d0ff34e96975cc3641ce3560f03b08e4993c32b79d54d3274",
+      "artifacts/native-model-lock-initial.json": "2351919bfe839d21c3c55175ecd66ff637ac149db9cf801e56f77526b7a7a42c",
+      "artifacts/cache-v2-identity-derivation.json": "1415c3d06d338905f29ca12cd41b1001d3699a6241f19ea50ef3bc2745f4ceef",
+      "artifacts/concise-cache-v1.pt.receipt.json": "942bb402f6314b6ca55cdfa81106c196f471750f6237c53ec8db762fe6ebf8a6"
+    }
+  }
+}

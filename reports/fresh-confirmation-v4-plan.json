@@ -1,0 +1,88 @@
+{
+  "arms": [
+    {
+      "arm": "raw-adapter/conditional16",
+      "dev_relative_sse": 0.960959624182127,
+      "steps": 512
+    },
+    {
+      "arm": "raw-adapter/residual64",
+      "dev_relative_sse": 0.9673319655642274,
+      "steps": 512
+    },
+    {
+      "arm": "normalized-adapter/conditional16",
+      "dev_relative_sse": 1.3486531440166947,
+      "steps": 512
+    },
+    {
+      "arm": "normalized-adapter/residual64",
+      "dev_relative_sse": 0.8798450937392852,
+      "steps": 512
+    }
+  ],
+  "artifact": {
+    "file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/normalized-residual-dev-v3-continuation/raw-inference.pt",
+    "sha256": "9cc611049cddfd22c06a3856ffd4f08775f8e00670367a791f3a636336d66a5b"
+  },
+  "backend_module": "glide_particle_sliders.binding_normalized_v3",
+  "checkpoint": {
+    "file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/normalized-residual-dev-v3-continuation/step-512.pt",
+    "sha256": "e09bf93e7fe5b2657893c6f38cbf901f218fb263f17575f0c0615cb1abeb62a7"
+  },
+  "control_groups": 8,
+  "dataset_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/data/concise-fresh-v2.json",
+  "dataset_sha256": "7f3a247377d59faf537a3329bf2908183d9962b05805dd65afdfcd29aef2bdfe",
+  "evaluation_script_sha256": "9d06c78ee884bc793067ce18fa1def7453588d46fd6bb3c3094d620177cfd4e1",
+  "exclusion_policy": "No model-dependent row filtering; all80 rows retained, teacher-only exact-zero energy exclusions only",
+  "fresh_groups": 40,
+  "fresh_ordered_rows": 80,
+  "frozen_at": "2026-11-06T17:49:16.860991+00:00",
+  "main_groups": 32,
+  "new_training_updates": 0,
+  "no_post_fresh_training_or_candidate_selection": true,
+  "output_directory": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/fresh-confirmation-v4",
+  "preference_metrics": [
+    "preferred-choice accuracy",
+    "both-orders correct",
+    "mean and worst-order Ppreferred",
+    "group-bootstrap paired probability gains",
+    "main/control behavior separately",
+    "NLL and Brier"
+  ],
+  "product_sources": {
+    "native-model.lock.json": "41360c5d3817012d0ff34e96975cc3641ce3560f03b08e4993c32b79d54d3274",
+    "pyproject.toml": "e0988fab0d0f919c6737d656ca2b4b378c820446ec57077965219a0620d9c0b2",
+    "src/glide_particle_sliders/__init__.py": "7fe0dc115b75f70cd368a07a5acb3fea7c9c0fedc06be69e4797844b06466440",
+    "src/glide_particle_sliders/binding.py": "4b9e7e0e5337923ad0485d3c474467badbe44403293c7044cd87d56e5b1ceb3b",
+    "src/glide_particle_sliders/binding_normalized_v3.py": "464a2c28d65d5459acf9470607faaad5b559575faa0bc06ede99e3b60a489359",
+    "src/glide_particle_sliders/binding_residual_v2.py": "87b9372216923d5a0dcc0ec5d0edf5d97af580292fe3195fe81e1941dc4e21ef",
+    "src/glide_particle_sliders/cli.py": "68e13d22cf71725545da7ad4f68592fc0eafd3daee97a30820ed089e2d545fb2",
+    "src/glide_particle_sliders/evaluation.py": "e7d6dfaab56e5ddb8a9ca897dd3b4b37b65a5a231945b3e5170e60983d62c278",
+    "src/glide_particle_sliders/native.py": "924f3c3241d984fc79e0b616820a6615241f5a79fb4db377a4ddbeeda2280b4f",
+    "src/glide_particle_sliders/preference_metrics.py": "c598a9824a40e8bb2251d057ed79be764450034152c0ade50c649976c9f41be3"
+  },
+  "readout_file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/readout-v2.pt",
+  "ridge_coefficients": {
+    "file": "/ml2/codex-storage/future-workspaces/2026-11-06/task/hypergan/glide-particle-sliders/artifacts/ridge-label-control-v1/local-coefficients.pt",
+    "regularization": 0.01,
+    "selection": "previous TRAIN/dev only",
+    "sha256": "7abf5d4174ed3b06549ec6bae1ea22d15cb99e636cdca808f00c98b4972c5fdf"
+  },
+  "schema": "glide-fresh-confirmation-plan-v4",
+  "selection": "Minimum DEV RAW FP64 equal-example relative SSE at512 completed updates; no preference/control rejection gate",
+  "strengths": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "teacher": "T=N+delta, preferred_slot+1.5/other-1.5; original synthetic labels",
+  "untouched_until_recipe_freeze": true,
+  "winner": {
+    "arm": "normalized-adapter/residual64",
+    "dev_relative_sse": 0.8798450937392852,
+    "steps": 512
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "changed_rows": [
+    {
+      "index": 100,
+      "new_id": "control-support-order-mismatch--concise-0",
+      "old_id": "control-support-return-window--concise-0",
+      "split": "dev"
+    },
+    {
+      "index": 101,
+      "new_id": "control-support-order-mismatch--concise-1",
+      "old_id": "control-support-return-window--concise-1",
+      "split": "dev"
+    }
+  ],
+  "corrected_native_cache_sha256": "abd5d1b50a38f14c920a1d2bc02d13986639acf67433ed200f2730fb648b3799",
+  "final_dataset_sha256": "48877d1285b26ced60a37a7ac878f211ba9709b2d6a2473f9cd0699e41744a42",
+  "native_forward_requests": 4,
+  "source_cache_sha256": "da03d88bb0b208c4ef61a3ad7a7329d92f633603572c7d1ed8a699eaf85f6bf4",
+  "source_code_sha256": "51b015b53c11e9435e76a00ef563f20ab3169c62476447e2f31c51b8f418dd15",
+  "synthetic_label_cache_sha256": "a614394667fa35027cde522a9ab272c3a80f38d9c3a421206d41a684dc6b0671",
+  "target_protocol": "synthetic-known-label capacity probe: T=N+delta, preferred slot+1.5/other-1.5; frozen native encoder/readout particle training; NOT native instruction distillation; previously viewed test examples, exploratory",
+  "unchanged_tensors_exact": {
+    "neutral_hidden": true,
+    "neutral_logits": true,
+    "teacher_logits": true
+  }
+}

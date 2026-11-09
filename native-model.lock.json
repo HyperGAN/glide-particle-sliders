@@ -1,0 +1,29 @@
+{
+  "files": {
+    "LICENSE": "7381146597b418d6fa4c1345c43ca2450ccccd6c6322257356efabfece9ebb9a",
+    "NOTICE": "54576106686e7b0c3796ac7d81a5df94cf471b24d747feee22d257adf5edbbfd",
+    "README.md": "44acf7ca770fa9f2028dc43ccce20f377d44d2c7795842ae68cf8cfb0f316147",
+    "config.json": "778102ed6dca61fe4258ca87cd302927cc991c239d218e57f33ae272d7324b38",
+    "decision_config.json": "33e58b79cf4228abff85153ee630a80461dff5c97f7aed9d26abd1738be3b5b5",
+    "glide/__init__.py": "7e807d7d94895d436c43c2b2add0521608e208c5dde7e0016549c5b8ee5d7192",
+    "glide/encoder.py": "e2767770c3cc645c0a61eb4580e39e215406083ef5d9ba01bc91d0af33d3127d",
+    "glide/images.py": "4858f30b92819abe463d845886f3240145c532fd0dfc725f5a08586e7591c616",
+    "glide/model.py": "8efc9a72b26b3b05885ce1d34fccb94b1139d3c43511ec52f598fedd3f2a662c",
+    "glide/nvfp4.py": "d6b5633e24c8702055ec05a98e63d718948e43fa1cb14c6555bd0285fa2ea497",
+    "glide/prompt.py": "e47149ac980fe12c3cb24ea0ee63822d5bcde71f32d4a5cc9f37499853948338",
+    "licenses/Ettin-encoder-400m-LICENSE": "9cec9e5a835df0bdc65cc3405c1177763c87da63a99d650b75cc288e046ac9f3",
+    "model-00001-of-00001.safetensors": "4540aa6d168fd15b06f7d6a61c34dd45523b5a0a1a72f98f1b2a81cf60774f34",
+    "model.safetensors.index.json": "911f8dfccf8af55999c6cb14d08f72e86b3450a123be4add338d77b47eb4b613",
+    "readout.safetensors": "0cb6da049081b05dc60dcf0c9f95dc4309c8849ab921f61f67f4658172b57f2a",
+    "render_tokenizer/chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+    "render_tokenizer/tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "render_tokenizer/tokenizer_config.json": "66e427c470fe580fe8c7b5725d857af23d8417e37fae62667ec698306a19987b",
+    "requirements.txt": "16b3db96b1fc595622f259a3d41ab50962a940aa561396096d02bfec4745c064",
+    "special_tokens_map.json": "ea97ecdbcc73713039d8d64dbb05e3689495c96657fbd9a18f5bed381be81049",
+    "tokenizer.json": "9fd55248d51d33976b324fc11592e28071da7d41e0e9401dfb7082e30574b7b1",
+    "tokenizer_config.json": "3cd2017ff46d0a527e5d39cae39272eccfa1f19bb9f89b05d166aab2e38354e2"
+  },
+  "model_id": "fastino/GLiDE-0.4B",
+  "revision": "6bda7ab91aeb36dcad6d27828a8871e548c7fc71",
+  "schema": "glide-assets-v1"
+}
