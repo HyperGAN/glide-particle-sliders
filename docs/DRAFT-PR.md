@@ -1,4 +1,6 @@
-# Integrate and calibrate native GLiDE readout particles
+# Implementation review record — merged PR1
+
+[PR1](https://github.com/HyperGAN/glide-particle-sliders/pull/1) merged on 2026-11-09 at [`e058591d`](https://github.com/HyperGAN/glide-particle-sliders/commit/e058591d1ac12042609dfe58504cebc8d9235ae0), retaining reviewed implementation head `29075f79269d1976071575e9d0ce8d569458fc3b` as an ancestor. The original review description below preserves its source/evidence scope; it is not an uncreated or still-draft PR.
 
 GLiDE's public inference wrapper freezes the model and runs under inference mode, so it cannot directly train a slider. This adds a thin product over the shared particle-sliders lifecycle: cache the exact frozen native encoder representation, adapt the genuine decision readout with the shared routed particle bank, and reload raw exports into the live native API. The tested product supports two-choice text decisions on CPU, disables weight EMA, and preserves the native zero-strength response.
 
@@ -6,4 +8,11 @@ The cohort normalizes only adapter inputs with fixed TRAIN statistics and retain
 
 Original implementation validation (not rerun by this documentation change): 57 tests plus 784 subtests pass; a weight-free wheel builds; real GLiDE execution, exact full-state continuation, native-only export and full public-API replay pass. Benchmarks separate full native inference from cached-head latency and training throughput. Reports retain the initial negative results, source/data/checkpoint provenance, a corrected dataset-finalization race, and preserved launcher failures with strict continuation.
 
-No pretrained or trained model weights belong in this source change. Preserve Fastino and Ettin licensing notices. This text is a local review description; no pull request has been created.
+No pretrained or trained model weights belong in the merged source change.
+Preserve Fastino and Ettin licensing notices. The historical receipt-producing
+experiment/helpers are source-checkout/editable-product workflows because
+`source_receipt()` assumes repository-relative Source and manifest files; an
+ordinary wheel-installed experiment CLI lacks that layout. The pinned core
+remains non-editable. Registered response/inference package APIs are separate
+from this CLI limitation; no new wheel/model test or qualification is claimed.
+See [installation scope](../README.md#install-and-historical-reproduction-workflow).

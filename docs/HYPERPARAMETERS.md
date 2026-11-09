@@ -78,6 +78,11 @@ Machine evidence: [search plan](../reports/hpo-v5-plan.json), [search results](.
 ## Historical SSE-selected source-cohort reproduction
 
 The following original commands describe the historical batch32 SSE-selected cohort, not all four current tied recipes. They are retained for provenance, not an instruction to rerun completed work. From the repository root, they required the pinned dependencies and locked local model:
+The receipt-producing helpers require a source checkout/editable product
+installation; the ordinary wheel-installed CLI has the existing source-root
+receipt limitation described in [the README](../README.md#install-and-historical-reproduction-workflow).
+This does not require editable installation of the pinned shared core.
+
 
 ```bash
 CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 .venv/bin/glide-particle-sliders prepare \

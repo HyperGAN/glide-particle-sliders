@@ -87,6 +87,15 @@ all four tied recipes. The historical experiment/HPO CLI scripts retain their
 SSE/index selection behavior and are not the current intended-effect selector.
 No new script, default or execution protocol is introduced here.
 
+The historical experiment/helper scripts that call `cli.source_receipt()`
+require this product's source checkout/editable installation: the helper looks
+for repository-root `src`, `pyproject.toml` and `native-model.lock.json` relative
+to its Source file. A normal wheel-installed experiment CLI lacks that layout.
+The pinned shared core remains non-editable. Registered response/inference
+bindings do not call this CLI receipt helper; copying the scalar options is
+still not independent wheel/native qualification or migration of old RAWs.
+See [the installation scope](../README.md#install-and-historical-reproduction-workflow).
+
 ## Historical SSE and separate fresh104 scope
 
 The historical SSE-selected **arm12/batch32/G0.001/D0.018000000000000002/
