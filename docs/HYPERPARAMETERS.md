@@ -1,4 +1,6 @@
-# GLiDE hyperparameter search and fresh confirmation
+# Historical GLiDE SSE search and separate fresh104 results
+
+Current intended-effect selection is the [four-way batch8 RAW512 full-recipe tie](finished-output-learning-rates.md), not the SSE-selected batch32 recipe below. The current selector uses only equal-case concise-choice ON−OFF on16 original main DEV rows; preservation/control accuracy, SSE, probability and declared index are not selectors or tiebreaks. The reports, measurements and commands below retain their original historical scope. Reuse completed outputs/first counts; no new search, proof or fresh confirmation is required.
 
 Bounded tuning produced a better measured preference/control tradeoff. On a new frozen set, RAW relative SSE fell from **1.113 before tuning to0.327**, versus OFF 1.000; a second training seed scored 0.475. Both tuned runs kept every tested correctness-control and unrelated-task choice correct. The tuned models make fewer concise selections than the aggressive pre-tuning controller, and option-order sensitivity remains substantial.
 
@@ -18,7 +20,7 @@ The earlier generator-LR sweeps kept multipliers constant, coupling generator, c
 - Critic: .003,.018.
 - Particle bank: .003,.03.
 
-The 12 combinations use batch 8; one additional anchor configuration uses batch 32. Official multiplier inputs are D/G and bank/G. Actual optimizer group base and scheduled rates are logged at every update. All candidates use seed 7, horizon 512, RAW strength1 evaluation, and complete every finite declared budget. One exactly matching historical anchor was reused instead of retrained. Selection is solely the minimum FP64 operand-first equal-example development relative SSE; preference and unrelated behavior are diagnostics, not additional rejection gates.
+The historical search used12 combinations at batch8 and one additional batch32 configuration. Official multiplier inputs were D/G and bank/G, with actual group rates logged. All used seed7, horizon512 and RAW strength1; every finite declared budget completed and one exact historical anchor was reused. That search selected minimum FP64 operand-first equal-example development relative SSE with declared candidate-index tie handling. This preserves the old diagnostic procedure, not the current intended-effect selector or a future finish-worse-arms rule.
 
 | G | D | Bank | Batch | Dev relative SSE |
 |---:|---:|---:|---:|---:|
@@ -36,11 +38,11 @@ The 12 combinations use batch 8; one additional anchor configuration uses batch 
 |.003|.018|.03|8|.22355|
 |**.001**|**.018**|**.03**|**32**|**.18218**|
 
-The selected recipe is **G=.001,D=.018,bank=.03,batch 32,512 updates**, with multipliers 18 and 30. A predeclared seed 11 repeat changed only the seed and scored **.25858** on development data. It was not used to reselect a model. Higher generator LR also helped batch 8 fits, but those runners-up have not received the same fresh confirmation.
+The historical SSE-selected recipe was **G=.001,D=.018,bank=.03,batch 32,512 updates**, with multipliers 18 and 30. A predeclared seed 11 repeat changed only the seed and scored **.25858** on development data. It was not used to reselect a model. Higher generator LR also helped batch8 SSE fits in that study. The fresh set did not measure every batch8 recipe; no new confirmation requirement follows for the current four-way intended-effect tie.
 
-Batch32 processes four times the example exposures per update as batch 8 and takes about 2.6 times as long per step in the benchmark. This is a better tested fixed-update recipe, not a compute-matched demonstration that batch size alone caused the improvement.
+Batch32 processes four times the example exposures per update as batch 8 and takes about 2.6 times as long per step in the benchmark. That was the stronger SSE-tested fixed-update recipe, not a compute-matched demonstration that batch size alone caused improvement or the current main-choice winner.
 
-## Untouched confirmation
+## Separate historical fresh104 measurements
 
 The confirmation dataset contains 40 new preference scenarios (32 main, 8 correctness controls), each in both option orders, plus 12 unrelated binary classification/fact cases in both orders. Dataset SHA256 is`995871d69e3c1b7e0b8ee052d5e2fa68c9a472f8455408d39ba74cf2bf1b9059`. Artifact selection, both seeds, strengths and metrics were frozen before any native predictions on it. There was no confirmation-set training, filtering or subsequent model/strength selection.
 
@@ -73,9 +75,14 @@ Current workloads were inspected before new work. Both GPUs were busy and the se
 
 Machine evidence: [search plan](../reports/hpo-v5-plan.json), [search results](../reports/hpo-v5-results.json), [seed confirmation](../reports/hpo-v5-seed11.json), [frozen confirmation plan](../reports/hpo-v5-fresh-plan.json), and [fresh results](../reports/hpo-v5-fresh-results.json).
 
-## Reproduce the selected source cohort
+## Historical SSE-selected source-cohort reproduction
 
-From the repository root, after installing the pinned dependencies and downloading the locked model:
+The following original commands describe the historical batch32 SSE-selected cohort, not all four current tied recipes. They are retained for provenance, not an instruction to rerun completed work. From the repository root, they required the pinned dependencies and locked local model:
+The receipt-producing helpers require a source checkout/editable product
+installation; the ordinary wheel-installed CLI has the existing source-root
+receipt limitation described in [the README](../README.md#install-and-historical-reproduction-workflow).
+This does not require editable installation of the pinned shared core.
+
 
 ```bash
 CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 .venv/bin/glide-particle-sliders prepare \
@@ -87,4 +94,4 @@ CUDA_VISIBLE_DEVICES='' .venv/bin/python scripts/train_normalized.py \
   --critic residual64 --steps 512 --batch 32 --lr .001 --seed 7
 ```
 
-This uses the original synthetic labels, not a learned model of Mikkel's personal preferences. The exact historical search also has immutable plans and source capsules under`artifacts/`; do not overwrite them when reproducing. The source supports the shared registered training/inference backend`glide-normalized-readout-particles-v3`.
+This uses the original synthetic labels, not a learned model of Mikkel's personal preferences. The exact historical search also has immutable plans and source capsules under`artifacts/`; do not overwrite them when reproducing. The source supports shared registered training/inference backend`glide-normalized-readout-particles-v3`. The convenience script hardcodes D/G18 and bank/G30; use [the actual config option guide](finished-output-learning-rates.md) to understand all four tied tuples without repeating them.
