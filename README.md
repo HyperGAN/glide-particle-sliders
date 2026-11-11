@@ -83,3 +83,11 @@ remain unchanged.
 The dataset is original synthetic preference examples, not Mikkel's actual preference labels. Candidate pairs, reversal groups and domains are split explicitly. This is neutral→concise instruction distillation; negative strength is extrapolation, and broader255-option transfer or encoder fine-tuning has not been established.
 
 The independent integration source is [MIT licensed](LICENSE); [the top-level NOTICE](NOTICE) explains its scope and shared-code attribution. Fastino's [Community License](licenses/GLiDE-LICENSE) applies to its contributions and derivative model weights. It includes commercial attribution and revenue-dependent production terms. The [GLiDE NOTICE](licenses/GLiDE-NOTICE) and [Ettin MIT license](licenses/Ettin-encoder-400m-LICENSE) are preserved. This repository does not relicense the pretrained model or publish any weights.
+
+
+## Explicit cached fresh95 opt-in
+
+See [FRESH95.md](FRESH95.md) for the separate cached fresh/FULL/RAW library API,
+its original runtime and owning-distribution prerequisites, and the retained
+software qualification scope. Existing defaults, checkpoints and LR results
+keep their original routes.
