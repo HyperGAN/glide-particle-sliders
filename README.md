@@ -1,5 +1,7 @@
 # GLiDE particle sliders
 
+**Calculated memory:** Native CPU encoder/cache preparation: **8 GiB host / 0 GiB GPU** at batch 2/512 tokens. Cached-head training: **4 GiB host**, with encoder unloaded. [Full memory ledger and limits](MEMORY.md). These are planning estimates, not measured peaks.
+
 Native text-decision readout particles for [`fastino/GLiDE-0.4B`](https://huggingface.co/fastino/GLiDE-0.4B), using shared `particle-sliders-core` 0.13.0 and official ParticleGAN 0.9.5. Built with Fastino GLiDE.
 
 **Current intended-effect decision:** four existing full recipes **arm04/05/06/07 tie**, all **G0.001/batch8/RAW512/horizon512/seed7**, with D/bank combinations retained separately. Each has mean binary concise-choice ON−OFF **1** over the original16 main ordered DEV rows. No unique D/bank recipe or default is selected. See [current rates and method](LEARNING-RATES.md), [all13 first-count results and exact options](docs/finished-output-learning-rates.md), and [portable metadata](docs/finished-output-rate.json).
