@@ -1,4 +1,4 @@
-"""Public PG095 same-Parameter downQR and declared std1 routed bank R2 policy."""
+"""Public ParticleGAN 0.11.0 same-Parameter downQR and declared std1 routed bank R2 policy."""
 from dataclasses import dataclass
 from importlib import metadata
 import hashlib,math
@@ -10,7 +10,7 @@ from .util import canonical,source_record
 
 INIT_SHA='3534ff23efa413cdf8b4125b91e0d30671d873b3e2958547d4e744b750454b9b'
 SCHEMA='GLiDE-normalized-readout-explicit-downQR-bankR2std1-initialization-v1'
-MARKER='_glide_explicit_fresh95_receipt'
+MARKER='_glide_explicit_scoped_receipt'
 
 @dataclass(frozen=True)
 class Construction:
@@ -37,7 +37,7 @@ def seed_for(seed,name):
 def declarations(slider,critic):
     from glide_particle_sliders.binding_normalized_v3 import NormalizedReadoutSlider
     from glide_particle_sliders.binding_residual_v2 import ResidualCritic
-    from particle_sliders.fibo_hndl import HNDLParticleProjection
+    from glide_particle_sliders.fibo_hndl import HNDLParticleProjection
     from hndl.operators.linear import Linear
     if type(slider)is not NormalizedReadoutSlider or type(critic)is not ResidualCritic or type(slider.adapter)is not HNDLParticleProjection:
         raise ValueError('exact original normalized readout/ResidualCritic64/HNDL projection required')
@@ -73,8 +73,8 @@ def initialize(slider,critic,construction,options,sources):
     if (type(construction)is not Construction or construction.mode!='fresh'or not construction.cohort
             or construction.options_sha256!=hashlib.sha256(canonical(options).encode()).hexdigest()):
         raise ValueError('explicit new fresh intent before optimizers required')
-    if metadata.version('particlegan')!='0.9.5'or source_record(pg_init.__file__)['sha256']!=INIT_SHA:
-        raise ValueError('exact public PG095 initializer Source required')
+    if metadata.version('particlegan')!='0.11.0'or source_record(pg_init.__file__)['sha256']!=INIT_SHA:
+        raise ValueError('exact public ParticleGAN 0.11.0 initializer Source required')
     rows=declarations(slider,critic);before=[tensor_sha(x['parameter'])for x in rows]
     ids=[id(x['parameter'])for x in rows];holder=DeclaredOwned(rows)
     seeds={'p'+str(i):seed_for(options['config']['seed'],row['name'])for i,row in enumerate(rows)}

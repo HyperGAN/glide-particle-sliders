@@ -95,7 +95,7 @@ def test_cache_rejects_mismatched_native_logits(cache, tmp_path):
 
 def test_no_ema_is_enforced_before_update(cache):
     path, _, _ = cache
-    with pytest.raises(ValueError, match="no EMA"):
+    with pytest.raises(ValueError, match="EMA"):
         session(path, ema_decay=.9)
     with session(path) as run:
         assert run.config.options["ema_decay"] is None

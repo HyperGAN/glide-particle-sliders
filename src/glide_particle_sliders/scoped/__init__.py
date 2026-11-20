@@ -1,5 +1,5 @@
 """Explicit cached GLiDE normalized readout policy; no old cohort migration."""
-PROFILE='glide-normalized-readout-explicit-cached-fresh95-v1'
+PROFILE='glide-normalized-readout-explicit-cached-scoped-v1'
 def open_training(*args,**kwargs):
     from .api import Training
     return Training(*args,**kwargs)

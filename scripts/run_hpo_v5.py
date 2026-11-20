@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Declare, then explicitly execute the fixed CPU-only GLiDE HPO cohort.
+"""Archived orchestration for the completed fixed CPU-only GLiDE HPO cohort.
 
 Import/build_plan never starts a worker. --plan-only is the default; executing an
 existing immutable plan requires --execute. No worker is retried or killed by a
@@ -83,10 +83,10 @@ def candidate_specs(project=PROJECT):
         options = dict(base_precision="float32", batch=batch, cache_file=cache,
                        critic="residual64", d_lr_mult=d / g, device="cpu",
                        ema_decay=None, lr=g, penalty_input_domain="continuous",
-                       pg_source_profile="release-0.9.5", prior_lr_mult=bank / g,
+                       pg_source_profile="release-0.11.0", prior_lr_mult=bank / g,
                        seed=SEED, steps=HORIZON)
         config = dict(backend="glide-normalized-readout-particles-v3",
-                      cohort="glide-04b-normalized-adapter-pg095-raw-v3", options=options)
+                      cohort="glide-04b-normalized-adapter-engine-raw-v3", options=options)
         reuse = (g, d, bank, batch) == (.001, .018, .03, 8)
         candidates.append(dict(index=index, id=f"arm-{index:02d}",
             base_rates=dict(adapter=g, critic=d, bank=bank), config=config,
@@ -311,6 +311,13 @@ def execute(plan_path):
 
 
 def main():
+    raise SystemExit(
+        "This completed study uses its archived source and saved results. "
+        "See docs/finished-output-learning-rates.md for the retained evidence."
+    )
+
+
+def _archived_main():
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--plan-only", action="store_true")

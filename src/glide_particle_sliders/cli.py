@@ -82,9 +82,9 @@ def run_experiment(cache_file, readout_file, output_dir, *, steps=128, rates=(.0
     write_json(root / "source-receipt.json", source)
     report = dict(schema="glide-native-experiment-v1", started=now(), source=source,
                   cache_sha256=sha256(cache_file), readout_sha256=sha256(readout_file),
-                  primary="RAW strength1 FP64 operand-first equal-example relative SSE on the two active native logits",
+                  primary="Mean binary concise-choice gain on matched main development cases",
                   experiment_scope=cache["metadata"].get("teacher_protocol", "frozen encoder; native routed particle readout; neutral-to-concise instruction distillation; synthetic paired choices"),
-                  selection=dict(split="dev", common_horizon=steps, completed_updates=steps, metric="mean relative SSE"),
+                  selection=dict(split="dev", common_horizon=steps, completed_updates=steps, metric="concise-choice ON minus OFF"),
                   resource=dict(device="cpu", cpu_threads=threads, gpu_launches=0, foreign_jobs_changed=False),
                   candidates=[])
     base_options = dict(cache_file=str(Path(cache_file).resolve()), steps=steps, batch=batch, seed=7,
@@ -114,11 +114,14 @@ def run_experiment(cache_file, readout_file, output_dir, *, steps=128, rates=(.0
                 if not torch.equal(zero, direct):
                     raise RuntimeError("OFF does not reproduce the native readout exactly")
             candidate["off_exact_direct_native"] = True
+            off = session_report(run, cache, "dev", strength=0.)["concise_choice_rate_main"]
+            if off is None:
+                raise ValueError("Development split requires main intended-effect cases")
             log = (candidate_dir / "updates.jsonl").open("w")
             try:
                 def on_step(stats):
                     log.write(json.dumps(stats, allow_nan=False) + "\n"); log.flush()
-                stops = sorted({max(1, steps // 4), max(1, steps // 2), steps})
+                stops = sorted({max(1, steps * quarter // 4) for quarter in (1, 2, 3, 4)})
                 for stop in stops:
                     if run.game.completed_steps < stop:
                         run.train(stop_after=stop, on_step=on_step)
@@ -153,6 +156,7 @@ def run_experiment(cache_file, readout_file, output_dir, *, steps=128, rates=(.0
                 candidate["status"] = "completed"
                 candidate["completed_steps"] = run.game.completed_steps
                 candidate["dev"] = candidate["snapshots"][-1]["dev"]
+                candidate["intended_effect"] = candidate["dev"]["concise_choice_rate_main"] - off
                 slider = run.game.backend.slider
                 candidate["native_mechanics"] = dict(
                     particle_bank_l2_change=float((slider.particles.detach() - initial_bank).double().norm()),
@@ -163,35 +167,40 @@ def run_experiment(cache_file, readout_file, output_dir, *, steps=128, rates=(.0
             finally:
                 log.close()
         write_json(root / "progress.json", report)
-    selected = min(report["candidates"], key=lambda c: (c["dev"]["mean"], c["index"]))
+    best = max(c["intended_effect"] for c in report["candidates"])
+    winners = [c for c in report["candidates"] if c["intended_effect"] == best]
+    selected = winners[0] if len(winners) == 1 else None
+    report["winners"] = deepcopy(winners)
     report["winner"] = deepcopy(selected)
     report["selection_frozen_at"] = now()
-    write_json(root / "selection.json", dict(winner=selected, criterion=report["selection"], selected_at=report["selection_frozen_at"]))
-    report["test_baselines"] = dict(off=assess(cache, "test", cache["neutral_logits"]),
-                                    explicit_teacher=assess(cache, "test", cache["teacher_logits"]),
-                                    constant_slot_bias=assess(cache, "test", cache["neutral_logits"].double() + bias))
-    cfg = config(**{k: v for k, v in selected["config"]["options"].items()})
-    with open_response(cfg, resume=selected["final_checkpoint"]) as run:
-        report["winner_test"] = session_report(run, cache, "test")
-        report["strength_sweep_test"] = {str(a): session_report(run, cache, "test", a) for a in (0., .25, .5, .75, 1.)}
-        report["actual_off_dev"] = session_report(run, cache, "dev", 0.)
-        report["actual_off_test"] = report["strength_sweep_test"]["0.0"]
-        # Input-independent and scrambled-context diagnostics help identify whether
-        # an apparent logit fit is only a generic positional edit.
-        with torch.no_grad():
-            learned = run.game.backend.slider.response(cache["neutral_hidden"], strength=1.)
-            direct = torch.nn.functional.linear(cache["neutral_hidden"], cache["readout_weight"])[:, :2]
-            delta = learned - direct
-            scrambled = cache["neutral_logits"] + delta.roll(1, 0)
-        report["native_batch_roundoff"] = dict(max_logit_difference=float((direct - cache["neutral_logits"]).abs().max()),
-            explanation="cached encoder/readout batch2; shared response readout batch1; actual OFF scores are measured separately")
-        report["scrambled_delta_test"] = assess(cache, "test", scrambled)
-        export_path = selected["export"]
-        with open_inference(export_path, operation="response", options={"readout_file": str(Path(readout_file).resolve())}) as inference:
-            restored = inference.response(hidden=cache["neutral_hidden"], strength=1.)
-            if not torch.equal(learned, restored):
-                raise RuntimeError("RAW native-only export differs from training network")
-            report["raw_export_exact"] = True
+    write_json(root / "selection.json", dict(winners=winners, winner=selected,
+               criterion=report["selection"], selected_at=report["selection_frozen_at"]))
+    if selected is not None:
+        report["test_baselines"] = dict(off=assess(cache, "test", cache["neutral_logits"]),
+                                        explicit_teacher=assess(cache, "test", cache["teacher_logits"]),
+                                        constant_slot_bias=assess(cache, "test", cache["neutral_logits"].double() + bias))
+        cfg = config(**{k: v for k, v in selected["config"]["options"].items()})
+        with open_response(cfg, resume=selected["final_checkpoint"]) as run:
+            report["winner_test"] = session_report(run, cache, "test")
+            report["strength_sweep_test"] = {str(a): session_report(run, cache, "test", a) for a in (0., .25, .5, .75, 1.)}
+            report["actual_off_dev"] = session_report(run, cache, "dev", 0.)
+            report["actual_off_test"] = report["strength_sweep_test"]["0.0"]
+            # Input-independent and scrambled-context diagnostics help identify whether
+            # an apparent logit fit is only a generic positional edit.
+            with torch.no_grad():
+                learned = run.game.backend.slider.response(cache["neutral_hidden"], strength=1.)
+                direct = torch.nn.functional.linear(cache["neutral_hidden"], cache["readout_weight"])[:, :2]
+                delta = learned - direct
+                scrambled = cache["neutral_logits"] + delta.roll(1, 0)
+            report["native_batch_roundoff"] = dict(max_logit_difference=float((direct - cache["neutral_logits"]).abs().max()),
+                explanation="cached encoder/readout batch2; shared response readout batch1; actual OFF scores are measured separately")
+            report["scrambled_delta_test"] = assess(cache, "test", scrambled)
+            export_path = selected["export"]
+            with open_inference(export_path, operation="response", options={"readout_file": str(Path(readout_file).resolve())}) as inference:
+                restored = inference.response(hidden=cache["neutral_hidden"], strength=1.)
+                if not torch.equal(learned, restored):
+                    raise RuntimeError("RAW native-only export differs from training network")
+                report["raw_export_exact"] = True
     report["actual_updates"] = dict(sweep=sum(c["completed_steps"] for c in report["candidates"]),
                                     proof_additional_physical=1, deliberate_duplicate=1, replayed_prefix=0,
                                     total_physical=sum(c["completed_steps"] for c in report["candidates"]) + 1)
@@ -207,6 +216,8 @@ def live_check(model_dir, lock_file, dataset_file, cache_file, experiment_dir, *
     from .binding import NativeReadoutResponse, PROTOCOL
     root = Path(experiment_dir)
     result = json.loads((root / "results.json").read_text())
+    if result["winner"] is None:
+        raise ValueError("No unique winner; the tied raw exports are listed in results.json")
     cache = load_readout_file(cache_file, cache=True)
     model, identity = load_glide(model_dir, lock_file, threads=threads)
     if identity != cache["model_identity"]:
@@ -277,7 +288,8 @@ def main():
     elif args.command == "experiment":
         result = run_experiment(args.cache, args.readout, args.output, steps=args.steps,
                                 rates=tuple(args.rates), batch=args.batch, threads=args.threads)
-        print(json.dumps(dict(winner=result["winner"]["generator_lr"], test=result["winner_test"], actual_updates=result["actual_updates"])), flush=True)
+        print(json.dumps(dict(winners=[row["generator_lr"] for row in result["winners"]],
+                              test=result.get("winner_test"), actual_updates=result["actual_updates"])), flush=True)
     else:
         result = live_check(args.model_dir, args.lock, args.dataset, args.cache, args.experiment, threads=args.threads)
         print(json.dumps(dict(live_public_api=True, example_ids=result["example_ids"])), flush=True)

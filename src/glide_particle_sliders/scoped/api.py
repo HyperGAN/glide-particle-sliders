@@ -5,12 +5,12 @@ import hashlib,re,math,torch
 from glide_particle_sliders import binding as original
 from glide_particle_sliders.binding_normalized_v3 import NormalizedNativeResponse
 from glide_particle_sliders.binding_residual_v2 import ResidualCritic
-from particle_sliders.pg095 import ConditionalPG095
+from particle_sliders.engine import ConditionalParticleGAN
 from . import PROFILE,ownership,policy
 from .cache import load_cache
 from .util import canonical,equal,new_directory,read_packet,save_packet,write_json
-FULL_SCHEMA='GLiDE-normalized-cached-explicit-fresh95-v1-FULL'
-RAW_SCHEMA='GLiDE-normalized-cached-explicit-fresh95-v1-RAW'
+FULL_SCHEMA='GLiDE-normalized-cached-explicit-scoped-v1-FULL'
+RAW_SCHEMA='GLiDE-normalized-cached-explicit-scoped-v1-RAW'
 
 def identity_valid(value):
     if(not isinstance(value,dict)or value.get('model_id')!=original.MODEL_ID
@@ -22,8 +22,8 @@ def identity_valid(value):
 def configuration(value):
     keys={'seed','steps','batch','lr','d_lr_mult','prior_lr_mult','model_identity','ema_decay','device','pg_version','pg_source_profile','penalty_input_domain'}
     if(not isinstance(value,dict)or set(value)!=keys or value['ema_decay']is not None or value['device']!='cpu'
-            or(value['pg_version'],value['pg_source_profile'],value['penalty_input_domain'])!=('0.9.5','release-0.9.5','continuous')):
-        raise ValueError('exact original CPU FP32/PG095 continuous/noEMA configuration required')
+            or(value['pg_version'],value['pg_source_profile'],value['penalty_input_domain'])!=('0.11.0','release-0.11.0','continuous')):
+        raise ValueError('exact original CPU FP32/ParticleGAN 0.11.0 continuous/noEMA configuration required')
     for key,low,high in(('seed',0,2**63-101),('steps',1,10000),('batch',2,512)):
         if type(value[key])is not int or not low<=value[key]<=high:raise ValueError('invalid '+key)
     for key in('lr','d_lr_mult','prior_lr_mult'):
@@ -88,11 +88,11 @@ class Training(NativeOwner):
                     if mode=='fresh'else deepcopy(packet['initialization']))
                 self.backend=ReceiptBackend(self.native,self.initialization,self.sources,self.cache_identity)
                 train=[r for r,s in zip(rows,splits)if s=='train']
-                self.game=ConditionalPG095(self.backend,train,self.critic,conditions=torch.cat([r.row.hidden for r in train]),
+                self.game=ConditionalParticleGAN(self.backend,train,self.critic,conditions=torch.cat([r.row.hidden for r in train]),
                     particles=self.slider.particles,response_domain='continuous_vector',response_scale=1.,batch_size=self.config['batch'],
                     total_steps=self.config['steps'],seed=self.config['seed'],
                     recipe_overrides={k:self.config[k]for k in('lr','d_lr_mult','prior_lr_mult')},
-                    pg_source_profile='release-0.9.5',penalty_input_domain='continuous')
+                    pg_source_profile='release-0.11.0',penalty_input_domain='continuous')
                 if self.game.backend.particles is not self.slider.particles:raise RuntimeError('actual bank identity differs')
                 if packet is not None:
                     self.game.load_state_dict(packet['game'])

@@ -17,15 +17,15 @@ import re
 import torch
 from torch import nn
 
-from particle_sliders.fibo_hndl import HNDLParticleProjection, verified_builder
+from glide_particle_sliders.fibo_hndl import HNDLParticleProjection, verified_builder
 from particle_sliders.inference import InferenceBackend, InferenceBinding, native_identity
 from particle_sliders.lifecycle import Binding, EvaluationRows, SessionConfig
-from particle_sliders.pg09_backends import AdapterParameters
-from particle_sliders.pg095 import ConditionalPG095, PG_VERSION, PG_SOURCE_PROFILE, engine_options
+from particle_sliders.backends import AdapterParameters
+from particle_sliders.engine import ConditionalParticleGAN, PG_VERSION, PG_SOURCE_PROFILE, engine_options
 from particle_sliders.response import ResponseBackend, ResponseCapabilities
 
 NAME = "glide-readout-particles"
-COHORT = "glide-04b-readout-pg095-raw-v1"
+COHORT = "glide-04b-readout-engine-raw-v1"
 PROTOCOL = "glide-native-active-two-choice-readout-v1"
 CACHE_SCHEMA = "glide-readout-cache-v1"
 MODEL_SCHEMA = "glide-readout-model-v1"
@@ -33,7 +33,7 @@ HIDDEN = 1024
 OUTPUTS = 255
 ACTIVE = 2
 MODEL_ID = "fastino/GLiDE-0.4B"
-CORE_COMMIT = "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423"
+CORE_COMMIT = "c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78"
 CRITIC_GRAPH = '''joined = concat(response, condition, axis=1)
 features = linear(joined, 16, name="hidden")
 features = silu(features)
@@ -58,10 +58,10 @@ def _readout_identity(identity, weight):
 
 
 def _runtime():
-    if version("particle-sliders-core") != "0.13.0":
-        raise ValueError("GLiDE requires its pinned particle-sliders-core 0.13.0")
-    if (PG_VERSION, PG_SOURCE_PROFILE) != ("0.9.5", "release-0.9.5"):
-        raise ValueError("GLiDE requires official ParticleGAN 0.9.5")
+    if version("particle-sliders-core") != "0.15.1":
+        raise ValueError("GLiDE requires its pinned particle-sliders-core 0.15.1")
+    if (PG_VERSION, PG_SOURCE_PROFILE) != ("0.11.0", "release-0.11.0"):
+        raise ValueError("GLiDE requires official ParticleGAN 0.11.0")
     import json
     provenance = json.loads(distribution("particle-sliders-core").read_text("direct_url.json") or "{}")
     if (provenance.get("url") != "https://github.com/HyperGAN/particle-sliders.git"
@@ -274,7 +274,7 @@ def validate(options):
     if options.get("device", "cpu") != "cpu":
         raise ValueError("GLiDE readout cohort is CPU-only; GPU requires separate scheduler admission")
     if engine_options(options) != dict(pg_source_profile=PG_SOURCE_PROFILE, penalty_input_domain="continuous"):
-        raise ValueError("GLiDE requires its explicit continuous PG0.9.5 profile")
+        raise ValueError("GLiDE requires its explicit continuous ParticleGAN 0.11.0 profile")
     for key in ("lr", "d_lr_mult", "prior_lr_mult"):
         value = options.get(key)
         if value is not None and (isinstance(value, bool) or not isinstance(value, (int, float))
@@ -321,7 +321,7 @@ def prepare(options):
             torch.random.default_generator.manual_seed(options.get("seed", 7) + 1)
             critic = ReadoutCritic().to(device)
         rates = {key: options[key] for key in ("lr", "d_lr_mult", "prior_lr_mult") if options.get(key) is not None}
-        game = ConditionalPG095(native, rows, critic, conditions=conditions, particles=native.particles,
+        game = ConditionalParticleGAN(native, rows, critic, conditions=conditions, particles=native.particles,
             response_domain="continuous_vector", batch_size=options.get("batch", 2),
             total_steps=options.get("steps", 4), seed=options.get("seed", 7), recipe_overrides=rates,
             **engine_options(options))
