@@ -4,9 +4,9 @@ import math,pytest,torch
 from torch import nn
 from glide_particle_sliders import MODEL_ID,MODEL_REVISION
 from glide_particle_sliders import binding as original,binding_normalized_v3 as normalized
-from glide_particle_sliders.fresh95 import open_training,open_inference,save_prepared_cache,file_pin,Checkpoint
-from glide_particle_sliders.fresh95 import api,cache,policy,ownership
-from glide_particle_sliders.fresh95.util import equal
+from glide_particle_sliders.scoped import open_training,open_inference,save_prepared_cache,file_pin,Checkpoint
+from glide_particle_sliders.scoped import api,cache,policy,ownership
+from glide_particle_sliders.scoped.util import equal
 
 @pytest.fixture
 def staged(tmp_path,monkeypatch):
@@ -33,8 +33,8 @@ def staged(tmp_path,monkeypatch):
     frozen=save_prepared_cache(tmp_path/'completed-cache.pt',prepared=rows,splits=['train','train','train','dev'],
         teacher_origins=origins,model_identity=identity,cache_id='NEW-GLiDE-normalized-synthetic',owner_admission=lambda request:True)
     config=dict(seed=7,steps=3,batch=2,lr=.001,d_lr_mult=18.,prior_lr_mult=30.,model_identity=identity,
-        ema_decay=None,device='cpu',pg_version='0.9.5',pg_source_profile='release-0.9.5',penalty_input_domain='continuous')
-    return dict(config=config,cache=frozen,cohort_id='NEW-GLiDE-fresh95-software-v1',component_factory=factory,
+        ema_decay=None,device='cpu',pg_version='0.11.0',pg_source_profile='release-0.11.0',penalty_input_domain='continuous')
+    return dict(config=config,cache=frozen,cohort_id='NEW-GLiDE-scoped-software-v1',component_factory=factory,
         owner_admission=lambda request:True),tmp_path,weight,rows
 
 def opened(staged,name='fresh'):
@@ -42,7 +42,7 @@ def opened(staged,name='fresh'):
     return open_training(directory=root/name,mode='fresh',**options)
 
 def test_new_same_Parameters_bank_before_optimizer_receipt_zeroUP_router_critic_KEEP(staged,monkeypatch):
-    init=policy.initialize;game=api.ConditionalPG095;seen=[]
+    init=policy.initialize;game=api.ConditionalParticleGAN;seen=[]
     def initialize(slider,critic,*args):
         ids=[id(p)for p in slider.network.parameters()]+[id(p)for p in critic.parameters()]
         old_critic=deepcopy(critic.state_dict());old_buffers={n:t.clone()for n,t in slider.network.named_buffers()}
@@ -56,7 +56,7 @@ def test_new_same_Parameters_bank_before_optimizer_receipt_zeroUP_router_critic_
         assert seen and backend.metadata()['fresh_initialization']['receipt']==seen[-1]
         assert kwargs['particles']is backend.particles and kwargs['response_scale']==1.
         return game(backend,*args,**kwargs)
-    monkeypatch.setattr(policy,'initialize',initialize);monkeypatch.setattr(api,'ConditionalPG095',construct)
+    monkeypatch.setattr(policy,'initialize',initialize);monkeypatch.setattr(api,'ConditionalParticleGAN',construct)
     with opened(staged)as owner:
         assert owner.game.completed_steps==0 and owner.game.backend.particles is owner.slider.particles
         assert tuple(owner.slider.particles.shape)==(128,4)
@@ -90,7 +90,7 @@ def test_new_ONE_update_strict_whole_FULL_optimizers_RNG_RAW_no_initializer_or_c
     monkeypatch.setattr(policy,'initialize',forbidden)
     with open_training(directory=root/'resume',mode='resume',resume=full,**options)as resumed:
         assert resumed.inherited_steps==1 and equal(state,resumed.game.state_dict())
-    monkeypatch.setattr(api,'load_cache',forbidden);monkeypatch.setattr(api,'ConditionalPG095',forbidden)
+    monkeypatch.setattr(api,'load_cache',forbidden);monkeypatch.setattr(api,'ConditionalParticleGAN',forbidden)
     with open_inference(raw,component_factory=options['component_factory'],owner_admission=lambda request:True)as inferred:
         assert not hasattr(inferred,'game')and not hasattr(inferred,'critic')
         assert equal(network,inferred.network.state_dict())

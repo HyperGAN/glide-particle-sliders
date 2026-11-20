@@ -24,9 +24,14 @@ def test_shared_experiment_selects_dev_then_reloads_raw_export(tmp_path):
                     readout_weight=weight, readout_bias=None), model)
     result = run_experiment(cache, model, tmp_path / "experiment", steps=4, rates=(.0001, .001), batch=2, threads=1)
     assert result["resume_proof"]["exact_packet_match"]
-    assert result["raw_export_exact"]
     assert result["actual_updates"]["sweep"] == 8
     assert result["actual_updates"]["total_physical"] == 9
     assert result["resume_proof"]["replayed_prefix_updates"] == 0
     assert result["resource"]["gpu_launches"] == 0
-    assert result["winner"]["dev"]["mean"] == min(c["dev"]["mean"] for c in result["candidates"])
+    best = max(c["intended_effect"] for c in result["candidates"])
+    assert result["winners"] == [c for c in result["candidates"] if c["intended_effect"] == best]
+    if len(result["winners"]) == 1:
+        assert result["raw_export_exact"]
+    else:
+        assert result["winner"] is None
+        assert "winner_test" not in result

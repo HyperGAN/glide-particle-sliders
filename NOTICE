@@ -24,3 +24,6 @@ artifacts. Preserve and consult:
 GLiDE is based on Ettin-encoder-400m, copyright (c) 2025 the Ettin authors
 (Johns Hopkins University CLSP), under the MIT License. The original upstream
 license is preserved at the path above.
+
+The Fibo HNDL builder, graphs and source manifest are adapted from
+HyperGAN/particle-sliders c13890f8 under the MIT license.

@@ -5,7 +5,7 @@ from glide_particle_sliders.binding import PreparedReadout,ReadoutRow,HIDDEN,ACT
 from glide_particle_sliders.binding_normalized_v3 import train_statistics
 from . import PROFILE,ownership
 from .util import equal,canonical,read_packet,save_packet,tree,source_record
-SCHEMA='GLiDE-completed-PreparedReadout-explicit-fresh95-v1'
+SCHEMA='GLiDE-completed-PreparedReadout-explicit-scoped-v1'
 
 def file_record(value):
     if(not isinstance(value,dict)or set(value)!={'path','bytes','sha256'}or not isinstance(value['path'],str)

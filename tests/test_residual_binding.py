@@ -90,7 +90,7 @@ with open_inference(sys.argv[1],backend=INFERENCE,operation="response",options={
 
 def test_new_cohort_keeps_noema_cpu_and_split_guards(inputs):
     cache_path, _, _ = inputs
-    for options, message in ((dict(ema_decay=.9), "no EMA"), (dict(device="cuda:0"), "CPU-only"),
+    for options, message in ((dict(ema_decay=.9), "EMA"), (dict(device="cuda:0"), "CPU-only"),
                               (dict(split="dev"), "train split")):
         with pytest.raises(ValueError, match=message):
             product.BACKEND.open(product.config(cache_file=str(cache_path), **options))

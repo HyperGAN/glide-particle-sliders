@@ -130,12 +130,19 @@ def test_registry_derivative_allows_only_four_exact_metadata_entries(tmp_path):
     archived.parent.mkdir(parents=True)
     archived.write_bytes(original.read_bytes())
     current = tmp_path / "pyproject.toml"
-    current.write_bytes((ROOT / "pyproject.toml").read_bytes())
+    frozen = original.read_text()
+    for kind, attribute in (("response_backends", "BACKEND"), ("inference_backends", "INFERENCE")):
+        registry = f'[project.entry-points."particle_sliders.{kind}"]'
+        entries = (f'\nglide-residual-critic-particles-v2 = "glide_particle_sliders.binding_residual_v2:{attribute}"'
+                   f'\nglide-normalized-readout-particles-v3 = "glide_particle_sliders.binding_normalized_v3:{attribute}"')
+        frozen = frozen.replace(registry, registry + entries)
+    current.write_text(frozen)
+    fixture_bytes = current.read_bytes()
     receipt = hpo.registry_derivative(tmp_path, hpo.file_sha(archived), hpo.file_sha(current))
     assert len(receipt["exact_toml_equality_after_removing"]) == 4
     current.write_text(current.read_text().replace('version = "0.1.0"', 'version = "99.0.0"'))
     # Assert the test actually introduced a separate metadata change.
-    if current.read_bytes() == (ROOT / "pyproject.toml").read_bytes():
+    if current.read_bytes() == fixture_bytes:
         current.write_text(current.read_text() + '\n[unapproved]\nchanged = true\n')
     with pytest.raises(ValueError, match="beyond four"):
         hpo.registry_derivative(tmp_path, hpo.file_sha(archived), hpo.file_sha(current))

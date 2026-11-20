@@ -1,4 +1,4 @@
-"""Separate response-only residual critic cohort over the shared PG0.9.5 game.
+"""Separate response-only residual critic cohort over the shared ParticleGAN 0.11.0 game.
 
 The native routed readout and actual particle bank are unchanged. The shared
 game presents Gaussian reference noise versus Gaussian noise plus the paired
@@ -14,13 +14,13 @@ from torch import nn
 
 from particle_sliders.inference import InferenceBackend, InferenceBinding, native_identity
 from particle_sliders.lifecycle import Binding, EvaluationRows, SessionConfig
-from particle_sliders.pg095 import ConditionalPG095, engine_options
+from particle_sliders.engine import ConditionalParticleGAN, engine_options
 from particle_sliders.response import ResponseBackend
 
 from . import binding as base
 
 NAME = "glide-residual-critic-particles-v2"
-COHORT = "glide-04b-readout-pg095-residual-critic-raw-v2"
+COHORT = "glide-04b-readout-engine-residual-critic-raw-v2"
 PROTOCOL = "glide-native-active-two-choice-readout-residual-critic-v2"
 CRITIC_GRAPH = '''features = linear(response, 64, name="hidden0")
 features = silu(features)
@@ -88,7 +88,7 @@ def prepare(options):
             torch.random.default_generator.manual_seed(options.get("seed", 7) + 1)
             critic = ResidualCritic()
         rates = {key: options[key] for key in ("lr", "d_lr_mult", "prior_lr_mult") if options.get(key) is not None}
-        game = ConditionalPG095(native, rows, critic, conditions=conditions, particles=native.particles,
+        game = ConditionalParticleGAN(native, rows, critic, conditions=conditions, particles=native.particles,
             response_domain="continuous_vector", batch_size=options.get("batch", 2),
             total_steps=options.get("steps", 4), seed=options.get("seed", 7), recipe_overrides=rates,
             **engine_options(options))

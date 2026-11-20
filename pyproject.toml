@@ -8,7 +8,9 @@ version = "0.1.0"
 description = "Native GLiDE decision-readout particles using the shared particle-sliders lifecycle"
 requires-python = ">=3.12,<3.13"
 dependencies = [
-  "particle-sliders-core[hypergan-hndl] @ git+https://github.com/HyperGAN/particle-sliders.git@3dd672a7f9b8c169daef90fd63e4bb42b9ddc423#subdirectory=packages/particle-sliders-core",
+  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78#subdirectory=packages/particle-sliders-core",
+  "hndl==0.10.0",
+  "hypergan @ git+https://github.com/HyperGAN/HyperGAN.git@5f368a3770cf5bdae0448995c9f76e29af8049f7",
   "transformers==5.3.0", "tokenizers==0.22.2", "safetensors==0.8.0", "pillow>=11",
 ]
 
@@ -30,6 +32,9 @@ glide-normalized-readout-particles-v3 = "glide_particle_sliders.binding_normaliz
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+glide_particle_sliders = ["fibo_*.hndl", "fibo_hndl_010_sources.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

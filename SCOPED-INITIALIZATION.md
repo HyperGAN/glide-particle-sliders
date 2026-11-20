@@ -1,16 +1,15 @@
-# Explicit cached fresh95 normalized-readout opt-in
+# Explicit cached scoped normalized-readout opt-in
 
-`glide_particle_sliders.fresh95` is a separate initialization profile. Existing
+`glide_particle_sliders.scoped` is a separate initialization profile. Existing
 registered readout/residual/normalized backends, defaults, learning-rate ties and
 old FULL/RAW checkpoints keep their original routes. Completed cohorts are not
 reset or migrated.
 
 Use a genuinely installed `glide-particle-sliders==0.1.0` in its compatible
-original core0.13.0 Git3dd672a7/PG0.9.5/HNDL/HyperGAN runtime. Original Source
+core 0.15.1 at Git commit c13890f8, ParticleGAN 0.11.0, HNDL 0.10.0 and the pinned HyperGAN builder. Original Source
 and noneditable core-origin guards remain active. Generated RECORD must own
-the four captured original modules and all seven fresh95 files. A Source
+the reviewed product modules, vendored graph assets and scoped files. A Source
 prepend, editable checkout or counterfeit metadata cannot replace that owner.
-No dependency/version/entrypoint or core upgrade is added here.
 
 The caller supplies the actual frozen CPU FP32 bias-free1024→255 readout,
 its immutable model/revision/readout-weight identity, and completed original
@@ -36,11 +35,11 @@ These are library calls with caller-supplied data, paths and functions.
 `owner_admission(request)` authenticates origins and admits the operation. A
 fresh cohort and owner directory must be new. `config` has explicit
 seed/steps/batch/lr/d_lr_mult/prior_lr_mult/model_identity, `ema_decay=None`,
-`device="cpu"`, `pg_version="0.9.5"`, `pg_source_profile="release-0.9.5"`,
+`device="cpu"`, `pg_version="0.11.0"`, `pg_source_profile="release-0.11.0"`,
 and `penalty_input_domain="continuous"`. This namespace selects no rate.
 
 ```python
-from glide_particle_sliders.fresh95 import (
+from glide_particle_sliders.scoped import (
     save_prepared_cache, open_training, open_inference,
 )
 
@@ -94,14 +93,11 @@ unchanged; no old test/proof/search/teacher/output is replayed by this addition.
 
 ## Explicit installed-owner software check
 
-The retained four-case fixture is published as `tests/fresh95_owner_check.py`.
+The four-case fixture is available as `tests/scoped_owner_check.py`.
 That filename is outside pytest’s default `test_*.py` and `*_test.py` discovery,
-so ordinary repository CI keeps collecting its existing tests. The fixture body
-is unchanged from the retained installed-owner software observations. Publication
-routing adds no new software pass or native qualification.
-
+so ordinary repository CI keeps collecting its existing tests.
 This check requires the genuine installed wheel’s generated RECORD to own both
-the original namespace and all seven fresh95 modules, with the frozen compatible
+the original namespace and all seven scoped modules, with the frozen compatible
 core, ParticleGAN and other runtime dependencies described above. An editable
 checkout or a Source-tree import is not that installed owner. For an explicitly
 requested owner check, use that compatible installed environment, an independent
@@ -112,11 +108,9 @@ cd /absolute/path/to/neutral-working-directory
 PYTHONPATH= PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
   /absolute/path/to/compatible-env/bin/python -m pytest \
   -q -c /dev/null \
-  /absolute/path/to/checkout/tests/fresh95_owner_check.py
+  /absolute/path/to/checkout/tests/scoped_owner_check.py
 ```
 
 The paths are caller-supplied. The explicit file argument selects these four
 software cases; `-c /dev/null` avoids repository configuration and its Source
-pythonpath. The fixture includes one total tiny update. This proposal does not
-execute or replay it, and the earlier completed software observations remain
-separate from public CI and pretrained/native qualification.
+pythonpath. The fixture includes one total tiny update. The earlier software observations retain their original source identity.

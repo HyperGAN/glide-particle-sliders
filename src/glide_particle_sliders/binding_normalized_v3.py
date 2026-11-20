@@ -10,14 +10,14 @@ import torch
 
 from particle_sliders.inference import InferenceBackend, InferenceBinding, native_identity
 from particle_sliders.lifecycle import Binding, EvaluationRows, SessionConfig
-from particle_sliders.pg095 import ConditionalPG095, engine_options
+from particle_sliders.engine import ConditionalParticleGAN, engine_options
 from particle_sliders.response import ResponseBackend
 
 from . import binding as original
 from .binding_residual_v2 import ResidualCritic
 
 NAME = "glide-normalized-readout-particles-v3"
-COHORT = "glide-04b-normalized-adapter-pg095-raw-v3"
+COHORT = "glide-04b-normalized-adapter-engine-raw-v3"
 PROTOCOL = "glide-native-active-two-choice-normalized-adapter-v3"
 NORMALIZATION = "train-only-mean-global-centered-coordinate-rms-v1"
 
@@ -91,7 +91,7 @@ def prepare(options):
             torch.manual_seed(options.get("seed", 7) + 1)
             critic = ResidualCritic() if options.get("critic") == "residual64" else original.ReadoutCritic()
         rates = {key: options[key] for key in ("lr", "d_lr_mult", "prior_lr_mult") if options.get(key) is not None}
-        game = ConditionalPG095(native, banks["train"], critic,
+        game = ConditionalParticleGAN(native, banks["train"], critic,
             conditions=torch.cat([p.row.hidden for p in banks["train"]]), particles=native.particles,
             response_domain="continuous_vector", batch_size=options.get("batch", 8),
             total_steps=options.get("steps", 512), seed=options.get("seed", 7),
