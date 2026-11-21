@@ -59,26 +59,9 @@ training, selection, exports and inference.
 The common names mean G=`lr`, D=`lr*d_lr_mult`, bank=`lr*prior_lr_mult`.
 Actual D for multiplier18.0 is0.018000000000000002, rather than a reconstructed
 rounded literal. Copy the original tuples. All four full option fragments in
-[the portable summary](finished-output-rate.json) also preserve batch8,
+[the portable summary](https://github.com/HyperGAN/glide-particle-sliders/blob/3719eace8e84acced3c37eed8a438ba79bf3bfce/docs/finished-output-rate.json) also preserve batch8,
 steps512, seed7, critic residual64, CPU FP32, continuous penalties and the
-release-0.9.5 profile. Only the deployment-specific `cache_file` path is omitted
-explicitly; these fragments are not substituted full source-bound configs.
-
-The existing [normalized configuration factory](../src/glide_particle_sliders/binding_normalized_v3.py)
-returns a common SessionConfig for backend
-`glide-normalized-readout-particles-v3`, cohort
-`glide-04b-normalized-adapter-pg095-raw-v3`. For example, this shows **arm04's
-accepted option shape**, not a command to repeat completed work:
-
-```python
-from glide_particle_sliders.binding_normalized_v3 import config
-
-cfg = config(cache_file=caller_owned_original_cache_path,
-             lr=0.001, d_lr_mult=3.0, prior_lr_mult=3.0,
-             batch=8, steps=512, seed=7, critic="residual64",
-             device="cpu", base_precision="float32", ema_decay=None,
-             penalty_input_domain="continuous", pg_source_profile="release-0.9.5")
-```
+original ParticleGAN profile. Use the [archived configuration example](https://github.com/HyperGAN/glide-particle-sliders/blob/3719eace8e84acced3c37eed8a438ba79bf3bfce/docs/finished-output-learning-rates.md) with the original source checkout for those saved runs.
 
 The local cache must retain its original model/data/source identity.
 [`scripts/train_normalized.py`](../scripts/train_normalized.py) exposes lr,
@@ -110,7 +93,7 @@ confirmation is required. See [the historical study](HYPERPARAMETERS.md).
 The retained model/cache/RAW/FULL artifacts are not public downloads bundled
 here. The summary provides first counts, exact options, original observation
 pointers and source hashes for scalar arithmetic review. Separately, Root
-adopted the existing frozen core0.13.0/PG0.9.5 native bundle on 2026-11-09:
+adopted the existing frozen core0.13.0 / archived ParticleGAN native bundle on 2026-11-09:
 512 original unique updates, exact full256→257 continuation, RAW native-response
 reload and actual `Glide.decide_batch` replay. This reuses its original Source
 identity; it does not claim current-core0.14 qualification.
@@ -118,7 +101,7 @@ identity; it does not claim current-core0.14 qualification.
 The campaign sampler also publishes twelve saved fresh-anchor OFF/ON decision
 previews (first three original groups in both option orders). They retain their
 separate fresh104 scope and do not replace or rerate the main16 LR comparison.
-The [portable metadata](finished-output-rate.json) records the actual acceptance,
+The [portable metadata](https://github.com/HyperGAN/glide-particle-sliders/blob/3719eace8e84acced3c37eed8a438ba79bf3bfce/docs/finished-output-rate.json) records the actual acceptance,
 canonical adoption and preview-publication artifact names, bytes and SHA256.
 These identify retained evidence, not public artifact download links. Ordinary
 Generate remains unavailable and published weights remain zero. This status

@@ -2,18 +2,18 @@
 
 **Calculated memory:** Native CPU encoder/cache preparation: **8 GiB host / 0 GiB GPU** at batch 2/512 tokens. Cached-head training: **4 GiB host**, with encoder unloaded. [Full memory ledger and limits](MEMORY.md). These are planning estimates, not measured peaks.
 
-Native text-decision readout particles for [`fastino/GLiDE-0.4B`](https://huggingface.co/fastino/GLiDE-0.4B), using shared `particle-sliders-core` 0.15.1 and official ParticleGAN 0.11.0. Built with Fastino GLiDE.
+Native text-decision readout particles for [`fastino/GLiDE-0.4B`](https://huggingface.co/fastino/GLiDE-0.4B), using shared `particle-sliders-core` 0.15.2 and official ParticleGAN 0.11.1. Built with Fastino GLiDE.
 
-**Current intended-effect decision:** four existing full recipes **arm04/05/06/07 tie**, all **G0.001/batch8/RAW512/horizon512/seed7**, with D/bank combinations retained separately. Each has mean binary concise-choice ON−OFF **1** over the original16 main ordered DEV rows. No unique D/bank recipe or default is selected. See [current rates and method](LEARNING-RATES.md), [all13 first-count results and exact options](docs/finished-output-learning-rates.md), and [portable metadata](docs/finished-output-rate.json).
+**Current intended-effect decision:** four existing full recipes **arm04/05/06/07 tie**, all **G0.001/batch8/RAW512/horizon512/seed7**, with D/bank combinations retained separately. Each has mean binary concise-choice ON−OFF **1** over the original16 main ordered DEV rows. No unique D/bank recipe or default is selected. See [current rates and method](LEARNING-RATES.md), [all13 first-count results and exact options](docs/finished-output-learning-rates.md), and [portable metadata](https://github.com/HyperGAN/glide-particle-sliders/blob/3719eace8e84acced3c37eed8a438ba79bf3bfce/docs/finished-output-rate.json).
 
 The historical SSE-selected batch32 run and fresh104 results remain [separate diagnostic evidence](docs/HYPERPARAMETERS.md): relative SSE1.113→0.327 versus OFF1.000, second seed0.475, with original control/choice measurements unchanged. They do not select the current four-way tie or confirm all four recipes. Reuse completed searches, RAWs, outputs and first counts; no new confirmation is required. [Throughput](docs/THROUGHPUT.md) and the [initial negative experiment](docs/EXPERIMENT.md) retain their original scopes.
 
 The reviewed implementation from [PR1](https://github.com/HyperGAN/glide-particle-sliders/pull/1) merged on 2026-11-09 at [`e058591d`](https://github.com/HyperGAN/glide-particle-sliders/commit/e058591d1ac12042609dfe58504cebc8d9235ae0); its reviewed Source head `29075f79269d1976071575e9d0ce8d569458fc3b` is retained as an ancestor. The [public repository](https://github.com/HyperGAN/glide-particle-sliders) publishes source and weight-free measurements. This source merge publishes no model weights, server or deployment and does not change captured native identities.
 
-**Campaign status, 2026-11-09:** the existing frozen core0.13.0/PG0.9.5 native
+**Campaign status, 2026-11-09:** the existing frozen core0.13.0 / archived ParticleGAN native
 bundle is Root-adopted, and twelve saved fresh-anchor OFF/ON decision previews
 are published in the campaign sampler. These are separate from the original
-main16 LR comparison. [Portable status evidence](docs/finished-output-rate.json)
+main16 LR comparison. [Portable status evidence](https://github.com/HyperGAN/glide-particle-sliders/blob/3719eace8e84acced3c37eed8a438ba79bf3bfce/docs/finished-output-rate.json)
 records the actual adoption/publication artifact identities. Ordinary Generate
 remains unavailable and published weights remain zero; no new native proof,
 training, inference or rating was required for this status update.
@@ -62,7 +62,7 @@ CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
 .venv/bin/python -m pytest -q
 ```
 
-Model revision: `6bda7ab91aeb36dcad6d27828a8871e548c7fc71`. Every required asset is SHA256-locked. Core Git pin: `c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78`; runtime validates immutable Git origin and the shared native-source checks. Downloading is an explicit separate preparation step; training and live checks load local files only.
+Model revision: `6bda7ab91aeb36dcad6d27828a8871e548c7fc71`. Every required asset is SHA256-locked. Core Git pin: `ec1161f5d74481be3540cb0dfa63d0e8f8b54e90`; runtime validates immutable Git origin and the shared native-source checks. Downloading is an explicit separate preparation step; training and live checks load local files only.
 
 In that historical workflow, output directories were immutable. Each candidate wrote per-update logs, checkpoints at32/64/128 and a RAW inference artifact. The original128-update search selected minimum RAW FP64 equal-example relative SSE, then evaluated test results; its32→33 proof deliberately compared one next update. Those completed results and code remain unchanged, including the historical finish-every-finite-arm policy. They are not future search/proof/confirmation requirements. Current selection uses only equal-case main concise-choice ON−OFF, retains the four full ties, and reuses completed work without replaying updates.
 
@@ -87,3 +87,5 @@ See [SCOPED-INITIALIZATION.md](SCOPED-INITIALIZATION.md) for the separate cached
 its original runtime and owning-distribution prerequisites, and the retained
 software qualification scope. Existing defaults, checkpoints and LR results
 keep their original routes.
+
+Earlier campaign receipts, including the full machine-readable run reports remain available in the [archived source](https://github.com/HyperGAN/glide-particle-sliders/tree/3719eace8e84acced3c37eed8a438ba79bf3bfce).

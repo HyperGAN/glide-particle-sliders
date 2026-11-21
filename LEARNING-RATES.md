@@ -4,7 +4,7 @@ The completed saved RAW512 comparison yields four tied full recipes:
 **arm04/05/06/07**, all G0.001/batch8/horizon512/seed7, with D0.003 or
 0.018000000000000002 and bank0.003 or0.03. There is no unique full recipe,
 D/bank choice or default change. See [exact options and all13 first counts](docs/finished-output-learning-rates.md)
-and [portable metadata](docs/finished-output-rate.json).
+and [portable metadata](https://github.com/HyperGAN/glide-particle-sliders/blob/3719eace8e84acced3c37eed8a438ba79bf3bfce/docs/finished-output-rate.json).
 
 Select only equal-case binary concise-choice ON−exact matched OFF on the
 original sixteen main ordered DEV rows (eight scenarios, two orders each).
@@ -20,7 +20,7 @@ original separate scopes. The original experiment/HPO scripts still implement
 historical SSE/index selection; they are not current ranking instructions.
 The existing normalized configuration factory accepts the exact scalar tuples;
 the convenience training script hardcodes one multiplier pair and does not
-expose every tied recipe. The existing frozen core0.13.0/PG0.9.5 native bundle
+expose every tied recipe. The existing frozen core0.13.0 / archived ParticleGAN native bundle
 is now Root-adopted, and twelve saved fresh-anchor decision previews are
 published, separately from this accepted arithmetic decision. Ordinary Generate
 remains unavailable and published weights remain zero. See the portable status

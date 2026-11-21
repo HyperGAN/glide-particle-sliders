@@ -1,4 +1,4 @@
-"""Separate response-only residual critic cohort over the shared ParticleGAN 0.11.0 game.
+"""Separate response-only residual critic cohort over the shared ParticleGAN 0.11.1 game.
 
 The native routed readout and actual particle bank are unchanged. The shared
 game presents Gaussian reference noise versus Gaussian noise plus the paired

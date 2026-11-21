@@ -38,7 +38,7 @@ def verified_builder():
     if (expected['schema'], expected['profile'], expected['hndl_version'],
             expected['hypergan_commit'], expected['particlegan_version']) != (
             'particle-sliders-hypergan-hndl-profile-v2', PROFILE, '0.10.0',
-            '5f368a3770cf5bdae0448995c9f76e29af8049f7', '0.11.0'):
+            '5f368a3770cf5bdae0448995c9f76e29af8049f7', '0.11.1'):
         raise ValueError('Fibo HNDL profile manifest contradicts the binding')
     hndl_root = Path(hndl.__file__).parent
     actual = {str(p.relative_to(hndl_root)): _sha(p) for p in hndl_root.rglob('*.py')}

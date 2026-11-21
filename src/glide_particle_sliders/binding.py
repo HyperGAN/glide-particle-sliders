@@ -33,7 +33,7 @@ HIDDEN = 1024
 OUTPUTS = 255
 ACTIVE = 2
 MODEL_ID = "fastino/GLiDE-0.4B"
-CORE_COMMIT = "c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78"
+CORE_COMMIT = "ec1161f5d74481be3540cb0dfa63d0e8f8b54e90"
 CRITIC_GRAPH = '''joined = concat(response, condition, axis=1)
 features = linear(joined, 16, name="hidden")
 features = silu(features)
@@ -58,10 +58,10 @@ def _readout_identity(identity, weight):
 
 
 def _runtime():
-    if version("particle-sliders-core") != "0.15.1":
-        raise ValueError("GLiDE requires its pinned particle-sliders-core 0.15.1")
-    if (PG_VERSION, PG_SOURCE_PROFILE) != ("0.11.0", "release-0.11.0"):
-        raise ValueError("GLiDE requires official ParticleGAN 0.11.0")
+    if version("particle-sliders-core") != "0.15.2":
+        raise ValueError("GLiDE requires its pinned particle-sliders-core 0.15.2")
+    if (PG_VERSION, PG_SOURCE_PROFILE) != ("0.11.1", "release-0.11.1"):
+        raise ValueError("GLiDE requires official ParticleGAN 0.11.1")
     import json
     provenance = json.loads(distribution("particle-sliders-core").read_text("direct_url.json") or "{}")
     if (provenance.get("url") != "https://github.com/HyperGAN/particle-sliders.git"
@@ -274,7 +274,7 @@ def validate(options):
     if options.get("device", "cpu") != "cpu":
         raise ValueError("GLiDE readout cohort is CPU-only; GPU requires separate scheduler admission")
     if engine_options(options) != dict(pg_source_profile=PG_SOURCE_PROFILE, penalty_input_domain="continuous"):
-        raise ValueError("GLiDE requires its explicit continuous ParticleGAN 0.11.0 profile")
+        raise ValueError("GLiDE requires its explicit continuous ParticleGAN 0.11.1 profile")
     for key in ("lr", "d_lr_mult", "prior_lr_mult"):
         value = options.get(key)
         if value is not None and (isinstance(value, bool) or not isinstance(value, (int, float))
