@@ -33,7 +33,7 @@ def staged(tmp_path,monkeypatch):
     frozen=save_prepared_cache(tmp_path/'completed-cache.pt',prepared=rows,splits=['train','train','train','dev'],
         teacher_origins=origins,model_identity=identity,cache_id='NEW-GLiDE-normalized-synthetic',owner_admission=lambda request:True)
     config=dict(seed=7,steps=3,batch=2,lr=.001,d_lr_mult=18.,prior_lr_mult=30.,model_identity=identity,
-        ema_decay=None,device='cpu',pg_version='0.11.0',pg_source_profile='release-0.11.0',penalty_input_domain='continuous')
+        ema_decay=None,device='cpu',pg_version='0.11.1',pg_source_profile='release-0.11.1',penalty_input_domain='continuous')
     return dict(config=config,cache=frozen,cohort_id='NEW-GLiDE-scoped-software-v1',component_factory=factory,
         owner_admission=lambda request:True),tmp_path,weight,rows
 

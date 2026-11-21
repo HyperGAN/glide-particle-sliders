@@ -83,7 +83,7 @@ def candidate_specs(project=PROJECT):
         options = dict(base_precision="float32", batch=batch, cache_file=cache,
                        critic="residual64", d_lr_mult=d / g, device="cpu",
                        ema_decay=None, lr=g, penalty_input_domain="continuous",
-                       pg_source_profile="release-0.11.0", prior_lr_mult=bank / g,
+                       pg_source_profile="release-0.11.1", prior_lr_mult=bank / g,
                        seed=SEED, steps=HORIZON)
         config = dict(backend="glide-normalized-readout-particles-v3",
                       cohort="glide-04b-normalized-adapter-engine-raw-v3", options=options)

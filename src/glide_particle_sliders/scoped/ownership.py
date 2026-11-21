@@ -17,8 +17,8 @@ def guard():
     for name,record in CORE_SOURCES.items():
         if source_record(core/name)!=record:raise RuntimeError('installed shared core source differs:'+name)
     original._runtime()  # Original noneditable core Git pin and real HNDL/HyperGAN guard.
-    if metadata.version('particlegan')!='0.11.0'or source_record(pg_init.__file__)['sha256']!=INIT_SHA:
-        raise RuntimeError('exact public ParticleGAN 0.11.0 initializer required')
+    if metadata.version('particlegan')!='0.11.1'or source_record(pg_init.__file__)['sha256']!=INIT_SHA:
+        raise RuntimeError('exact public ParticleGAN 0.11.1 initializer required')
     owners=[d for d in metadata.distributions()if(d.metadata.get('Name')or'').lower().replace('_','-')=='glide-particle-sliders']
     if len(owners)!=1 or owners[0].version!='0.1.0':raise RuntimeError('one genuine owning GLiDE distribution required')
     owner=owners[0];records={str(r):r for r in owner.files or ()}
@@ -28,7 +28,7 @@ def guard():
             raise RuntimeError('genuine original/new namespace RECORD ownership required:'+relative)
         data=p.read_bytes();digest=base64.urlsafe_b64encode(hashlib.sha256(data).digest()).rstrip(b'=').decode()
         if r.size!=len(data)or r.hash.value!=digest:raise RuntimeError('GLiDE installed Source/RECORD differs:'+relative)
-    return dict(original_core='0.15.1@c13890f8',PG='0.11.0',original_guards=True,genuine_owning_RECORD=True)
+    return dict(original_core='0.15.2@ec1161f5',PG='0.11.1',original_guards=True,genuine_owning_RECORD=True)
 
 def sources():
     from glide_particle_sliders import binding as original

@@ -25,4 +25,4 @@ Larger batches process more examples per second but complete fewer updates per s
 
 The benchmark completed 192 genuine updates and exited, releasing its model before the search started. Search workers were capped at two CPU processes with four Torch threads each. Both physical GPUs were busy at inspection (99–100% utilization), and this delegated session's Babel mailbox was not prepared, so no GPU lease, allocation, launch or workload change was attempted.
 
-Exact timings, selected request IDs, padding/token counts, source hashes, checkpoint identities and limitations are in [the machine-readable benchmark](../reports/throughput-benchmark-v1-results.json).
+Exact timings, selected request IDs, padding/token counts, source hashes, checkpoint identities and limitations are in [the machine-readable benchmark](https://github.com/HyperGAN/glide-particle-sliders/blob/3719eace8e84acced3c37eed8a438ba79bf3bfce/reports/throughput-benchmark-v1-results.json).

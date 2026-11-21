@@ -22,8 +22,8 @@ def identity_valid(value):
 def configuration(value):
     keys={'seed','steps','batch','lr','d_lr_mult','prior_lr_mult','model_identity','ema_decay','device','pg_version','pg_source_profile','penalty_input_domain'}
     if(not isinstance(value,dict)or set(value)!=keys or value['ema_decay']is not None or value['device']!='cpu'
-            or(value['pg_version'],value['pg_source_profile'],value['penalty_input_domain'])!=('0.11.0','release-0.11.0','continuous')):
-        raise ValueError('exact original CPU FP32/ParticleGAN 0.11.0 continuous/noEMA configuration required')
+            or(value['pg_version'],value['pg_source_profile'],value['penalty_input_domain'])!=('0.11.1','release-0.11.1','continuous')):
+        raise ValueError('exact original CPU FP32/ParticleGAN 0.11.1 continuous/noEMA configuration required')
     for key,low,high in(('seed',0,2**63-101),('steps',1,10000),('batch',2,512)):
         if type(value[key])is not int or not low<=value[key]<=high:raise ValueError('invalid '+key)
     for key in('lr','d_lr_mult','prior_lr_mult'):
@@ -92,7 +92,7 @@ class Training(NativeOwner):
                     particles=self.slider.particles,response_domain='continuous_vector',response_scale=1.,batch_size=self.config['batch'],
                     total_steps=self.config['steps'],seed=self.config['seed'],
                     recipe_overrides={k:self.config[k]for k in('lr','d_lr_mult','prior_lr_mult')},
-                    pg_source_profile='release-0.11.0',penalty_input_domain='continuous')
+                    pg_source_profile='release-0.11.1',penalty_input_domain='continuous')
                 if self.game.backend.particles is not self.slider.particles:raise RuntimeError('actual bank identity differs')
                 if packet is not None:
                     self.game.load_state_dict(packet['game'])

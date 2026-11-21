@@ -6,7 +6,7 @@ old FULL/RAW checkpoints keep their original routes. Completed cohorts are not
 reset or migrated.
 
 Use a genuinely installed `glide-particle-sliders==0.1.0` in its compatible
-core 0.15.1 at Git commit c13890f8, ParticleGAN 0.11.0, HNDL 0.10.0 and the pinned HyperGAN builder. Original Source
+core 0.15.2 at Git commit ec1161f5, ParticleGAN 0.11.1, HNDL 0.10.0 and the pinned HyperGAN builder. Original Source
 and noneditable core-origin guards remain active. Generated RECORD must own
 the reviewed product modules, vendored graph assets and scoped files. A Source
 prepend, editable checkout or counterfeit metadata cannot replace that owner.
@@ -35,7 +35,7 @@ These are library calls with caller-supplied data, paths and functions.
 `owner_admission(request)` authenticates origins and admits the operation. A
 fresh cohort and owner directory must be new. `config` has explicit
 seed/steps/batch/lr/d_lr_mult/prior_lr_mult/model_identity, `ema_decay=None`,
-`device="cpu"`, `pg_version="0.11.0"`, `pg_source_profile="release-0.11.0"`,
+`device="cpu"`, `pg_version="0.11.1"`, `pg_source_profile="release-0.11.1"`,
 and `penalty_input_domain="continuous"`. This namespace selects no rate.
 
 ```python
