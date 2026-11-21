@@ -30,6 +30,21 @@ The encoder is cached for head training. Caches come from the bundled native `Gl
 
 Dependency direction is the product uses shared Particle Sliders and its ParticleGAN dependency, plus pinned HyperGAN and HNDL. The product contains no replacement GAN loss, optimizer, checkpoint engine or inference serialization. `binding.py` supplies only native geometry, construction, data rows, attachment and cleanup. Shared code performs updates, full-state continuation, evaluation, raw export and native-only reload. EMA is explicitly disabled. Execution is CPU-only in this tested cohort and rejects CUDA device options.
 
+## Strength on a native decision
+
+The native encoder processes the whole question in one bidirectional pass.
+It pools the last real token before `[SEP]` and calls the adapted readout
+once per question. Each row of the readout input is one question, and the
+first two logits identify its answer options. [Pinned encoder](https://huggingface.co/fastino/GLiDE-0.4B/blob/6bda7ab91aeb36dcad6d27828a8871e548c7fc71/glide/encoder.py#L51) · [Product binding](src/glide_particle_sliders/binding.py).
+
+Use a single scalar `strength` with the saved RAW readout. The shared early
+and late profiles reduce to this same scalar for one intervention. CFP could
+choose a single edit from a calibrated pooled representation. CLABS needs
+successive interventions within a request for its feedback to affect later
+steps. PSR on the pooled representation would require a separate fitted
+coefficient and held-out decision evaluation. Scheduled strength gains are
+unmeasured for this scorer. [Shared steering methods](https://github.com/HyperGAN/particle-sliders/blob/b1f780decc516808cfd3019d5e5b674457161f86/docs/strength-schedules.md#activation-dependent-steering).
+
 ## Install and run a fresh cohort
 
 Tested: Python3.12.15, Torch2.9.1+cu128 running on CPU, Transformers5.3.0, Tokenizers0.22.2, HNDL0.10.0. This differs from Fastino's published Torch2.14/Transformers5.17/BF16 GPU environment; results qualify this explicit CPU FP32 cohort only.
