@@ -30,6 +30,8 @@ The encoder is cached for head training. Caches come from the bundled native `Gl
 
 Dependency direction is the product uses shared Particle Sliders and its ParticleGAN dependency, plus pinned HyperGAN and HNDL. The product contains no replacement GAN loss, optimizer, checkpoint engine or inference serialization. `binding.py` supplies only native geometry, construction, data rows, attachment and cleanup. Shared code performs updates, full-state continuation, evaluation, raw export and native-only reload. EMA is explicitly disabled. Execution is CPU-only in this tested cohort and rejects CUDA device options.
 
+The [opt-in GLiDE-9B package](native9b/README.md) supports recurrent prompt-steering replay with its pinned publisher runtime.
+
 ## Strength on a native decision
 
 The native encoder processes the whole question in one bidirectional pass.

@@ -1,0 +1,71 @@
+{
+  "files": {
+    "chat_template.jinja": {
+      "bytes": 8952,
+      "git_blob_sha1": "c0c686f9c38d70d179fb7b5f5aa7530bc913dda3"
+    },
+    "config.json": {
+      "bytes": 1981,
+      "git_blob_sha1": "8e0f0638467c1088f951f37eabd7e9a565a9eab0"
+    },
+    "decision_config.json": {
+      "bytes": 4557,
+      "git_blob_sha1": "6fd69cf9a75431d4ee6dec8ddd6b0c933ff94aeb"
+    },
+    "glide/__init__.py": {
+      "bytes": 255,
+      "git_blob_sha1": "685a4c922e82bbb2f6cdb1a07138bb4b7cf4d65d"
+    },
+    "glide/images.py": {
+      "bytes": 2785,
+      "git_blob_sha1": "3eda859bf0e32f8d3590fb179c69937a4ae43f7b"
+    },
+    "glide/model.py": {
+      "bytes": 23888,
+      "git_blob_sha1": "1c70f23976d7bce543a68a718aa3276e69e32057"
+    },
+    "glide/nvfp4.py": {
+      "bytes": 8765,
+      "git_blob_sha1": "5e0fa5f288a66304d7c2dc7b36d54fc4d036928c"
+    },
+    "glide/prompt.py": {
+      "bytes": 6434,
+      "git_blob_sha1": "78999859bc5aa955b10b7312572f53c295d891c9"
+    },
+    "glide/recurrent.py": {
+      "bytes": 6034,
+      "git_blob_sha1": "49116bc86acba43ae6052fd577d635f9e5ca5827"
+    },
+    "model-00001-of-00002.safetensors": {
+      "bytes": 10784454520,
+      "sha256": "9d30d2bceaac3d07dea5b07a62a996cefac83ced2de2a1fd1588c7e14821e432"
+    },
+    "model-00002-of-00002.safetensors": {
+      "bytes": 5088970464,
+      "sha256": "aec8a83b05d6d0ddad82ac1cc3c248c317e19c481990aa63f19fcf49db755d67"
+    },
+    "model.safetensors.index.json": {
+      "bytes": 41099,
+      "git_blob_sha1": "e1a7dcb97f621b732fe998132718835f27106502"
+    },
+    "readout.safetensors": {
+      "bytes": 2089048,
+      "sha256": "4cbb89754d0434dce17808a3fbc717efac8d7729740faf3f0444f9a874547527"
+    },
+    "requirements.txt": {
+      "bytes": 465,
+      "git_blob_sha1": "dc5d40741c60af977e27e6a4d9635f355e22b698"
+    },
+    "tokenizer.json": {
+      "bytes": 19989325,
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523"
+    },
+    "tokenizer_config.json": {
+      "bytes": 1124,
+      "git_blob_sha1": "d1a20cc3a8838d08eca9de8a7b84d510d60a0524"
+    }
+  },
+  "model_id": "fastino/GLiDE-9B",
+  "revision": "eff5e5ff7d69e005f5cc0b1e2bc4ae07561f811e",
+  "schema": "glide-recurrent-assets-v1"
+}

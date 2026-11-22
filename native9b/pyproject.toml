@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glide-recurrent-sliders"
+version = "0.1.0"
+description = "Opt-in GLiDE-9B recurrent prompt steering"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@303d0a3fbe6d2258997f1c59dc23822a90a68d75#subdirectory=packages/particle-sliders-core",
+  "torch==2.14.1+cu130",
+  "transformers==5.17.0",
+  "tokenizers==0.23.3",
+  "safetensors==0.8.0",
+  "huggingface_hub==1.33.0",
+  "jinja2==3.1.6",
+  "pillow==13.0.0",
+  "numpy==1.26.4",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+glide-recurrent-sliders = "glide_recurrent_sliders.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+glide_recurrent_sliders = ["native-model.lock.json"]
