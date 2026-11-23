@@ -1,6 +1,7 @@
 """Apply the shared prompt-steering probe at the two stock GLiDE-9B passes."""
 
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager
+from fractions import Fraction
 import importlib
 from math import isfinite
 from pathlib import Path
@@ -9,14 +10,19 @@ from threading import Lock
 
 import torch
 from particle_sliders.prompt_steering import PromptSteering
-from particle_sliders.strength_schedule import match_binary64_interval_dose
+from particle_sliders.strength_schedule import match_binary32_interval_dose, match_binary64_interval_dose
 
-from .identity import hash_json, load_replay, require_fields, require_positive, verify_runtime, verify_snapshot
+from .identity import (
+    BLOCK17_COORDINATE, BLOCK17_SCHEMA, hash_json, load_replay, require_fields, require_positive,
+    verify_block17_dose_source, verify_runtime, verify_snapshot,
+)
 
 BLOCKS = ((12, 17), (18, 23))
 PASSES = 2
 HIDDEN = 4096
 LAYERS = 32
+BLOCK17_ROUTE = (*range(18), *range(12, 18), *range(18, 24), *range(18, 24), *range(24, LAYERS))
+BLOCK17_VISITS = (18, 24)
 _LOAD_LOCK = Lock()
 
 
@@ -77,6 +83,74 @@ def _recurrent_edit(backbone, steering, strength, constant):
             raise RuntimeError("The native scorer did not complete both recurrent passes")
     finally:
         handle.remove()
+
+
+def _block17_dose(coefficients, match_side):
+    if (not isinstance(coefficients, list) or len(coefficients) != len(BLOCK17_VISITS)
+            or not all(type(value) is float and isfinite(value) and value >= 0 for value in coefficients)):
+        raise ValueError("Expected two finite nonnegative binary32 reference coefficients")
+    if match_side not in ("nearest", "lower", "upper"):
+        raise ValueError("Expected a nearest, lower or upper binary32 constant")
+    match = match_binary32_interval_dose(coefficients, range(len(BLOCK17_VISITS) + 1))
+    constant = match.constant_strength
+    nearest_residual = match.constant_dose - match.adaptive_dose
+    if (match_side == "lower" and nearest_residual > 0) or (match_side == "upper" and nearest_residual < 0):
+        limit = -float("inf") if match_side == "lower" else float("inf")
+        constant = torch.nextafter(torch.tensor(constant, dtype=torch.float32),
+                                   torch.tensor(limit, dtype=torch.float32)).item()
+    constant_dose = len(BLOCK17_VISITS) * Fraction(constant)
+    residual = constant_dose - match.adaptive_dose
+    return constant, dict(adaptive_dose=str(match.adaptive_dose), constant_dose=str(constant_dose),
+                          constant_minus_adaptive=str(residual), exact=residual == 0,
+                          side="lower" if residual < 0 else "upper" if residual > 0 else "exact",
+                          requested_control=match_side)
+
+
+@contextmanager
+def _block17_edit(backbone, steering, strength, constant):
+    _check_backbone(backbone)
+    route, coefficients = [], []
+
+    def at_block_end(block):
+        def hook(_layer, _args, output):
+            if len(route) >= len(BLOCK17_ROUTE) or block != BLOCK17_ROUTE[len(route)]:
+                raise RuntimeError("The native scorer left the registered 44-call route")
+            route.append(block)
+            if (not isinstance(output, torch.Tensor) or output.dtype != torch.bfloat16 or output.ndim != 3
+                    or output.shape[0] != 1 or not output.shape[1] or output.shape[-1] != HIDDEN):
+                raise RuntimeError("Expected one native BF16 text residual")
+            if len(route) not in BLOCK17_VISITS:
+                return None
+            if strength is None and constant is None:
+                coefficients.append(0.0)
+                return None
+            if steering.direction.weight.dtype != torch.float32 or steering.probe.weight.dtype != torch.float32:
+                raise ValueError("Block 17 requires the fitted FP32 probe and direction")
+            mask = torch.arange(output.shape[1], device=output.device)[None] >= output.shape[1] - 1
+            if constant is None:
+                gain = steering.coefficients(output)
+                if gain.dtype != torch.float32 or gain.shape != output.shape[:2] or not gain.isfinite().all().item():
+                    raise ValueError("Expected finite FP32 prompt-steering gains")
+                amount = gain * torch.tensor(strength, dtype=torch.float32, device=output.device)
+            else:
+                amount = torch.full(output.shape[:2], constant, dtype=torch.float32, device=output.device)
+            amount = amount.masked_fill(~mask, 0)
+            value = amount[0, -1].item()
+            if not isfinite(value) or value < 0:
+                raise ValueError("PSR coefficient must be finite and nonnegative")
+            coefficients.append(value)
+            edited = (output.float() + torch.einsum("bs,d->bsd", amount, steering.direction.weight[0])).bfloat16()
+            if not edited[:, -1].isfinite().all().item():
+                raise ValueError("PSR produced a nonfinite residual")
+            return torch.where(mask[..., None], edited, output)
+        return hook
+
+    with ExitStack() as hooks:
+        for block, layer in enumerate(backbone.layers):
+            hooks.callback(layer.register_forward_hook(at_block_end(block)).remove)
+        yield coefficients
+        if tuple(route) != BLOCK17_ROUTE or len(coefficients) != len(BLOCK17_VISITS):
+            raise RuntimeError("The native scorer did not complete the 44-call route and both Block 17 visits")
 
 
 def _validate_request(model, request):
@@ -147,16 +221,21 @@ class RecurrentChoice:
         self._steering = steering
         self._raw_sha256 = plan["raw_sha256"]
         self._plan_sha256 = plan_sha256
-        self._strength = require_positive(strength, "Selected strength")
+        self._block17 = plan.get("schema") == BLOCK17_SCHEMA
+        self._strength = require_positive(strength, "Development trial strength" if self._block17 else "Selected strength")
         self._lock = Lock()
 
     @classmethod
-    def open(cls, model_dir, *, plan_file, plan_sha256, raw_file, full_file, full_receipt_file, calibration_file):
+    def open(cls, model_dir, *, plan_file, plan_sha256, raw_file, full_file, full_receipt_file,
+             calibration_file=None, development_evidence_file=None):
         """Open local, verified BF16 publisher assets and the replay-bound RAW probe."""
         verify_runtime()
         plan, strength, parameters = load_replay(
             plan_file, plan_sha256, raw_file, full_file, full_receipt_file, calibration_file,
+            development_evidence_path=development_evidence_file,
         )
+        if plan["schema"] == BLOCK17_SCHEMA:
+            verify_block17_dose_source()
         root = verify_snapshot(model_dir)
         if torch.cuda.device_count() != 1 or not torch.cuda.is_bf16_supported():
             raise ValueError("Expected one visible BF16-capable CUDA device for GLiDE-9B")
@@ -165,23 +244,37 @@ class RecurrentChoice:
         steering.load_state_dict(parameters, strict=True)
         return cls(model, steering.eval().requires_grad_(False).to("cuda:0"), plan, plan_sha256, strength)
 
-    def score(self, request, *, mode, reference=None):
+    def score(self, request, *, mode, reference=None, match_side=None):
         """Return the stock decision and both resolved recurrent coefficients."""
         with self._lock, torch.inference_mode():
             normalized, key, options = _validate_request(self._model, request)
             binding = dict(request_sha256=hash_json(normalized), replay_sha256=self._plan_sha256,
                            raw_sha256=self._raw_sha256)
+            if match_side is not None and (not self._block17 or mode != "matched"):
+                raise ValueError("Binary32 control sides are only accepted on a Block 17 matched replay")
+            if self._block17:
+                binding.update(coordinate=BLOCK17_COORDINATE, visit_clocks=list(BLOCK17_VISITS),
+                               trial_strength=self._strength)
             strength, constant = None, None
+            dose = None
             if mode == "adaptive" and reference is None:
                 strength = self._strength
             elif mode == "matched":
                 require_fields(reference, (*binding, "mode", "resolved_coefficients"), "adaptive reference")
                 if reference["mode"] != "adaptive" or any(reference[name] != value for name, value in binding.items()):
                     raise ValueError("The adaptive trace belongs to another request or replay")
-                constant = _matched_coefficient(reference["resolved_coefficients"])
+                if self._block17:
+                    constant, dose = _block17_dose(reference["resolved_coefficients"],
+                                                   "nearest" if match_side is None else match_side)
+                else:
+                    constant = _matched_coefficient(reference["resolved_coefficients"])
             elif mode != "off" or reference is not None:
                 raise ValueError("The mode requires a valid adaptive, matched or off request")
-            with _recurrent_edit(self._model.network.backbone, self._steering, strength, constant) as coefficients:
+            intervention = _block17_edit if self._block17 else _recurrent_edit
+            with intervention(self._model.network.backbone, self._steering, strength, constant) as coefficients:
                 response = self._model.decide(normalized["state"], normalized["questions"])
             _validate_response(response, key, options)
-        return dict(response=response, trace=dict(**binding, mode=mode, resolved_coefficients=coefficients))
+        trace = dict(**binding, mode=mode, resolved_coefficients=coefficients)
+        if dose is not None:
+            trace["binary32_dose"] = dose
+        return dict(response=response, trace=trace)

@@ -10,13 +10,23 @@ import sys
 
 import numpy as np
 import torch
-from particle_sliders import prompt_steering
+from particle_sliders import prompt_steering, strength_schedule
 
 MODEL_ID = "fastino/GLiDE-9B"
 MODEL_REVISION = "eff5e5ff7d69e005f5cc0b1e2bc4ae07561f811e"
 CORE_COMMIT = "28745b7d47435f89bb55b86d1761adce6b8f1b06"
 PSR_SOURCE_SHA256 = "67ee03066e255fe105735820b0edba53757d943b93239b1279de707d23dbae59"
 COORDINATE = "block23-final-token-two-euler-passes"
+BLOCK17_COORDINATE = "block17-final-token-clocks18-24-fp32"
+BLOCK17_SCHEMA = "glide-recurrent-block17-development-v1"
+BLOCK17_CORE_COMMIT = "303d0a3fbe6d2258997f1c59dc23822a90a68d75"
+BLOCK17_DOSE_SOURCE_SHA256 = "732e8536ec16cf38950edbf0c536f08019844247a87b552d8b7de02096362d6d"
+BLOCK17_RAW_SHA256 = "9bae1827330dc3e3034b7cdb8525384f795b60d47ac77930861b65715edf8ac5"
+BLOCK17_FULL_SHA256 = "d742bcff516ec08069dab7269db575892d365615c2e314f217461166f6d39d35"
+BLOCK17_RECEIPT_SHA256 = "6bb833703629caa30ab57ff468c7443993a3d3f569fbdb15b0d1a25068a73ed1"
+BLOCK17_FIT_SHA256 = "9635dbb504924ed8072708634ac9210f9cefc9a50b65db30ba350641bbe65775"
+BLOCK17_DEVELOPMENT_SHA256 = "1496d8a85a95e1ad2ab1b90cf690ed79327f628a26a092d86e8978b555bc8bca"
+BLOCK17_RANK_SHA256 = "7259c69f46f09683334b0b813dc68466e48963687cf5879b26db1c143037da4c"
 AUTHOR_EPOCH_WIDTH = 16
 AUTHOR_BUDGET = 80
 AUTHOR_STOP_OBJECTIVE = 0.001
@@ -75,10 +85,16 @@ def locked_manifest():
     return manifest, sha256(data).hexdigest()
 
 
-def model_identity():
+def model_identity(*, block=23):
+    if block == 23:
+        coordinate, core = COORDINATE, CORE_COMMIT
+    elif block == 17:
+        coordinate, core = BLOCK17_COORDINATE, BLOCK17_CORE_COMMIT
+    else:
+        raise ValueError("Unsupported recurrent steering block")
     return dict(
         model_id=MODEL_ID, revision=MODEL_REVISION, asset_manifest_sha256=locked_manifest()[1],
-        core_commit=CORE_COMMIT, coordinate=COORDINATE,
+        core_commit=core, coordinate=coordinate,
     )
 
 
@@ -119,6 +135,11 @@ def verify_runtime():
         raise ValueError("Python package versions differ from the GLiDE-9B runtime")
     if sha256(Path(prompt_steering.__file__).read_bytes()).hexdigest() != PSR_SOURCE_SHA256:
         raise ValueError("Shared PromptSteering source differs from the reviewed core pin")
+
+
+def verify_block17_dose_source():
+    if sha256(Path(strength_schedule.__file__).read_bytes()).hexdigest() != BLOCK17_DOSE_SOURCE_SHA256:
+        raise ValueError("Shared binary32 dose source differs from the Block 17 evidence")
 
 
 def _read_pin(path, expected, label):
@@ -181,27 +202,16 @@ def _check_final_state(full, count):
             raise ValueError(f"Invalid FULL RNG state: {name}")
 
 
-def load_replay(plan_path, plan_sha256, raw_path, full_path, full_receipt_path, calibration_path):
-    plan = decode_json(_read_pin(plan_path, plan_sha256, "replay plan"))
-    require_fields(plan, ("schema", "identity", "raw_sha256", "full_sha256", "fit_recipe_sha256",
-                          "completed_updates", "calibration_sha256", "ema_decay"), "replay plan")
-    if plan["schema"] != "glide-recurrent-replay-v1" or plan["identity"] != model_identity() or plan["ema_decay"] is not None:
-        raise ValueError("The replay plan belongs to another model, site or weight policy")
-
-    calibration = decode_json(_read_pin(calibration_path, plan["calibration_sha256"], "calibration"))
-    require_fields(calibration, ("schema", "raw_sha256", "selected_strength", "selection_metric"), "calibration")
-    if (calibration["schema"] != "glide-recurrent-calibration-v1"
-            or calibration["raw_sha256"] != plan["raw_sha256"]
-            or calibration["selection_metric"] != "mean_matched_intended_effect_on_minus_off"):
-        raise ValueError("Calibration is not bound to this RAW adapter and effect metric")
-    strength = require_positive(calibration["selected_strength"], "Selected strength")
-
+def _load_fitted_state(plan, raw_path, full_path, full_receipt_path):
     raw = torch.load(io.BytesIO(_read_pin(raw_path, plan["raw_sha256"], "RAW adapter")), map_location="cpu", weights_only=True)
     full = torch.load(io.BytesIO(_read_pin(full_path, plan["full_sha256"], "FULL checkpoint")), map_location="cpu", weights_only=True)
     require_fields(raw, ("experiment", "full", "completed", "probe", "raw_weights", "ema_decay"), "RAW adapter")
     require_fields(full, ("experiment", "fitted_probe", "optimizer", "scheduler", "cpu_rng", "cuda_rng", "shuffle_state",
                           "orders_sha256", "losses", "cursor", "raw_weights", "ema_decay", "mutation_marker"), "FULL checkpoint")
-    receipt = decode_json(_read_pin(full_receipt_path, raw["full"]["sha256"], "FULL receipt"))
+    receipt_sha = raw["full"]["sha256"]
+    if plan["schema"] == BLOCK17_SCHEMA and receipt_sha != BLOCK17_RECEIPT_SHA256:
+        raise ValueError("Block 17 RAW does not identify the reviewed FULL receipt")
+    receipt = decode_json(_read_pin(full_receipt_path, receipt_sha, "FULL receipt"))
     if (receipt["state"]["sha256"] != plan["full_sha256"]
             or receipt["experiment"] != raw["experiment"] or receipt["ema_decay"] is not None
             or receipt["mutation_marker"] != full["mutation_marker"]):
@@ -221,4 +231,73 @@ def load_replay(plan_path, plan_sha256, raw_path, full_path, full_receipt_path, 
     _check_parameters(full["fitted_probe"])
     if any(not torch.equal(tensor, full["fitted_probe"][key]) for key, tensor in raw["probe"].items()):
         raise ValueError("RAW adapter tensors differ from the completed FULL checkpoint")
-    return plan, strength, raw["probe"]
+    return raw["probe"]
+
+
+def _block17_plan(trial_strength):
+    return dict(
+        schema=BLOCK17_SCHEMA, identity=model_identity(block=17), raw_sha256=BLOCK17_RAW_SHA256,
+        full_sha256=BLOCK17_FULL_SHA256, fit_recipe_sha256=BLOCK17_FIT_SHA256,
+        completed_updates=AUTHOR_BUDGET, development_evidence_sha256=BLOCK17_DEVELOPMENT_SHA256,
+        trial_strength=trial_strength, selected_strength=None, ema_decay=None,
+    )
+
+
+def _block17_trial(plan, evidence_path):
+    require_fields(plan, _block17_plan(1), "Block 17 development plan")
+    strength = require_positive(plan["trial_strength"], "Development trial strength")
+    if plan != _block17_plan(strength):
+        raise ValueError("Block 17 development replay requires the reviewed fit, identity and no selected strength")
+    evidence = decode_json(_read_pin(evidence_path, BLOCK17_DEVELOPMENT_SHA256, "development evidence"))
+    fit, ranking = evidence["fit"], evidence["development_ranking"]
+    if (evidence["schema"] != "glide-block17-development-evidence-v1" or evidence["held_out_cases"] != 0
+            or fit["raw_checkpoint_sha256"] != BLOCK17_RAW_SHA256 or fit["full_checkpoint_sha256"] != BLOCK17_FULL_SHA256
+            or fit["full_checkpoint_receipt_sha256"] != BLOCK17_RECEIPT_SHA256 or fit["ema_decay"] is not None
+            or fit["completed_updates"] != AUTHOR_BUDGET or ranking["verification_sha256"] != BLOCK17_RANK_SHA256
+            or ranking["selected_strength"] is not None or not ranking["identical_adaptive_choices_across_strengths"]
+            or strength not in ranking["co_leading_strengths"]):
+        raise ValueError("The requested strength is not a verified tied development trial")
+    return strength
+
+
+def write_block17_development_plan(
+    plan_path, *, trial_strength, raw_path, full_path, full_receipt_path, development_evidence_path,
+):
+    """Write a new digest-bound plan for one measured trial, without selecting a preset."""
+    strength = require_positive(trial_strength, "Development trial strength")
+    plan = _block17_plan(strength)
+    _block17_trial(plan, development_evidence_path)
+    _load_fitted_state(plan, raw_path, full_path, full_receipt_path)
+    data = (json.dumps(plan, indent=2, allow_nan=False) + "\n").encode()
+    with Path(plan_path).open("xb") as output:
+        output.write(data)
+    return sha256(data).hexdigest()
+
+
+def load_replay(
+    plan_path, plan_sha256, raw_path, full_path, full_receipt_path, calibration_path=None,
+    *, development_evidence_path=None,
+):
+    plan = decode_json(_read_pin(plan_path, plan_sha256, "replay plan"))
+    schema = plan.get("schema") if isinstance(plan, dict) else None
+    if schema == BLOCK17_SCHEMA:
+        if calibration_path is not None or development_evidence_path is None:
+            raise ValueError("Block 17 replay requires development evidence without a selected calibration")
+        strength = _block17_trial(plan, development_evidence_path)
+    else:
+        if development_evidence_path is not None or calibration_path is None:
+            raise ValueError("Block 23 replay requires a selected calibration without development evidence")
+        require_fields(plan, ("schema", "identity", "raw_sha256", "full_sha256", "fit_recipe_sha256",
+                              "completed_updates", "calibration_sha256", "ema_decay"), "replay plan")
+        if schema != "glide-recurrent-replay-v1" or plan["identity"] != model_identity() or plan["ema_decay"] is not None:
+            raise ValueError("The replay plan belongs to another model, site or weight policy")
+        if plan["raw_sha256"] == BLOCK17_RAW_SHA256 or plan["fit_recipe_sha256"] == BLOCK17_FIT_SHA256:
+            raise ValueError("The reviewed Block 17 fit requires a development replay plan")
+        calibration = decode_json(_read_pin(calibration_path, plan["calibration_sha256"], "calibration"))
+        require_fields(calibration, ("schema", "raw_sha256", "selected_strength", "selection_metric"), "calibration")
+        if (calibration["schema"] != "glide-recurrent-calibration-v1"
+                or calibration["raw_sha256"] != plan["raw_sha256"]
+                or calibration["selection_metric"] != "mean_matched_intended_effect_on_minus_off"):
+            raise ValueError("Calibration is not bound to this RAW adapter and effect metric")
+        strength = require_positive(calibration["selected_strength"], "Selected strength")
+    return plan, strength, _load_fitted_state(plan, raw_path, full_path, full_receipt_path)

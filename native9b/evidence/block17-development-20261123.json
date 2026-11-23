@@ -1,0 +1,60 @@
+{
+  "schema": "glide-block17-development-evidence-v1",
+  "scope": "Finished two-option choices on a separate development panel",
+  "publisher_model": {
+    "id": "fastino/GLiDE-9B",
+    "revision": "eff5e5ff7d69e005f5cc0b1e2bc4ae07561f811e"
+  },
+  "native_edit": {
+    "physical_block": 17,
+    "call_indices_one_based": [
+      18,
+      24
+    ],
+    "stock_route_calls": 44,
+    "position": "final input token",
+    "arithmetic": "binary32 outer product and add, then BF16 writeback"
+  },
+  "shared_core": {
+    "commit": "303d0a3fbe6d2258997f1c59dc23822a90a68d75",
+    "binary32_interval_dose_source_sha256": "732e8536ec16cf38950edbf0c536f08019844247a87b552d8b7de02096362d6d"
+  },
+  "fit": {
+    "completed_updates": 80,
+    "stop_reason": "declared_budget",
+    "raw_checkpoint_sha256": "9bae1827330dc3e3034b7cdb8525384f795b60d47ac77930861b65715edf8ac5",
+    "full_checkpoint_sha256": "d742bcff516ec08069dab7269db575892d365615c2e314f217461166f6d39d35",
+    "full_checkpoint_receipt_sha256": "6bb833703629caa30ab57ff468c7443993a3d3f569fbdb15b0d1a25068a73ed1",
+    "verified_fit_sha256": "2d8cbf193904ca3d683f916aad7650770eec9c5ae2921b5b0378d2f28bce51d1",
+    "ema_decay": null
+  },
+  "development_ranking": {
+    "case_count": 16,
+    "fact_families": 8,
+    "co_leading_strengths": [
+      7.5,
+      8.75,
+      9.375,
+      9.6875,
+      9.84375,
+      9.921875
+    ],
+    "identical_adaptive_choices_across_strengths": true,
+    "intended_off": 8,
+    "intended_adaptive_at_each_strength": 10,
+    "selected_strength": null,
+    "verification_sha256": "7259c69f46f09683334b0b813dc68466e48963687cf5879b26db1c143037da4c"
+  },
+  "matched_dose_development_diagnostic": {
+    "candidate_strength": 7.5,
+    "native_constant_forwards": 27,
+    "intended_when_using_lower_constant_for_inexact_cases": 9,
+    "intended_when_using_upper_constant_for_inexact_cases": 9,
+    "exact_binary32_scalar_dose_cases": 5,
+    "adaptive_additional_intended_answers_on_exact_cases": 1,
+    "inexact_binary32_dose_cases": 11,
+    "cases_with_same_finished_choice_for_both_adjacent_constants": 11,
+    "verification_sha256": "f6b7091f992470e7be6bd73658862cf16da43748f65d990ed192def080719033"
+  },
+  "held_out_cases": 0
+}
