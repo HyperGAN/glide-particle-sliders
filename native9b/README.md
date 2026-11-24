@@ -67,3 +67,20 @@ on all 192 visits across the six runs. The equal-case gain was zero for
 each strength, so the registered rule left strength selection unset.
 The matched-constant timing study remains a separate comparison.
 [Third-panel results and source digests](evidence/block17-third-development-20261124.json)
+
+## Layer 15 confirmation
+
+The separate Layer 15 study tested the frozen nominal strength of 5 on 16
+fresh text-choice cases from eight public facts, with both answer orders.
+The stock baseline chose the intended concise answer in 10 of 16 cases.
+Stepped adaptive steering and its casewise exact-dose constant control each
+did so in 15 of 16, choosing the same answer on every case. Steering
+improved the score by 5 of 16 over stock. Timing added zero over the
+constant control, so the registered criterion left the default strength
+unset.
+
+Both steering arms ran on the same GPU at native visits 16 and 22. The
+binary64 constant repeated the exact mean of the two resolved adaptive
+coefficients. This matches their signed sum before BF16 writeback. The
+first BF16 edit still differed between the two arms in all 16 cases.
+[Per-case choices, coefficient doses, and source digests](evidence/layer15-exact-dose-confirmation-20261124.json)
