@@ -39,3 +39,13 @@ digest = write_block17_development_plan(
 ```
 
 Pass the returned digest as `--plan-sha256` and supply the same evidence file using `--development-evidence`. The existing `adaptive`, `off` and `matched` modes use this plan. For `matched`, provide the adaptive trace for the same request and plan. The shared binary32 matcher chooses the nearest representable constant by default. Use `--match-side lower` or `--match-side upper` to reproduce either bracket control. The trace gives the exact rational dose of each arm, the signed constant-minus-adaptive residual, and whether the match is exact at the coefficient boundary before BF16 writeback.
+
+### Third development panel
+
+Each of the six registered strengths scored 14 of 16 intended choices on
+the same order-balanced cases. All 16 choices per strength matched the
+stock OFF choices. The nonzero coefficients changed the BF16 activation
+on all 192 visits across the six runs. The equal-case gain was zero for
+each strength, so the registered rule left strength selection unset.
+The matched-constant timing study remains a separate comparison.
+[Third-panel results and source digests](evidence/block17-third-development-20261124.json)
