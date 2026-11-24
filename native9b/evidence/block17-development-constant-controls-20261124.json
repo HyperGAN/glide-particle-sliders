@@ -1,0 +1,168 @@
+{
+  "schema": "glide-9b-block17-development-constant-controls-v1",
+  "scope": {
+    "panel": "Registered Block 17 development panel",
+    "cases": 16,
+    "native_constant_forwards": 144,
+    "coefficient_boundary": "Sum of the two binary32 scalar coefficients before native BF16 residual writeback",
+    "inexact_match": "Two native constant controls at the adjacent binary32 coefficients around the adaptive mean, each repeated at both visits",
+    "held_out_cases_read": 0
+  },
+  "results": [
+    {
+      "strength": 7.5,
+      "exact_scalar_dose_cases": 5,
+      "adjacent_scalar_dose_cases": 11,
+      "native_constant_forwards": 27,
+      "intended_choices": {
+        "off": 8,
+        "adaptive": 10,
+        "nearest_constant": 9,
+        "lower_constant": 9,
+        "upper_constant": 9
+      },
+      "changed_choices_vs_adaptive": {
+        "nearest_constant": 1,
+        "lower_constant": 1,
+        "upper_constant": 1
+      },
+      "sha256": {
+        "primary_constant_panel": "a9dc7b6ce0b684c4ff814d56a217a5c1907290f7446585699ac1071b90d8e6cb",
+        "complete_bracket": "f6b7091f992470e7be6bd73658862cf16da43748f65d990ed192def080719033"
+      }
+    },
+    {
+      "strength": 8.75,
+      "exact_scalar_dose_cases": 8,
+      "adjacent_scalar_dose_cases": 8,
+      "native_constant_forwards": 24,
+      "intended_choices": {
+        "off": 8,
+        "adaptive": 10,
+        "nearest_constant": 10,
+        "lower_constant": 10,
+        "upper_constant": 10
+      },
+      "changed_choices_vs_adaptive": {
+        "nearest_constant": 0,
+        "lower_constant": 0,
+        "upper_constant": 0
+      },
+      "sha256": {
+        "primary_constant_panel": "48fd74cf7b2299a8a417e360d7bea0dadea341c354140a2d5911237945af785d",
+        "complete_bracket": "4cbd4e8e4a13f5f007fac5a0ddb3b36f02b01f5c8826bb9c06e15e1ba663c4a1"
+      }
+    },
+    {
+      "strength": 9.375,
+      "exact_scalar_dose_cases": 9,
+      "adjacent_scalar_dose_cases": 7,
+      "native_constant_forwards": 23,
+      "intended_choices": {
+        "off": 8,
+        "adaptive": 10,
+        "nearest_constant": 10,
+        "lower_constant": 10,
+        "upper_constant": 10
+      },
+      "changed_choices_vs_adaptive": {
+        "nearest_constant": 0,
+        "lower_constant": 0,
+        "upper_constant": 0
+      },
+      "sha256": {
+        "primary_constant_panel": "4814812d026fd8d44b56f31459093744fc64f53349e70c684a19e4b495318f72",
+        "complete_bracket": "90598d510630468629d59368032aa81a2aa99d25f3c0d9f0f5597cf87f2eded7"
+      }
+    },
+    {
+      "strength": 9.6875,
+      "exact_scalar_dose_cases": 10,
+      "adjacent_scalar_dose_cases": 6,
+      "native_constant_forwards": 22,
+      "intended_choices": {
+        "off": 8,
+        "adaptive": 10,
+        "nearest_constant": 10,
+        "lower_constant": 10,
+        "upper_constant": 10
+      },
+      "changed_choices_vs_adaptive": {
+        "nearest_constant": 0,
+        "lower_constant": 0,
+        "upper_constant": 0
+      },
+      "sha256": {
+        "primary_constant_panel": "d47d75118ca3b1382f15781bd44b685933fa9e2c58c5f7c04ade149675323edf",
+        "complete_bracket": "e738f6c2e2c1c4f7213109e07e613a55aca5aabb1e37b4c3e91d3d4807b8c60b"
+      }
+    },
+    {
+      "strength": 9.84375,
+      "exact_scalar_dose_cases": 8,
+      "adjacent_scalar_dose_cases": 8,
+      "native_constant_forwards": 24,
+      "intended_choices": {
+        "off": 8,
+        "adaptive": 10,
+        "nearest_constant": 10,
+        "lower_constant": 10,
+        "upper_constant": 10
+      },
+      "changed_choices_vs_adaptive": {
+        "nearest_constant": 0,
+        "lower_constant": 0,
+        "upper_constant": 0
+      },
+      "sha256": {
+        "primary_constant_panel": "0ed22ab1dc311172b49bb2aa40c55df73a850998ff7d32cb574f304b4158a6f4",
+        "complete_bracket": "009bc56456a19117beb9c6999a38365d7dc18c565cdff0f35d23ea785e140a52"
+      }
+    },
+    {
+      "strength": 9.921875,
+      "exact_scalar_dose_cases": 8,
+      "adjacent_scalar_dose_cases": 8,
+      "native_constant_forwards": 24,
+      "intended_choices": {
+        "off": 8,
+        "adaptive": 10,
+        "nearest_constant": 10,
+        "lower_constant": 10,
+        "upper_constant": 10
+      },
+      "changed_choices_vs_adaptive": {
+        "nearest_constant": 0,
+        "lower_constant": 0,
+        "upper_constant": 0
+      },
+      "sha256": {
+        "primary_constant_panel": "3e1039d07d837ddcf327f9a5c5642aea95248daf4c37b22b08754ff45eec61ac",
+        "complete_bracket": "361b2ec9981a4436867508e5dbcc7e29aa1cbb35a9b98f56378b08381cdb2e35"
+      }
+    }
+  ],
+  "selection": {
+    "metric": "Equal-case mean intended choice under adaptive ON minus matched OFF",
+    "co_leading_strengths": [
+      7.5,
+      8.75,
+      9.375,
+      9.6875,
+      9.84375,
+      9.921875
+    ],
+    "tied_gain": {
+      "numerator": 1,
+      "denominator": 8
+    },
+    "selected_strength": null,
+    "default_strength": null
+  },
+  "sha256": {
+    "verified_control_aggregate": "ecb3b53c8e46c3f89073e4909c4fba422b0f4521472886c614cb8df06ef0e083",
+    "control_registration": "9c97837299f32dff9034d3d2805fcc5b16dafbb8030ec073c954eea2d6ef854b",
+    "registered_design": "1e7e051388f1212741a346305ebd1b527b47334cd6082ad707d00f21cabf6a5a",
+    "adaptive_development_ranking": "7259c69f46f09683334b0b813dc68466e48963687cf5879b26db1c143037da4c"
+  }
+}

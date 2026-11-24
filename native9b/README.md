@@ -38,7 +38,25 @@ digest = write_block17_development_plan(
 )
 ```
 
+This example reproduces the registered 7.5 development arm.
+
 Pass the returned digest as `--plan-sha256` and supply the same evidence file using `--development-evidence`. The existing `adaptive`, `off` and `matched` modes use this plan. For `matched`, provide the adaptive trace for the same request and plan. The shared binary32 matcher chooses the nearest representable constant by default. Use `--match-side lower` or `--match-side upper` to reproduce either bracket control. The trace gives the exact rational dose of each arm, the signed constant-minus-adaptive residual, and whether the match is exact at the coefficient boundary before BF16 writeback.
+
+### Matched constant controls
+
+The registered 16-case development panel has 144 native constant controls
+across the six strengths. Dose is the sum of the two binary32 scalar
+coefficients before the native BF16 residual writeback. The 48 exact-dose
+comparisons use one constant each. The remaining 48 use the two binary32
+coefficients on either side of the adaptive mean, repeated at both visits.
+
+At 7.5, adaptive steering chose the intended answer on 10 of 16 cases and
+each constant control arm did so on 9. At each other strength, adaptive and
+constant controls chose the intended answer on 10 of 16 cases. The
+registered ranking uses the equal-case difference between adaptive ON and
+matched OFF. All six strengths tied at +2 of 16 over OFF, so strength
+selection and the default preset remain unset.
+[Control counts and source digests](evidence/block17-development-constant-controls-20261124.json)
 
 ### Third development panel
 
