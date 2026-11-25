@@ -23,6 +23,15 @@
     "origin": "The global coefficient used throughout the original author fit",
     "value": 1.0
   },
+  "stock_off_fit_comparison": {
+    "additional_native_forwards": 0,
+    "complete_canonical_reply_digest_equal": true,
+    "fit_cases_compared": 1,
+    "intended_choice_delta": 0,
+    "same_original_request_and_physical_gpu": true,
+    "stock_baseline": "Existing stock OFF fit reply",
+    "verified_fields": ["choice", "reported_probabilities", "complete_canonical_reply"]
+  },
   "visits": [
     {
       "adjacent_binary64_constant_arithmetic": [
