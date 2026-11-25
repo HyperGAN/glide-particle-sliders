@@ -32,6 +32,9 @@ varied by position at both visits in the native 44-call route.
 | 36 | 115 of 123 | 116 | `613403837177/1073741824` |
 
 The signed dose sums the applied coefficients before the BF16 residual cast.
+The complete canonical reply, including the choice and reported probabilities,
+matched the saved stock OFF reply for the same fit request on the same physical
+GPU. The comparison used the two retained records.
 The [fit-only evidence](evidence/site23-full-suffix-fit-runtime-20261125.json)
 records the binary64 constants immediately below and above each exact mean.
 At this width the two means lie between representable values. Those endpoints
