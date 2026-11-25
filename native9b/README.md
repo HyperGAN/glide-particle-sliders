@@ -1,6 +1,6 @@
 # GLiDE-9B recurrent sliders
 
-This opt-in package steers the final input token in the pinned text-only GLiDE-9B publisher runtime. The shared `PromptSteering` probe computes the coefficient from each visit's own residual. The first edit feeds into the second visit.
+This opt-in package supports final-token and full-suffix steering in the pinned text-only GLiDE-9B publisher runtime. The shared `PromptSteering` probe computes coefficients from each visit's own residual. The first edit feeds into the second visit.
 
 ## Block 23 calibrated replay
 
@@ -18,6 +18,57 @@ The request uses the publisher's native `state` and one two-option choice questi
 The `glide-recurrent-replay-v1` JSON includes `identity` from `glide_recurrent_sliders.identity.model_identity()`, `raw_sha256`, `full_sha256`, `fit_recipe_sha256`, `completed_updates`, `calibration_sha256` and `ema_decay` set to null. The `glide-recurrent-calibration-v1` JSON includes `raw_sha256`, the measured `selected_strength`, and `selection_metric` set to `mean_matched_intended_effect_on_minus_off`. The holdout evaluation belongs to the experiment consuming this replay.
 
 Use the root package and its existing entry point for GLiDE-0.4B readout sliders.
+
+## Site23 full-suffix replay
+
+Use the Python API with the original, completed Site23 RAW80. The replay file
+binds one registered neutral/positive pair and its explicit trial strength.
+The package does not distribute the weights or provide a default strength.
+
+In the existing case registration process, compute `alignment_sha256` with
+`site23_alignment_commitment(publisher, neutral, positive)` on the pinned
+publisher. This prepares the requests and hashes the exact token alignment
+without scoring. Keep that digest with the registered role and trial strength.
+Release the registration process's publisher before starting the scoring
+process. `FullSuffixChoice.open` owns its own publisher on the caller's single
+visible CUDA device. Use it under the experiment's exclusive device ownership.
+The package verifies request identity. The caller supplies role custody and
+authorization for any evaluation.
+
+Build a separate Particle Sliders wheel from the shared [PR #339 merge](https://github.com/HyperGAN/particle-sliders/commit/dc066402f9e56a86835bb0936ca01a4ee8304eee).
+The scorer reads its verified `strength_schedule.py` member. Keep the native9b
+installation's pinned core dependency for the existing entry points.
+
+```python
+from glide_recurrent_sliders import FullSuffixChoice, write_site23_full_suffix_replay
+from glide_recurrent_sliders.full_suffix import receipt_digest
+
+replay_sha256 = write_site23_full_suffix_replay(
+    replay_path, alignment_sha256=alignment_sha256, trial_strength=registered_strength,
+)
+scorer = FullSuffixChoice.open(
+    model_dir, replay_file=replay_path, replay_sha256=replay_sha256,
+    raw_file=site23_raw80, dose_core_wheel=shared_core_wheel,
+)
+off = scorer.zero_parity(neutral, positive)
+adaptive = scorer.adaptive(neutral, positive)
+constant = scorer.exact_constant(
+    neutral, positive, adaptive=adaptive, adaptive_sha256=receipt_digest(adaptive),
+    zero_parity=off, zero_parity_sha256=receipt_digest(off),
+)
+```
+
+The scorer edits only the full common input suffix at native visits 30 and
+36. It multiplies in FP32, widens the coefficient and direction for the add,
+and returns the native BF16 residual. Each receipt reports the consumed
+coefficient bits and the number of positions whose BF16 residual changed at
+each visit. The exact flat comparator checks one equal signed dose per visit.
+If either mean cannot be represented in binary64, `UnrepresentableConstant`
+reports the residuals before any constant forward. `zero_parity` compares the
+stock reply and BF16 readout with the hooked zero edit.
+
+Set `GLIDE_SITE23_DOSE_WHEEL` to the separate wheel when running the native9b
+CPU tests.
 
 ### Full-suffix fit check
 
