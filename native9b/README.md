@@ -19,6 +19,25 @@ The `glide-recurrent-replay-v1` JSON includes `identity` from `glide_recurrent_s
 
 Use the root package and its existing entry point for GLiDE-0.4B readout sliders.
 
+### Full-suffix fit check
+
+One original fit case exercised the authored full-suffix probe at Block 23 on
+the final RAW80 checkpoint. The run used the original fit's global strength
+of 1.0 and the complete 123-position aligned suffix. The live coefficient
+varied by position at both visits in the native 44-call route.
+
+| Native visit | Nonzero positions | Distinct applied coefficients | Signed dose |
+| --- | ---: | ---: | --- |
+| 30 | 119 of 123 | 120 | `64384529523/134217728` |
+| 36 | 115 of 123 | 116 | `613403837177/1073741824` |
+
+The signed dose sums the applied coefficients before the BF16 residual cast.
+The [fit-only evidence](evidence/site23-full-suffix-fit-runtime-20261125.json)
+records the binary64 constants immediately below and above each exact mean.
+At this width the two means lie between representable values. Those endpoints
+are available for sensitivity comparisons. Development and held-out effect
+measurements are pending.
+
 ## Block 17 development replay
 
 Block 17 visits 18 and 24 in the exact 44-call stock route. At each visit the runtime scales the shared FP32 probe coefficient, masks to the final input token, performs the FP32 outer product and add, and casts the edit once to BF16. All six co-leading strengths in the [verified development comparison](evidence/block17-development-20261123.json) produced the same choices. The development plan leaves `selected_strength` null.

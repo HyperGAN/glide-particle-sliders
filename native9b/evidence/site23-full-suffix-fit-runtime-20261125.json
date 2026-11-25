@@ -1,0 +1,67 @@
+{
+  "aligned_suffix_positions": 123,
+  "checkpoint_updates": 80,
+  "development_effect": null,
+  "dose": {
+    "adjacent_controls": "Arithmetic for sensitivity comparisons",
+    "coefficient_boundary": "Applied coefficients before the BF16 residual cast",
+    "coordinate": "One unit per aligned suffix position at each visit",
+    "native_constant_forwards": 0,
+    "shared_core_revision": "637880b9b40a231a16f2e02ad384738052eca6e0",
+    "shared_module_sha256": "4ffd07fa3793bb0d96e9e207dd45e5516a422497def938a7db7fd083ecf600f4"
+  },
+  "ema_decay": null,
+  "fit_cases": 1,
+  "heldout_effect": null,
+  "native_adaptive_forwards": 1,
+  "native_calls_per_route": 44,
+  "physical_block": 23,
+  "schema": "glide.9b.site23_full_suffix_fit_runtime.v1",
+  "scope": "Original fit-only technical runtime",
+  "selected_strength": null,
+  "source_alpha": {
+    "origin": "The global coefficient used throughout the original author fit",
+    "value": 1.0
+  },
+  "visits": [
+    {
+      "adjacent_binary64_constant_arithmetic": [
+        {
+          "constant_hex": "0x1.f333c43895da8p+1",
+          "dose_residual": "-9/281474976710656"
+        },
+        {
+          "constant_hex": "0x1.f333c43895da9p+1",
+          "dose_residual": "51/2251799813685248"
+        }
+      ],
+      "distinct_effective_coefficients": 120,
+      "exact_binary64_constant_available": false,
+      "ideal_constant_rational": "21461509841/5502926848",
+      "nonzero_positions": 119,
+      "positions": 123,
+      "signed_exact_dose": "64384529523/134217728",
+      "visit": 30
+    },
+    {
+      "adjacent_binary64_constant_arithmetic": [
+        {
+          "constant_hex": "0x1.293feeda7acbfp+2",
+          "dose_residual": "-59/1125899906842624"
+        },
+        {
+          "constant_hex": "0x1.293feeda7acc0p+2",
+          "dose_residual": "1/17592186044416"
+        }
+      ],
+      "distinct_effective_coefficients": 116,
+      "exact_binary64_constant_available": false,
+      "ideal_constant_rational": "613403837177/132070244352",
+      "nonzero_positions": 115,
+      "positions": 123,
+      "signed_exact_dose": "613403837177/1073741824",
+      "visit": 36
+    }
+  ],
+  "weight_selection": "raw"
+}
